@@ -1,0 +1,31 @@
+<div id="lb-info">
+	<p class="lb-header"></p>
+	<p class="lb-title">info</p>
+    
+	<div class="lb-content">
+		<span class="info">
+			Cette page est prot&eacute;g&eacute;e.
+			Vous devez &ecirc;tre identifi&eacute; pour y acc&eacute;der.
+		</span>		
+	</div>
+	<ul class="lb-buttons">
+	    <li>
+	        <input type="button" class="button" value="Fermer"/>
+	    </li>
+	</ul>
+    <p class="close"><a id="lb-close-needlogin"></a></p>
+</div>
+
+<script type="text/javascript">
+$(function() {
+    $('div#lb-info p.close a').bind('click',function(){
+        $('div#lb-mask').hide();
+        jQuery.each($(this).parents('div.lb'),function(){$(this).hide();});
+    });
+    
+    $('div#lb-info ul.lb-buttons input.button').bind('click',function(){
+        $('div#lb-mask').hide();
+        jQuery.each($(this).parents('div.lb'),function(){$(this).hide();});
+    });
+});
+</script>

@@ -1,0 +1,90 @@
+{% load static %}
+{% load generic_tags %}
+
+<div id="stats_team" style="clear:both;">
+
+	<div class="col1of3">
+
+
+		{% with team_name=team_name|lower %}
+			{% with 'images/clubs/large/'|add:team_name|add:'.png' as image_static %}
+				<img class="logo_large" src="{% static image_static %}" alt=""/>
+			{% endwith %}
+		{% endwith %}
+
+
+		<ul>
+		<li>
+			<span>S&eacute;rie en cours:</span>
+			{%if last_five%}
+			<span class="team_trend">
+				{%for val in last_five%}
+				<span class="{{val}}">{{val}}</span>
+				{%endfor%}
+			</span>
+			{%else%}
+				<span class="na">N/A</span>
+			{%endif%}  
+		</li>
+		<li>
+			<span class="lettrine">{{consecutive_wins}}</span>
+			<span>victoire cons&eacute;cutives</span>
+		</li>
+		<li>
+			<span class="lettrine">{{consecutive_draws}}</span>
+			<span>matches nuls cons&eacute;cutifs</span>
+		</li>
+		<li>
+			<span class="lettrine">{{consecutive_losses}}</span>
+			<span>d&eacute;faites cons&eacute;cutives</span>
+		</li>
+		<li>
+			<span class="lettrine">{{consecutive_noloss}}</span>
+			<span>matches cons&eacute;cutifs sans d&eacute;faite</span>
+		</li>
+		<li>
+			<span class="lettrine">{{consecutive_nowin}}</span>
+			<span>matches cons&eacute;cutifs sans victoire</span>
+		</li>
+		
+		<li>
+			<span class="lettrine">{{pts_avg|float_dbledigit}}</span>
+			<span>points par match</span>
+		</li>
+		
+		<li>
+			<span class="lettrine">{{goals_scored_avg|float_dbledigit}}</span>
+			<span>buts marqu&eacute;s par match</span>
+		</li>
+		
+		<li>
+			<span class="lettrine">{{goals_taken_avg|float_dbledigit}}</span>
+			<span>buts encaiss&eacute;s par match</span>
+		</li>
+		</ul>
+	</div>
+
+	<div class="col1of3 lsep">
+		<h4>Tendance des r&eacute;sultats</h4>
+		<div id="team_wdl_chart_ctnr" class="container" style="width: 275px; height: 185px; margin: 0 auto;float:left;"><em>Non disponible</em></div>	
+	</div>
+	
+	<div class="col1of3 lsep">
+		<h4>Tendance des pronostics</h4>
+		<div id="team_pronos_chart_ctnr" class="container" style="width: 275px; height: 185px; margin: 0 auto;float:left;"><em>Non disponible</em></div>	
+	</div>
+    
+</div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	{%if w_d_l%}
+		createPieChart('team_wdl_chart_ctnr',[['G',{{w_d_l|listvalue:0}}],['N',{{w_d_l|listvalue:1}}],['P',{{w_d_l|listvalue:2}}]],'percent');
+	{%endif%}
+
+	if ( ({{team_forecasts_win}}>0) || ({{team_forecasts_draw}}>0) || ({{team_forecasts_lose}}>0) )
+	{
+		createPieChart('team_pronos_chart_ctnr',[['G',{{team_forecasts_win}}],['N',{{team_forecasts_draw}}],['P',{{team_forecasts_lose}}]],'percent');
+	}
+});
+</script>

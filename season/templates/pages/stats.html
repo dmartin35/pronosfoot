@@ -1,0 +1,35 @@
+{% extends "main.html" %}
+
+{% block body %}
+
+	<div class="line fullline">
+	 	<div class="col2of3 rsep">
+			<h1>Ligue 1</h1>
+			<h2>Statistiques de la Ligue 1</h2>
+			{%include 'contents/stats_league.html'%}
+		</div>
+		
+		<div class="col1of3">
+			<h1>Pronos</h1>
+			<h2>Meilleures stats des pronos</h2>
+			{%include 'contents/stats_pronos.html'%}
+		</div>
+	</div>
+
+	<div class="line fullline">
+		<div class="col1of1">
+			<h1>&eacute;quipes</h1>
+			<h2 class="floatLeft">Statistiques de </h2>
+			<div class="h2 floatLeft" style="padding-left:0;">{%include 'global/teamselection.html'%}</div>
+			
+			<script type="text/javascript">
+				$(document).ready(function() {
+			       $('#teamselection').createDropdown(Urls.ajax_stats_team,'div#stats_team');
+				});
+			</script>
+		</div>
+		{%include 'contents/stats_team.html'%}
+	</div>
+	
+	<div class="line sep"/>
+{% endblock %}

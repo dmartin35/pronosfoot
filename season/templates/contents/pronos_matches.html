@@ -1,0 +1,213 @@
+{% load static %}
+{% load generic_tags %}
+
+<table id="forecasts" class="fixtures" cellpadding="0" cellspacing="0">
+
+	{% for day in days %}
+		<tr class="tableheader"><td class="day" colspan="8">{{day|date:"l j F Y"|capfirst}}</td></tr>
+		{% for form in ff_formset.forms %}
+			{% ifequal form.day day %}
+			<tr class="tableline
+			{%if form.score_a.errors%}error{%endif%}
+			{%if form.score_b.errors%}error{%endif%}
+			">
+				<td class="hour">
+					{%if form.hour%}{{form.hour|time:"H:i"}}{%endif%}
+					
+					<!-- hidden inputs -->
+					{{form.fixture}}
+					{{form.user_id}}
+				</td>
+
+				<td class="logo_team_a">
+					{% with team_name=form.team_a|lower %}
+						{% with 'images/clubs/small/'|add:team_name|add:'.png' as image_static %}
+						  <img src="{% static image_static %}" alt="{{team_name}} logo"/>
+						{% endwith %}
+					{% endwith %}
+				</td>
+
+				<td class="team_a">{{form.team_a}}</td>
+				<td class="score_team_a {%if form.score_a.errors%}error{%endif%}">
+					{{form.score_a}}
+					{%if form.readonly%}
+					<script type="text/javascript">
+						var txtfield = document.getElementById('id_{{form.score_a.html_name}}');
+						if (txtfield)
+						{
+							//txtfield must be readOnly so that value can not be modified 
+							txtfield.readOnly= true;
+							txtfield.setAttribute("class", "inactive");
+						};
+					</script>
+					{%endif%}
+				</td>
+				<td class="team_separator">-</td>
+				<td class="score_team_b {%if form.score_b.errors%}error{%endif%}">
+					{{form.score_b}}
+					
+					{%if form.readonly%}
+					<script type="text/javascript">
+						var txtfield = document.getElementById('id_{{form.score_b.html_name}}');
+						if (txtfield)
+						{
+							//txtfield must be readOnly so that value can not be modified 
+							txtfield.readOnly= true; 
+							txtfield.setAttribute("class", "inactive");
+						};
+					</script>
+					{%endif%}
+				</td>
+				<td class="team_b">{{form.team_b}}</td>
+
+				<td class="logo_team_b">
+					{% with team_name=form.team_b|lower %}
+						{% with 'images/clubs/small/'|add:team_name|add:'.png' as image_static %}
+						  <img src="{% static image_static %}" alt="{{team_name}} logo"/>
+						{% endwith %}
+					{% endwith %}
+				</td>
+
+				<td class="nostyle stats_link">
+					{%if form.nb_forecasts%}
+					<a href="#" onclick="javascript:show_forecasts_stats('{{form.fixture_id}}')">
+					<img id="stats_fixture_{{form.fixture_id}}" class="stats" src="{% static 'images/stats.png' %}" alt="stats">
+					</a>
+					{%endif%}
+				</td>
+				<td class="nostyle res_link"><span id="results_forecast_{{form.fixture_id}}" class="leg_res_{{form.points}}">&nbsp;</span></td>
+			</tr>
+			{% endifequal %}
+		{% endfor %}
+	{% endfor %}
+	
+	{%if week_points|notIsNone%}
+	<tr class="tablefooter">
+		<td colspan="8">
+			Total:
+		</td>
+		<td colspan="2">
+			<strong>{{week_points}}</strong> pts
+		</td>
+	</tr>	
+	{%endif%}
+	
+	{%if ff_formset.forms|can_submit_formset%}
+	<tr class="tablefooter">
+		<td colspan="8">
+			{{ ff_formset.management_form }}
+			<ul class="buttons">
+			    <li>
+			        <input id="ff_submit" type="submit" class="submit" value="Valider"/>
+			    </li>
+			    <li>
+			        <input id="ff_cancel" type="button" class="button" value="Annuler"/>
+			    </li>
+			    <li class="{% if ff_formset.errors|haserrors %}error{%endif%} 
+						   {% if ff_saved %}success{%endif%}">&nbsp;
+				{% if ff_saved %}
+				Vos pronostics ont &eacute;t&eacute; enregistr&eacute;s
+				{% endif %}
+				{% if ff_formset.errors|haserrors %}
+				Veuillez corriger les erreurs
+				{% endif %}			    
+			    </li>
+			</ul>
+		</td>
+	</tr>
+	{%endif%}
+	
+</table>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('input[type="text"]').focus(function() {
+			$(this).parent().parent().addClass("current");
+		});
+		$('input[type="text"]').blur(function() {
+			$(this).parent().parent().removeClass("current");
+		});
+		
+		//do not allow inactive field to have focus - in complement of readOnly
+		$('input[type="text"].inactive').focus(function() {
+			$(this).blur();
+		});
+		
+		/*
+	    $.getJSON(Urls.ajax_forecast_trends_week("{{currentweek}}"), function(data) {
+	    	for (fixture_id in data)
+	    	{
+	    	    popup_html = data[fixture_id];
+	    	    stats_link_name = '#stats_fixture_'+fixture_id;
+	    	    $(stats_link_name).parent().append(popup_html);
+	    	    $(stats_link_name).parent().addClass('has_popup');
+	    	}
+	    	load_popup_events();
+    	});
+    	*/
+    	
+    	{%if week_points|notIsNone%}
+    	$.getJSON(Urls.ajax_forecasts_results("{{currentweek}}"), function(data) {
+    		/* JSON object is returned when user not authenticated */
+	    	if (typeof data == 'object' && data.not_authenticated == true)return;
+	    	for (fixture_id in data)
+	    	{
+	    	    popup_html = data[fixture_id];
+	    	    result_link_name = '#results_forecast_'+fixture_id;
+	    	    $(result_link_name).parent().append(popup_html);
+	    	    $(result_link_name).parent().addClass('has_popup');
+	    	}
+	    	load_popup_events();
+    	});
+    	{%endif%}
+		
+		$('#ff_cancel').click(function(){
+			$.get(Urls.ajax_forecasts_fixtures("{{currentweek}}"),function(data){
+				if (check_ajax_logged_in(data))
+				{
+					$('table#forecasts').replaceWith(data);
+				}
+			});
+		});
+		
+		$('#ff_submit').click(function(){
+
+			var postdata={
+				{% for form in ff_formset.forms %}
+					'{{form.fixture.html_name}}': $('input[name={{form.fixture.html_name}}]').val(),
+					'{{form.user_id.html_name}}': $('input[name={{form.user_id.html_name}}]').val(),
+					'{{form.score_a.html_name}}': $('input[name={{form.score_a.html_name}}]').val(),
+					'{{form.score_b.html_name}}': $('input[name={{form.score_b.html_name}}]').val(),
+				{% endfor %}
+				'form-TOTAL_FORMS': $('input[name=form-TOTAL_FORMS]').val(),
+				'form-INITIAL_FORMS': $('input[name=form-INITIAL_FORMS]').val()
+	     	};
+	    	
+	    	 $.ajax({
+		      type: "POST",
+		      url: Urls.ajax_forecasts_fixtures("{{currentweek}}"),
+		      data: postdata,
+		      success: function(html) {
+		      	if (check_ajax_logged_in(html))
+		      	{
+			  		$('table#forecasts').replaceWith(html);
+		  		}
+		      }
+		    });
+		    return false;
+	    	
+		});
+		
+		show_forecasts_stats = function(fixture_id){
+			$.get(Urls.ajax_players_forecasts_fixture(fixture_id), function(html) {
+				if (html)
+				{
+					$('div#lb-mask').show();
+			    	$('div#lb-pronos-stats').replaceWith(html);
+					$('div#lb-pronos-stats').parent('div').show();
+				}
+			});
+		};
+		
+	});
+</script>

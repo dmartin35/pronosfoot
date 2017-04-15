@@ -1,0 +1,110 @@
+{% csrf_token %}
+
+<div id="lb-reg">
+    <p class="lb-header"></p>
+    <p class="lb-title">s'inscrire</p>
+    <div class="lb-content">
+    	<fieldset>
+			{% if form.errors %}
+	    		<strong class="error">Erreur d'inscription.</strong>
+	  		{% endif %}
+    		<ol>
+    			<li>
+	    		<label class="{%if form.username.errors%}error{%endif%}">Pseudo *</label>
+	    		<input type="text" class="text" name="username" id="username" value="{{form.data.username}}"/>
+	    		{%if form.username.errors%}
+	    			<span class="info error">{%for error in form.username.errors%}{{error}}{%endfor%}</span>
+	    		{%endif%}
+	    		</li>
+    		
+    			<li>
+	    		<label class="{%if form.email.errors%}error{%endif%}">Adresse E-Mail *</label>
+	    		<input type="text" class="text" name="email" value="{{form.data.email}}" id="email"/>
+	    		{%if form.email.errors%}
+	    			<span class="info error">{%for error in form.email.errors%}{{error}}{%endfor%}</span>
+	    		{%endif%}
+	    		</li>
+	    		
+    			<li>
+	    		<label class="{%if form.password1.errors%}error{%endif%}">Mot de passe *</label>
+	    		<input type="password" class="text" name="password1" value="{{form.data.password1}}" id="password1"/>
+	    		{%if form.password1.errors%}
+	    			<span class="info error">{%for error in form.password1.errors%}{{error}}{%endfor%}</span>
+	    		{%endif%}
+
+	    		</li>
+	    		
+    			<li>
+	    		<label class="{%if form.password2.errors%}error{%endif%}">Confirmation du mot de passe *</label>
+	    		<input type="password" class="text" name="password2" value="{{form.data.password2}}" id="password2"/>
+	    		{%if form.password2.errors%}
+	    			<span class="info error">{%for error in form.password2.errors%}{{error}}{%endfor%}</span>
+	    			<br/>
+	    		{%endif%}
+	    		<span class="info">* Champs obligatoires</span>
+	    		</li>
+    		
+    		</ol>
+    		
+    	</fieldset>
+	</div>
+	<ul class="lb-buttons">
+	    <li>
+	        <input type="submit" class="submit" value="Valider"/>
+	    </li>
+	    <li>
+	        <input type="button" class="button" value="Annuler"/>
+	    </li>
+	</ul>
+    <p class="close"><a id="lb-close-reg"></a></p>
+</div>
+
+<script type="text/javascript">
+$(function() {
+    $('div#lb-reg p.close a').bind('click',function(){
+        $('div#lb-mask').hide();
+        jQuery.each($(this).parents('div.lb'),function(){$(this).hide();});
+    });
+    $('div#lb-reg ul.lb-buttons input.button').bind('click',function(){
+        $('div#lb-mask').hide();
+        jQuery.each($(this).parents('div.lb'),function(){$(this).hide();});
+    });
+    
+    $('div#lb-reg').keydown(function(event) {        
+        if (event.keyCode == 13) {//Enter Key pressed
+            //Submit form - via click triggered on submit button
+            $('div#lb-reg input.submit').click();
+            return false;
+        }
+     });
+    
+    $('div#lb-reg input.submit').click(function(){
+    	
+    	var postdata={
+          'username':$('#username').val(),
+          'email':$('#email').val(), 
+          'password1':$('#password1').val(),
+          'password2':$('#password2').val()
+     	};
+    	
+    	 $.ajax({
+	      type: "POST",
+	      url: Urls.register(),
+	      data: postdata,
+	      success: function(response) {
+	      	
+	      	/* JSON object is returned when user not authenticated */
+	    	if (typeof response == 'object' && response.not_authenticated == true)
+	    	{
+	    		$('div#lb-reg').replaceWith(response.html);
+	    	}else{
+				document.location.href=Urls.index();
+	    	}
+	      	
+	      }
+	    });
+	    return false;
+    	
+    });
+});
+</script>

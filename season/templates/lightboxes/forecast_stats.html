@@ -1,0 +1,92 @@
+{% load static %}
+{% load generic_tags %}
+
+<div id="lb-pronos-stats">
+	<p class="lb-header"></p>
+	<p class="lb-title">pronos {{fixture_teams|getdictvalue:"team_a"}} - {{fixture_teams|getdictvalue:"team_b"}}</p>
+	
+	<div class="lb-content">
+	
+		<!-- forecasts trend -->
+		<h2>Tendance:</h2>
+		<div id="forecast_trend" class="container" style="width: 500px; height: 120px; margin: 0 auto;float:left;"></div>		
+				
+		<!-- players forecasts -->
+		<h2>Pronostics:</h2>
+		{%if fixture_started%}
+		<table cellspacing="0" cellpadding="0" class="forecasts_players">
+			<tr class="tableheader">
+				<td></td>
+				<td class="score">
+
+					{% with team_name=fixture_teams.team_a|lower %}
+						{% with 'images/clubs/small/'|add:team_name|add:'.png' as image_static %}
+						  <img src="{% static image_static %}" alt="{{team_name}} logo"/>
+						{% endwith %}
+					{% endwith %}
+
+				</td>
+				<td></td>
+				<td class="score">
+
+					{% with team_name=fixture_teams.team_b|lower %}
+						{% with 'images/clubs/small/'|add:team_name|add:'.png' as image_static %}
+						  <img src="{% static image_static %}" alt="{{team_name}} logo"/>
+						{% endwith %}
+					{% endwith %}
+
+				</td>
+				<td class="pts">Pts</td>
+			</tr>
+			{%for pf in players_forecasts%}
+			<tr class="tableline">
+				<td class="player">{{pf.user.name|lower|capfirst}}</td>
+				<td class="score">{{pf.score_a}}</td>
+				<td class="sep">-</td>
+				<td class="score">{{pf.score_b}}</td>
+				<td class="pts">{{pf.points|default_if_none:"N/A"}}</td>
+			</tr>
+			{%endfor%}
+		</table>
+			
+		{%else%}
+		<span class="info">
+			Les pronostics des joueurs seront disponibles apr&egrave;s le d&eacute;but du match.
+		</span>
+		{%endif%}
+		
+	</div>
+	
+	<ul class="lb-buttons">
+	    <li>
+	        <input type="button" class="button" value="Fermer"/>
+	    </li>
+	</ul>
+    <p class="close"><a id="lb-close-pronos-stats"></a></p>
+</div>	
+
+<script type="text/javascript">
+$(function() {
+	var series = [{
+		name: 'Victoire {{fixture_teams|getdictvalue:"team_b"}}',
+		data: [{{trend_forecasts|getdictvalue:"nb_team_b_win"}}],
+	},{
+		name: 'Match nul',
+		data: [{{trend_forecasts|getdictvalue:"nb_draw"}}],
+	}, {
+		name: 'Victoire {{fixture_teams|getdictvalue:"team_a"}}',
+		data: [{{trend_forecasts|getdictvalue:"nb_team_a_win"}}],
+	}];
+	createStackedBarChart ('forecast_trend',series);
+
+    $('div#lb-pronos-stats p.close a').bind('click',function(){
+        $('div#lb-mask').hide();
+        jQuery.each($(this).parents('div.lb'),function(){$(this).hide();});
+    });
+    
+    $('div#lb-pronos-stats ul.lb-buttons input.button').bind('click',function(){
+        $('div#lb-mask').hide();
+        jQuery.each($(this).parents('div.lb'),function(){$(this).hide();});
+    });
+});
+</script>

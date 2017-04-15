@@ -1,0 +1,31 @@
+<div id="lb-to">
+	<p class="lb-header"></p>
+	<p class="lb-title">session expir&eacute;e</p>
+    
+	<div class="lb-content">
+		<span class="info">
+			Votre session a expir&eacute;e.
+			Vous allez &ecirc;tre redirig&eacute; vers la page d'accueil.
+		</span>		
+	</div>
+	<ul class="lb-buttons">
+	    <li>
+	        <input type="button" class="button" value="Fermer"/>
+	    </li>
+	</ul>
+    <p class="close"><a id="lb-close-to"></a></p>
+</div>
+
+<script type="text/javascript">
+$(function() {
+    $('div#lb-to p.close a').bind('click',function(){
+    	//redirect to home page after closing time out message
+		document.location.href='';
+    });
+    
+    $('div#lb-to ul.lb-buttons input.button').bind('click',function(){
+    	//redirect to home page after closing time out message
+		document.location.href='';
+    });
+});
+</script>

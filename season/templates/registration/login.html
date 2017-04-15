@@ -1,0 +1,100 @@
+{% csrf_token %}
+
+<div id="lb-login">
+	<p class="lb-header"></p>
+	<p class="lb-title">s'identifier</p>
+    
+	<div class="lb-content">
+    	<fieldset>
+			{% if form.errors %}
+	    		<strong class="error">Erreur d'identification.</strong>
+	  		{% endif %}
+    		<ol>
+    			<li>
+	    		<label>Pseudo</label>
+	    		<input type="text" class="text" name="username" id="username" value="{{form.data.username}}"/>
+	    		</li>
+    		
+    			<li>
+	    		<label>Mot de passe</label>
+	    		<input type="password" class="password" name="password" id="password" value="{{form.data.password}}" />
+	    		<span class="info"><a id="reset_pwd" href="#">Mot de passe oubli&eacute; ?</a></span>
+	    		</li>
+    		
+    		</ol>
+    		
+    	</fieldset>
+		
+	</div>
+	<ul class="lb-buttons">
+	    <li>
+	        <input type="submit" class="submit" value="Entrer"/>
+	    </li>
+	</ul>
+	
+	</form>
+	
+	<p class="close"><a id="lb-close-login"></a></p>
+</div>
+
+<script type="text/javascript">
+$(function() {
+    $('div#lb-login p.close a').bind('click',function(){
+        $('div#lb-mask').hide();
+        jQuery.each($(this).parents('div.lb'),function(){$(this).hide();});
+    });
+    
+    $('div#lb-login').keydown(function(event) {        
+        if (event.keyCode == 13) {//Enter Key pressed
+            //Submit form - via click triggered on submit button
+            $('div#lb-login input.submit').click();
+            return false;
+        }
+     });
+    
+    $('div#lb-login input.submit').click(function(){
+    	
+    	var postdata={
+          'username':$('#username').val(), 
+          'password':$('#password').val()
+     	};
+    	
+    	 $.ajax({
+	      type: "POST",
+	      url: Urls.login(),
+	      data: postdata,
+	      success: function(response) {
+	      console.log(typeof(response));
+	      //console.log(response);
+	      	
+	      	/* JSON object is returned when user not authenticated */
+	    	if (typeof response == 'object' && response.not_authenticated == true)
+	    	{
+	    		$('div#lb-login').replaceWith(response.html);
+	    	}else{
+	    		//console.log('{{next}}');
+				//document.location.href='{{next}}';
+				document.location.href=Urls.index();
+	    	}
+	      	
+	      }
+	    });
+	    return false;
+    	
+    });
+    
+    $('div#lb-login a#reset_pwd').click(function(){
+		//display mask
+    	$('div#lb-mask').show();
+		//close login lb    	
+        jQuery.each($(this).parents('div.lb'),function(){$(this).hide();});
+       	//get reset pwd lb
+    	$.get(Urls.password_reset(),function(html){
+	       	//display reset pwd lb
+	       	$('div#lb-pwd').replaceWith(html);
+    		$('div#lb-pwd').parent('div').show();
+    	});
+    });
+    
+});
+</script>

@@ -1,0 +1,39 @@
+{% load generic_tags %}
+
+<div id="stats_pronos">
+
+<div >
+	<ul>
+		<li>
+			<span>Total points:</span>
+			{%if forecasts_best_points and forecasts_best_points|getdictvalue:'value'%}
+				<span class="stats_bold">{{forecasts_best_points|getdictvalue:'value'}} pts</span>
+				<span class="stats_italic">{{forecasts_best_points|getdictvalue:'players'|capFirstAll|listToComaSepStr}}</span>
+			{%else%}
+				<span class="na">N/A</span>
+			{%endif%}  
+		</li>
+		
+		<li>
+			<span>Issues correctes:</span>
+			{%if forecasts_best_issues and forecasts_best_issues|getdictvalue:'value'%}
+				<span class="stats_bold">{{forecasts_best_issues|getdictvalue:'value'}}</span>
+				<span class="stats_italic">{{forecasts_best_issues|getdictvalue:'players'|capFirstAll|listToComaSepStr}}</span>
+			{%else%}
+				<span class="na">N/A</span>
+			{%endif%}   
+		</li>
+		
+		<li>
+			<span>Scores exacts:</span>
+			{%if forecasts_best_scores and forecasts_best_scores|getdictvalue:'value'%}
+				<span class="stats_bold">{{forecasts_best_scores|getdictvalue:'value'}}</span>
+				<span class="stats_italic">{{forecasts_best_scores|getdictvalue:'players'|capFirstAll|listToComaSepStr}}</span>
+			{%else%}
+				<span class="na">N/A</span>
+			{%endif%}  
+		</li>
+	</ul>
+</div>
+
+</div>

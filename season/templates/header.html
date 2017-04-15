@@ -1,0 +1,58 @@
+<div id="masthead">
+    
+    <div class="sizeLarge">
+        <p id="pronosfoot_logo"></p>
+    </div>
+    
+    <div id="auth" class="sizeSmall">
+    {%if not user.is_authenticated%}
+    	<div id="register" class="line1of2">
+            <p class="icon">
+            <a href="#">S'inscrire</a>
+            </p>
+        </div>
+        
+        <div class="hsep"></div>
+        
+        <div id="login" >
+            <p class="icon">
+            <a href="#">S'identifier</a>
+            </p>
+        </div>
+        
+    {%else%}
+        <div class="line1of2">
+            <p class="username">
+            {{user.username|lower|capfirst}}
+            </p>
+        </div>
+        
+        <div class="hsep"></div>
+        
+        <div id="logout" >
+            <p class="icon">
+            <a href="{%url 'logout'%}">Se d&eacute;connecter</a>
+            </p>
+        </div>
+    {%endif%}
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function() {
+    $('#auth div#register a').click(function(){
+    	$('div#lb-mask').show();
+	    $.get(Urls.ajax_register(), function(html) {
+	    	$('div#lb-reg').replaceWith(html);
+    		$('div#lb-reg').parent('div').show();
+    	});
+    });
+    $('#auth div#login a').click(function(){
+    	$('div#lb-mask').show();
+	    $.get(Urls.ajax_login("{{selectedmenu}}"), function(html) {
+	    	$('div#lb-login').replaceWith(html);
+    		$('div#lb-login').parent('div').show();
+    	});
+    });
+});
+</script>

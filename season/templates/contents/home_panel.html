@@ -1,0 +1,58 @@
+<div id="home_panel">
+            
+    
+    <div class="hover-panel panel-calendrier panel-left panel-up">
+    	<a href="{%url 'fixtures'%}"></a>
+        <h3>Matches</h3>
+
+        <p>Consultez le calendrier et les r&eacute;sultats des rencontres de la Ligue 1.</p>
+    </div>
+    
+
+    <div class="hover-panel panel-pronos">
+    	<a href="{%url 'forecasts'%}"></a>
+        <h3>Pronos</h3>
+
+        <p>Saisissez vos pronostics et v&eacute;rifiez vos r&eacute;sultats.</p>
+    </div>
+
+    <div class="clearleft hover-panel panel-classement panel-left">
+    	<a href="{%url 'tables'%}"></a>
+        <h3>Classements</h3>
+
+        <p>Consultez les classements de la Ligue 1 et des pronostics.</p>
+    </div>
+
+    <div class="hover-panel panel-stats">
+    	<a href="{%url 'stats'%}"></a>
+        <h3>Stats</h3>
+
+        <p>Consultez les statistiques de la saison.</p>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+$(function() {
+    jQuery.each($('div.hover-panel'),function(){
+		//bind each span click with anchor child click
+		var button = $(this);
+    	$(button).bind('click',function(event){
+    		event.stopPropagation();
+    		var anchor = $(button).children('a:first-child');
+    		window.location = $(anchor).attr('href');
+    	});
+    });
+});
+</script>
+
+{%if not user.is_authenticated%}
+<script type="text/javascript">
+$(function() {
+	//unbind previously binded action
+	$('div.panel-pronos').unbind('click');
+	//blind to need login lightbox
+	bind_to_need_login('div.panel-pronos');
+});
+</script>
+{%endif%}

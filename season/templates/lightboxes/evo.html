@@ -1,0 +1,68 @@
+{% load generic_tags %}
+
+<div id="lb-evo">
+	<p class="lb-header"></p>
+	<p class="lb-title">evolution de {{evo_name|lower}}</p>
+    
+	<div class="lb-content">
+		
+		<div id="evo_pages" class="pages">
+			<div id="evo_pos" class="current">
+				<h2>Evolution de la position</h2>
+				<div id="evo_pos_chart_ctnr" class="container" style="width: 640px; height: 285px; margin: 0 auto;"><em>Non disponible</em></div>
+			</div>
+			
+			<div id="evo_progress" class="inactive">
+				<h2>Evolution de la progression</h2>
+				<div id="evo_progress_chart_ctnr" class="container" style="width: 640px; height: 285px; margin: 0 auto;"><em>Non disponible</em></div>
+			</div>
+			
+			<div id="evo_pts" class="inactive">
+				<h2>Evolution des points</h2>
+				<div id="evo_pts_chart_ctnr" class="container" style="width: 640px; height: 285px; margin: 0 auto;"><em>Non disponible</em></div>
+			</div>
+			
+			<div id="eco_pts_week" class="inactive">
+				<h2>Evolution des points par journ&eacute;e</h2>
+				<div id="evo_pts_week_chart_ctnr" class="container" style="width: 640px; height: 285px; margin: 0 auto;"><em>Non disponible</em></div>
+			</div>
+		</div>
+		
+		<ul class="paginator">
+			<li class="current first"><a rel="evo_pos" href="#">1</a></li>
+			<li><a rel="evo_progress" href="#">3</a></li>
+			<li><a rel="evo_pts" href="#">2</a></li>
+			<li class="last"><a rel="eco_pts_week" href="#">4</a></li>
+			
+		</ul>
+				
+	</div>
+	
+    <p class="close"><a id="lb-close-evo"></a></p>
+</div>
+
+<script type="text/javascript">
+$(function() {
+    $('div#lb-evo p.close a').bind('click',function(){
+        $('div#lb-mask').hide();
+        jQuery.each($(this).parents('div.lb'),function(){$(this).hide();});
+    });
+    
+    createSingleLineChart('evo_pos_chart_ctnr',eval('{{evo_weeks|int_list}}'),eval('{{evo_pos|int_list}}'),'journees','position',0,eval('{{evo_nb_max}}')+1,{{chart_pos_tickInterval}},{{chart_pos_minorTickInterval}},true,'J',['er','nd','eme']);
+    createColumnChart('evo_progress_chart_ctnr',eval('{{evo_weeks|int_list}}'),eval('{{evo_progress|int_list}}'),'journees','progression',100);//100 as tickInterval is a hack to have only 0 y axis displayed
+    createSingleLineChart('evo_pts_chart_ctnr',eval('{{evo_weeks|int_list}}'),eval('{{evo_points|int_list}}'),'journees','points',-1,null,{{chart_pts_tickInterval}},0,false,'J','points');
+    createColumnChart('evo_pts_week_chart_ctnr',eval('{{evo_weeks|int_list}}'),eval('{{evo_pts_per_week|int_list}}'),'journees','points',100);//100 as tickInterval is a hack to have only 0 y axis displayed
+   
+	$('ul.paginator li a').each(function(){
+		$(this).click(function(){
+			//display correct page
+			$('#evo_pages .current').removeClass('current').addClass('inactive');
+			$('#'+$(this).attr('rel')).removeClass('inactive').addClass('current');
+			//display correct paginator icon
+			$('ul.paginator li.current').removeClass('current');
+			$(this).parent().addClass('current');
+		});
+   	});
+    
+});
+</script>

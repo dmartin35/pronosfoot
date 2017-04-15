@@ -1,0 +1,15 @@
+{% load generic_tags %}
+
+<dl id="teamselection" class="dropdown" style="float:right;">
+    <dt><a href="#"><span class="selected">{{teams|listvalue:0}}</span><span class="link">&nbsp;</span></a></dt>
+    <dd>
+        <ul>
+        	{% for team in teams %}
+            	<li>
+            		<a href="#">{{team.name}}
+            		<span class="value">{{team.id}}</span></a>
+        		</li>
+            {% endfor %}
+		</ul>
+	</dd>
+</dl>

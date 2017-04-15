@@ -1,0 +1,172 @@
+{% load generic_tags %}
+
+<!-- fields -->
+<table id="forecasts_league" class="" cellpadding="0" cellspacing="0">
+<tr class="hsep">
+	<td>Champion d'Automne</td>
+	<td>{{fl_form.winner_midseason}}</td>
+	{%if fl_res|has_key:'winner_midseason'%}
+		<td class="res_link"><span id="res_league_winner_midseason" class="leg_res_{{fl_res|getdictvalue:'winner_midseason'|boolToInt}}">&nbsp;</span></td>
+	{%endif%}
+</tr>
+<tr>
+	<td>Champion</td>
+	<td>{{fl_form.winner}}</td>
+	{%if fl_res|has_key:'winner'%}
+		<td class="res_link"><span id="res_league_winner" class="leg_res_{{fl_res|getdictvalue:'winner'|boolToInt}}">&nbsp;</span></td>
+	{%endif%}
+</tr>
+<tr>
+	<td>Dauphin</td>
+	<td>{{fl_form.second}}</td>
+	{%if fl_res|has_key:'second'%}
+		<td class="res_link"><span id="res_league_second" class="leg_res_{{fl_res|getdictvalue:'second'|boolToInt}}">&nbsp;</span></td>
+	{%endif%}
+</tr>
+<tr>
+	<td>Troisi&egrave;me</td>
+	<td>{{fl_form.third}}</td>
+	{%if fl_res|has_key:'third'%}
+		<td class="res_link"><span id="res_league_third" class="leg_res_{{fl_res|getdictvalue:'third'|boolToInt}}">&nbsp;</span></td>
+	{%endif%}
+</tr>
+<tr class="hsep">
+	<td colspan="2" class="info">
+	Qualifi&eacute;s en Ligue des Champions
+	</td>
+</tr>
+<tr>
+	<td>Quatri&egrave;me</td>
+	<td>{{fl_form.fourth}}</td>
+	{%if fl_res|has_key:'fourth'%}
+		<td class="res_link"><span id="res_league_fourth" class="leg_res_{{fl_res|getdictvalue:'fourth'|boolToInt}}">&nbsp;</span></td>
+	{%endif%}
+</tr>
+<tr class="hsep">
+	<td colspan="2" class="info">
+	Qualifi&eacute; en Ligue Europa
+	</td>
+</tr>
+<tr>
+	<td>Rel&eacute;gu&eacute;s</td>
+	<td>{{fl_form.looser1}}</td>
+	{%if fl_res|has_key:'looser1'%}
+		<td class="res_link"><span id="res_league_looser1" class="leg_res_{{fl_res|getdictvalue:'looser1'|boolToInt}}">&nbsp;</span></td>
+	{%endif%}
+</tr>
+<tr>
+	<td></td>
+	<td>{{fl_form.looser2}}</td>
+	{%if fl_res|has_key:'looser2'%}
+		<td class="res_link"><span id="res_league_looser2" class="leg_res_{{fl_res|getdictvalue:'looser2'|boolToInt}}">&nbsp;</span></td>
+	{%endif%}
+</tr>
+<tr>
+	<td></td>
+	<td>{{fl_form.looser3}}</td>
+	{%if fl_res|has_key:'looser3'%}
+		<td class="res_link"><span id="res_league_looser3" class="leg_res_{{fl_res|getdictvalue:'looser3'|boolToInt}}">&nbsp;</span></td>
+	{%endif%}
+</tr>
+<tr class="hsep">
+	<td colspan="2" class="info">
+	Rel&eacute;gu&eacute;s en Ligue 2
+	</td>
+</tr>
+
+{%if fl_form|can_submit_form%}
+<tr class="tablefooter">
+	<td class="textrightalign" colspan="2">
+		<!-- hidden fields -->
+		{{fl_form.user_id}}
+		<ul class="buttons">
+		    <li>
+		        <input id="fl_submit" type="submit" class="submit" value="Valider"/>
+		    </li>
+		    <li>
+		        <input id="fl_cancel" type="button" class="button" value="Annuler"/>
+		    </li>
+		</ul>
+		<!-- need to have saved msg in a separate ul, 
+			 to have it on a single line
+		-->
+		<ul class="buttons">
+		    <li class=" {% if fl_saved %}success{%endif%}
+		    			{% if fl_form.errors %}error{%endif%}">&nbsp;
+			{% if fl_saved %}
+			Vos pronostics ont &eacute;t&eacute; enregistr&eacute;s
+			{% endif %}
+			{% if fl_form.errors %}
+				{%for error in fl_form.errors|getdictvalue:'__all__' %}{{error}}{%endfor%}
+			{% endif %}
+		    </li>
+		</ul>
+	</td>
+</tr>
+{%endif%}
+
+</table>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+	    $.getJSON(Urls.ajax_forecasts_league_results(), function(data) {
+	    	for (title in data)
+	    	{
+	    	    popup_html = data[title].replace(/&amp;eacute;/g,'\u00E9');
+	    	    link_name = '#res_league_'+title;
+	    	    $(link_name).parent().append(popup_html);
+	    	    $(link_name).parent().addClass('has_popup');
+	    	}
+	    	load_popup_events();
+    	});
+		
+		$('#fl_cancel').click(function(){
+			$.get(Urls.ajax_forecasts_league(),function(data){
+				if (check_ajax_logged_in(data))
+				{
+					$('table#forecasts_league').replaceWith(data);
+				}
+			});
+		});
+		
+		$('#fl_submit').click(function(){
+
+			var postdata={
+				{% for field in fl_form.visible_fields %}
+					'{{field.html_name}}': $('select[name={{field.html_name}}]').val(),
+				{% endfor %}
+				{% for field in fl_form.hidden_fields %}
+					'{{field.html_name}}': $('input[name={{field.html_name}}]').val(),
+				{% endfor %}
+				null:null //hack - need null after last ,
+	     	};
+	    	 
+	    	 $.ajax({
+		      type: "POST",
+		      url: Urls.ajax_forecasts_league(),
+		      data: postdata,
+		      success: function(html) {
+		      	if (check_ajax_logged_in(html))
+				{
+			  		$('table#forecasts_league').replaceWith(html);
+		  		}
+		      	
+		      }
+		    });
+		    return false;
+		});
+		
+		{%if fl_form.readonly%}
+			{% for field in fl_form.visible_fields %}
+			var combo = document.getElementById('id_{{field.html_name}}');
+			if (combo)
+			{
+				//combo must be disabled - not change possible
+				combo.setAttribute("disabled", "disabled");
+				combo.setAttribute("class", "inactive");
+			};
+			{% endfor %}
+		{%endif%}
+	});
+</script>
+

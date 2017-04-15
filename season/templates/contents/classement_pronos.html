@@ -1,0 +1,61 @@
+{% load generic_tags %}
+
+<table id="players_table" class="players_table" cellpadding="0" cellspacing="0">
+	<tr class="tableheader">
+		<td>Pos.</td>
+		<td></td>
+		<td>Joueur</td>
+		<td>Pts</td>
+		<td>Scores</td>
+		<td>Issues</td>
+		<td>Matches</td>
+		{%if eos and final_players_table%}<td>Bonus</td>{%endif%}
+		<td>Moy.</td>
+	</tr>
+	
+	{%for line in players_table%}
+	<tr class="tableline">
+		<td class="pos lettrine 
+			{%ifequal forloop.counter 1%}first{%endifequal%}
+			{%ifequal forloop.counter players_table|length%}last{%endifequal%}
+		">
+			{{forloop.counter}}
+		</td>
+		<td class="evo {{line|getdictvalue:'evo'|evoClass}}">
+			<a href="#" rel="{{line|getdictvalue:'id'}}"></a>
+		</td>
+		<td class="player">{{line|getdictvalue:'name'|lower|capfirst}}</td>
+		<td class="points">{%if line|has_key:'total' and line|getdictvalue:'total'%}
+								{{line|getdictvalue:'total'}}
+						   {%else%}
+							   {%if line|has_key:'pts'%}{{line|getdictvalue:'pts'}}{%else%}0{%endif%}
+						   {%endif%}
+		</td>
+		<td class="scores">{%if line|has_key:'scores'%}{{line|getdictvalue:'scores'}}{%else%}0{%endif%}</td>
+		<td class="issues">{%if line|has_key:'issues'%}{{line|getdictvalue:'issues'}}{%else%}0{%endif%}</td>
+		<td class="played">{%if line|has_key:'matches'%}{{line|getdictvalue:'matches'}}{%else%}0{%endif%}</td>
+		{%if eos and final_players_table%}
+		<td class="bonus">{%if line|has_key:'bonus' and line|getdictvalue:'bonus'%}{{line|getdictvalue:'bonus'}}{%else%}0{%endif%}</td>
+		{%endif%}
+		<td class="average">{{line|avg_table_line}}</td>
+	</tr>
+	{% endfor %}
+</table>
+
+<script type="text/javascript">
+showPlayerEvo = function()
+{
+	var player_id = $(this).children('td.evo:first').children('a').attr('rel');
+	$.get(Urls.ajax_evo_player(player_id), function(html) {
+		if (html)
+		{
+			$('div#lb-mask').show();
+	    	$('div#lb-evo').replaceWith(html);
+			$('div#lb-evo').parent('div').show();
+		}
+	});
+};
+$(function() {
+	bindtableline('players_table',showPlayerEvo);
+});
+</script>

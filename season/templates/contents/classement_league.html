@@ -1,0 +1,64 @@
+{% load static %}
+{% load generic_tags %}
+
+<table id="league_table" class="league_table" cellpadding="0" cellspacing="0">
+	<tr class="tableheader">
+		<td>Pos.</td>
+		<td></td>
+		<td></td>
+		<td>Equipe</td>
+		<td>Pts</td>
+		<td>J</td>
+		<td>G</td>
+		<td>N</td>
+		<td>P</td>
+		<td>p</td>
+		<td>c</td>
+		<td>Diff.</td>
+	</tr>
+	
+	{%for line in league_table%}
+	<tr class="tableline">
+		<td class="pos p{{forloop.counter}} lettrine">{{forloop.counter}}</td>
+		<td class="evo {{line|getdictvalue:'evo'|evoClass}}">
+			<a href="#" rel="{{line|getdictvalue:'id'}}"></a>
+		</td>
+
+        <td class="logo">
+        {% with team_name=line.name|lower %}
+            {% with 'images/clubs/small/'|add:team_name|add:'.png' as image_static %}
+              <img src="{% static image_static %}" alt="logo"/>
+            {% endwith %}
+        {% endwith %}
+        </td>
+
+		<td class="team">{{line|getdictvalue:'name'}}</td>
+		<td class="points">{{line|getdictvalue:'pts'}}</td>
+		<td class="played">{{line|getdictvalue:'played'}}</td>
+		<td class="win">{{line|getdictvalue:'win'}}</td>
+		<td class="draw">{{line|getdictvalue:'draw'}}</td>
+		<td class="lose">{{line|getdictvalue:'lose'}}</td>
+		<td class="for">{{line|getdictvalue:'goal_for'}}</td>
+		<td class="against">{{line|getdictvalue:'goal_against'}}</td>
+		<td class="diff">{{line|getdictvalue:'diff'|goal_diff}}</td>
+	</tr>
+	{% endfor %}
+</table>
+
+<script type="text/javascript">
+showTeamEvo = function()
+{
+	var team_id = $(this).children('td.evo:first').children('a').attr('rel');
+	$.get(Urls.ajax_evo_team(team_id), function(html) {
+		if (html)
+		{
+			$('div#lb-mask').show();
+	    	$('div#lb-evo').replaceWith(html);
+    		$('div#lb-evo').parent('div').show();
+		}
+	});
+};
+$(function() {
+	bindtableline('league_table',showTeamEvo);
+});
+</script>

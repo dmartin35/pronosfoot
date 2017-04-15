@@ -1,0 +1,48 @@
+{% extends "main.html" %}
+
+{% block body %}
+	
+	<div class="line fullline">
+		<div class="col2of3">
+			<h1>Matches &amp; R&eacute;sultats</h1>
+			<h2 class="floatLeft">Saison {{season}} | </h2>
+			<div class="h2 floatLeft" style="padding-left:0;">{%include "global/weekselection.html"%}</div>
+			{%include 'contents/fixtures.html'%}
+		</div>
+	
+		<div class="col1of3">
+			<h1>Calendrier</h1>
+			{%include 'contents/calendar.html'%}
+			<h3>L&eacute;gende</h3>
+			<ul class="legend">
+				{%if not user.is_authenticated%}
+				<li>
+					<span class="matchday color">&nbsp;</span>
+					<span class="info">Jour de matches</span>
+				</li>
+				{%else%}
+				<li>
+					<span class="empty color">&nbsp;</span>
+					<span class="info">Aucun pronostic</span>
+				</li>
+				<li>
+					<span class="half color">&nbsp;</span>
+					<span class="info">Pronostics partiels</span>
+				</li>
+				<li>
+					<span class="full color">&nbsp;</span>
+					<span class="info">Pronostics complets</span>
+				</li>
+				{%endif%}
+			</ul>
+		</div>	
+	</div>
+	<div class="line sep"/>
+	
+<script type="text/javascript">
+	$(document).ready(function() {
+       $('#weekselection').createDropdown(Urls.ajax_fixtures_week,'table#fixtures');
+	});
+</script>	
+{% endblock %}
+

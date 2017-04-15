@@ -1,0 +1,31 @@
+<ul id="nav">
+    <li id="pronosfoot">
+    	<a title="" href="{% url 'index' %}"></a>
+	</li>
+    <li id="matches" 
+ 	 {%ifequal selectedmenu 'matches'%} class="current" {%endifequal%}>
+    	<a title="" href="{% url 'fixtures'%}"></a>
+    </li>
+    <li id="pronos"
+     {%ifequal selectedmenu 'pronos'%} class="current" {%endifequal%}>
+    	<a title="" href="{% url 'forecasts'%}"></a>
+    </li>
+    <li id="classements"
+     {%ifequal selectedmenu 'classements'%} class="current" {%endifequal%}>
+    	<a title="" href="{% url 'tables'%}"></a>
+    </li>
+    <li id="stats"
+     {%ifequal selectedmenu 'stats'%} class="current" {%endifequal%}>
+    	<a title="" href="{% url 'stats'%}"></a>
+    </li>
+    {# extra li; to have darker zone on the rigth #}
+    <li id="right">&nbsp;</li>
+</ul>
+
+{%if not user.is_authenticated%}
+<script type="text/javascript">
+$(function() {
+	bind_to_need_login('#nav #pronos a');
+});
+</script>
+{%endif%}

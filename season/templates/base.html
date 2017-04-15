@@ -1,0 +1,64 @@
+{% load static %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr" dir="ltr">
+  <head>
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta name="author" content="David Martin" />
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta http-equiv="Content-Script-Type" content="text/javascript" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+	
+    <title>Pronos Foot</title>
+
+	<link rel="icon" href="{%static 'images/favicon.ico'%}" type="image/x-icon"/>
+
+    <script type="text/javascript" src="{% static 'django_js_reverse/js/reverse.js' %}"></script>
+    <!--<script type="text/javascript" src="{%static 'jquery/jquery-3.1.1.min.js'%}"></script>-->
+    <script type="text/javascript" src="{%static 'jquery/jquery-1.6.1.min.js'%}"></script>
+    <script type="text/javascript" src="{%static 'jquery/csrf.js'%}"></script>
+    <script type="text/javascript" src="{%static 'jquery/highcharts.js'%}"></script>
+	<script type="text/javascript" src="{%static 'jquery/piechart.js'%}"></script>
+	<script type="text/javascript" src="{%static 'jquery/singlelinechart.js'%}"></script>
+	<script type="text/javascript" src="{%static 'jquery/columnchart.js'%}"></script>
+	<script type="text/javascript" src="{%static 'jquery/dropdown.js'%}"></script>
+    <script type="text/javascript" src="{%static 'jquery/popup.js'%}"></script>
+    <script type="text/javascript" src="{%static 'jquery/ajax_logged_in.js'%}"></script>
+    <script type="text/javascript" src="{%static 'jquery/need_login.js'%}"></script>
+    <script type="text/javascript" src="{%static 'jquery/tableline.js'%}"></script>
+    <script type="text/javascript" src="{%static 'jquery/stackedbarchart.js'%}"></script>
+	<link type="text/css" rel="stylesheet" href="{%static 'css/pronosfoot.css'%}" />
+	<link type="text/css" rel="stylesheet" href="{%static 'css/dropdown.css'%}" />
+	<link type="text/css" rel="stylesheet" href="{%static 'css/calendar.css'%}" />
+	<link type="text/css" rel="stylesheet" href="{%static 'css/popup.css'%}" />
+	
+	<!--[if IE]>
+	<style type="text/css" media="screen">
+		@font-face{
+		font-family: 'Humanst_521_lt_BT_light';
+    	src: url('/static/fonts/humanst521_lt_bt_light.eot');
+		}
+	</style>
+	<![endif]-->
+
+  </head>
+<body>
+<div class="page">
+
+	<div id="header">
+		{% block header %}{% endblock %}
+		{% block nav %}{% endblock %}
+    </div>
+    
+    <div class="body">
+		{% block body %}{% endblock %}
+    </div>
+    
+    <div id="footer" >
+		{% block footer %}{% endblock %}
+    </div>
+    
+    {%block lightboxes%}{%endblock%}
+</div>
+</body>
+</html>

@@ -1,0 +1,21 @@
+%(title)s - %(subtitle)s
+
+Bonjour %(user)s
+
+Vous n'avez pas encore enregistre vos pronostics
+pour %(num_matches)s match%(plural_es)s du %(date)s
+comptant pour la %(week_loc)s journee de Ligue 1.<br>
+
+Nous vous rappelons que vous pouvez saisir et modifier
+vos pronostics jusqu'a la derniere seconde avant
+le debut de chaque match.<br>
+
+Nous vous invitons a enregistrer vos pronostics
+des maintenant: http://pronosfoot.alwaysdata.net/.
+
+L'equipe Pronos foOt.
+
+---
+
+Nous contacter: pronosfoot@alwaysdata.net
+Cliquez ici pour ne plus recevoir de rappel: http://pronosfoot.alwaysdata.net/%(unsubscribeurl)s

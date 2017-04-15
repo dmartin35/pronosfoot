@@ -1,0 +1,65 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-08-08 14:38+0200\n"
+"PO-Revision-Date: 2011-07-30 01:17+0100\n"
+"Last-Translator: \n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: .\settings.py:33
+msgid "English"
+msgstr "Anglais"
+
+#: .\settings.py:34
+msgid "French"
+msgstr "Français"
+
+#: .\auth\forms.py:13
+msgid "Username"
+msgstr "Nom d'utilisateur"
+
+#: .\auth\forms.py:14
+msgid "Required. 30 characters or fewer. Alphanumeric characters only (letters, digits and underscores)."
+msgstr "Requis. 30 caractères maximum, alphanumériques uniquement (lettres, chiffres, et tirets bas _)."
+
+#: .\auth\forms.py:15
+msgid "This value must contain only letters, numbers and underscores."
+msgstr "Ce champ ne doit contenir que des lettres, des nombres et des tirets bas _."
+
+#: .\auth\forms.py:16
+msgid "E-Mail Address"
+msgstr "Adresse électronique"
+
+#: .\auth\forms.py:17
+msgid "Password"
+msgstr "Mot de passe"
+
+#: .\auth\forms.py:18
+msgid "Password confirmation"
+msgstr "Confirmation de votre mot de passe"
+
+#: .\auth\forms.py:30
+msgid "A user with that username already exists."
+msgstr "Un utilisateur avec ce nom existe déjà"
+
+#: .\auth\forms.py:36
+msgid "A user with that email already exists."
+msgstr "Un utilisateur avec cet email existe déjà"
+
+#: .\auth\forms.py:43
+msgid "The two password fields didn't match."
+msgstr "Les deux mots de passe ne correspondent pas."
+
+#: .\season\forms.py:92
+msgid "Loosers must all be different."
+msgstr "Les relégués doivent être tous différents."
+

@@ -1,0 +1,39 @@
+{% extends "main.html" %}
+
+{% block body %}
+	
+	<div class="line fullline">
+	 	<div class="col1of2">
+			<h1>Ligue 1</h1>
+			{%if league_table%}
+				<h2 class="floatLeft">Classement g&eacute;n&eacute;ral | Saison {{season}} {%if currentweek%}| {%endif%}</h2>
+				{%if currentweek%}
+				<div class="h2 floatLeft" style="padding-left:0;">{%include "global/weekselection.html"%}</div>
+				{%endif%}
+				{%include 'contents/classement_league.html'%}
+			{%else%}
+				<h4>Le classement sera disponible d&egrave;s la parution des premiers r&eacute;sultats.</h4>
+			{%endif%}
+		</div>
+		
+		<div class="col1of2">
+			<h1>Joueurs</h1>
+			{%if players_table%}
+				<h2 class="floatLeft">Classement </h2>
+				<div class="h2 floatLeft" style="padding-left:0;">{%include "global/weekselection_playerstable.html"%}</div>
+				{%include 'contents/classement_pronos.html'%}
+			{%else%}
+				<h4>Le classement sera disponible d&egrave;s la parution des premiers r&eacute;sultats.</h4>
+			{%endif%}
+		</div>
+	</div>
+	
+	<div class="line sep"/>
+	
+<script type="text/javascript">
+	$(document).ready(function() {
+       $('#weekselection').createDropdown(Urls.ajax_table_league_week,'table#league_table');
+       $('#weekselection_players').createDropdown(Urls.ajax_table_players_week,'table#players_table');
+	});
+</script>		
+{% endblock %}

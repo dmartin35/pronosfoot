@@ -1,0 +1,13 @@
+{% load generic_tags %}
+
+<div class="popup">
+    <ul class="left">
+        <li>
+            <h2>{{title|teamTitle|capfirst}}</h2>
+            <p class="arrow_right"/>
+            <span class="desc">{{teams|capFirstAll|listToComaSepStr}}</span>
+        </li>
+    </ul>
+	
+</div>
+

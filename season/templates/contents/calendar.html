@@ -1,0 +1,90 @@
+{% load generic_tags %}
+
+
+<table id="calendar" class="calendar" cellpadding="0" cellspacing="0">
+	<thead>
+	<tr id="cal_nav">
+		<td>
+			<div id="previous">&nbsp;</div>
+		</td>
+		<td colspan="5"><h2>{{current_month|date:"F Y"|capfirst}}</h2></td>
+		<td>
+			<div id="next">&nbsp;</div>
+		</td>
+    </tr>
+	
+    <tr class="tableheader">
+		<th>L</th><th>M</th><th>M</th>
+		<th>J</th><th>V</th><th>S</th>
+		<th>D</th>
+	</tr>
+	</thead>
+    
+    <tbody>
+	{%for week in calendar%}
+	<tr class="tableline">
+		{%for day in week%}
+			{%if day_to_week|has_key:day%}
+			<td class="{%if forecasts_cal%}{{forecasts_cal|getdictvalue:day}}{%else%}matchday{%endif%}">
+				<span style="display:none;">{{day_to_week|getdictvalue:day}}</span>
+			{%else%}
+			<td>
+			{%endif%}
+				{%if day%}{{day}}{%endif%}
+			</td>
+		{%endfor%}
+	</tr>
+	{%endfor%}
+	</tbody>
+	
+</table>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+	   	
+		$('table#calendar tr#cal_nav div#previous').parent().hover(function(){
+			$(this).css('cursor','pointer');
+			$('table#calendar tr#cal_nav div#previous').addClass('over');
+		},function(){
+			$(this).css('cursor','default');
+			$('table#calendar tr#cal_nav div#previous').removeClass('over');
+		}).click(function(){
+			$.get(Urls.ajax_monthly_calendar("{{prev_year}}", "{{prev_month}}"), function(data) {
+		    	$('table#calendar').replaceWith(data);
+	    	});
+		});
+		
+		$('table#calendar tr#cal_nav div#next').parent().hover(function(){
+			$(this).css('cursor','pointer');
+			$('table#calendar tr#cal_nav div#next').addClass('over');
+		},function(){
+			$(this).css('cursor','default')
+			$('table#calendar tr#cal_nav div#next').removeClass('over');
+		}).click(function(){
+			$.get(Urls.ajax_monthly_calendar("{{next_year}}", "{{next_month}}"), function(data) {
+		    	$('table#calendar').replaceWith(data);
+	    	});
+		});
+
+		$('table#calendar td.matchday ,table#calendar td.empty, table#calendar td.half, table#calendar td.full').hover(function(){
+				$(this).addClass('hover');
+			},function(){
+				$(this).removeClass('hover');
+			});
+			
+		$('table#calendar td.matchday').click(function(){
+			var week = $(this).children('span').html();
+			window.location= Urls.fixtures(week);
+			//hack a click in the weekselection dropdown
+			//$('#weekselection li#week_'+week+' a').click();
+		});
+		
+		$('table#calendar td.empty, table#calendar td.half, table#calendar td.full').click(function(event){
+			event.stopPropagation();
+			var week = $(this).children('span').html();
+			window.location= Urls.forecasts(week);
+		});
+		
+		
+	});
+	</script>

@@ -1,0 +1,59 @@
+.popup {
+	position: relative;
+}
+
+.popup ul {
+	text-align: left;
+	position: absolute;
+	display: inline;
+	z-index: 1000;
+	padding: 10px;
+	width: 180px;
+	height: 100px;
+	border: 1px solid #396438;
+	background-color: #FFFFFF;
+}
+
+.popup li {
+	padding-bottom: 5px;
+}
+
+.popup li span {
+	display: block;
+	text-align: left;
+}
+
+.popup p.arrow {
+	background: transparent url("/static/images/popup_arrow.png") no-repeat;
+	width: 9px;
+	height: 17px;
+	position: absolute;
+	top: 17px;
+	left:-9px;
+}
+
+.popup p.arrow_right {
+	background: transparent url("/static/images/popup_arrow_right.png") no-repeat;
+	width: 9px;
+	height: 17px;
+	position: absolute;
+	top: 17px;
+	right:-9px;
+}
+
+/*** custom pop up ***/
+#forecasts td.stats_link .popup {
+	top: -38px;
+	left: 40px;
+}
+
+#forecasts td.res_link .popup {
+	top: -20px;
+	left: 40px;
+}
+
+#forecasts_league td.res_link .popup
+{
+	top: -15px;
+	right: 210px;
+}

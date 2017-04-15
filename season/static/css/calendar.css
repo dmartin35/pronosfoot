@@ -1,0 +1,71 @@
+div#calendar{
+	height: 270px;
+}
+
+table.calendar td, 
+table.calendar th {
+	width: 35px;
+	height: 35px;
+	text-align: center;
+	padding:0;
+}
+
+table.calendar td{
+	cursor: default;
+}
+
+table.calendar td.hover{
+	cursor: pointer;
+}
+
+
+.matchday {
+	background-color: #E5DDD7;
+}
+.matchday.hover {
+	background-color: #D4CCC6;
+}
+.empty {
+	background-color: #E89090;
+}
+.empty:hover {
+	background-color: #D78080;
+}
+.half {
+	background-color: #F5C484;
+}
+.half:hover {
+	background-color: #E4B373;
+}
+.full {
+	background-color: #B5E8A2;
+}
+.full:hover {
+	background-color: #A4D791;
+}
+
+table.calendar div#previous,
+table.calendar div#next{
+	height: 16px;
+	width: 16px;
+	margin-left:7px;
+}
+
+table.calendar div#previous
+{
+	background: transparent url("/static/images/nav.png") no-repeat 0 0;
+}
+
+table.calendar div#next{
+	background: transparent url("/static/images/nav.png") no-repeat -16px 0;
+}
+
+table.calendar div#previous.over
+{
+	background-position: 0 -17px;
+}
+
+table.calendar div#next.over
+{
+	background-position: -16px -17px;
+}

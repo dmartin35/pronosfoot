@@ -1,0 +1,77 @@
+{% load generic_tags %}
+
+<div id="stats_league">
+	<div class="col1of3 rsep col1">
+		<ul>
+		
+		<li> 
+			<span>Meilleure attaque:</span>
+			<span class="stats_bold">{{best_attack|listvalue:1|listToComaSepStr}}</span>
+			{%if best_attack|listvalue:0|notIsNone%}
+				<span class="stats_italic">{{best_attack|listvalue:0}} buts</span>
+			{%else%}<span class="na">N/A</span>{%endif%}
+		</li>
+		<li>
+			<span>Meilleure d&eacute;fense:</span>
+			<span class="stats_bold">{{best_defense|listvalue:1|listToComaSepStr}}</span>
+			{%if best_defense|listvalue:0|notIsNone%}
+				<span class="stats_italic">{{best_defense|listvalue:0}} buts</span>
+			{%else%}<span class="na">N/A</span>{%endif%}
+		</li>
+		<li>
+			<span>Plus mauvaise attaque:</span>
+			<span class="stats_bold">{{poorest_attack|listvalue:1|listToComaSepStr}}</span>
+			{%if poorest_attack|listvalue:0|notIsNone%}
+				<span class="stats_italic">{{poorest_attack|listvalue:0}} buts</span>
+			{%else%}<span class="na">N/A</span>{%endif%}
+		 </li>
+		<li>
+			<span>Plus mauvaise d&eacute;fense:</span>
+			<span class="stats_bold">{{poorest_defense|listvalue:1|listToComaSepStr}}</span>
+			{%if poorest_defense|listvalue:0|notIsNone%}
+				<span class="stats_italic">{{poorest_defense|listvalue:0}} buts</span>
+			{%else%}<span class="na">N/A</span>{%endif%}
+		</li>
+		
+		</ul>
+	</div>
+	
+	<div class="col1of3 col2">
+		<ul>
+		
+		<li> 
+			<span>Total marqu&eacute;s:</span>
+			{%if total_goals|notIsNone%}
+				<span class="stats_bold">{{total_goals}}</span>
+				<span class="stats_italic">buts</span>
+			{%else%}<span class="na">N/A</span>{%endif%}
+		</li>
+		
+		<li> 
+			<span>Moyenne par match:</span>
+			{%if avg_goals|notIsNone%}
+				<span class="stats_bold">{{avg_goals|float_dbledigit}}</span>
+				<span class="stats_italic">buts</span>
+			{%else%}<span class="na">N/A</span>{%endif%}
+		</li>
+		
+		<li> 
+			<span>Journ&eacute;e la plus prol&eacute;fique:</span>
+			{%if most_goals|notIsNone%}
+				<span class="stats_bold">{{most_goals}}</span>
+				<span class="stats_italic">buts</span>
+			{%else%}<span class="na">N/A</span>{%endif%}
+		</li>
+
+		<li> 
+			<span>Journ&eacute;e la moins prol&eacute;fique:</span>
+			{%if less_goals|notIsNone%}
+				<span class="stats_bold">{{less_goals}}</span>
+				<span class="stats_italic">buts</span>
+			{%else%}<span class="na">N/A</span>{%endif%}
+		</li>
+		
+		</ul>
+	</div>
+
+</div>
