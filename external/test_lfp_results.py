@@ -16,7 +16,6 @@ class TestLFPApi(unittest.TestCase):
 
     def test_get_scores(self):
 
-
         self.assertEqual(get_score(1, 'Bastia', 'Paris'), (0, 1))
         self.assertEqual(get_score(1, 'Monaco', 'Guimgamp'), (2, 2))
         self.assertEqual(get_score(1, 'Montpellier', 'Angers'), (1, 0))
