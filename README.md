@@ -1,5 +1,6 @@
-# pronosfoot
 [![Build Status](https://travis-ci.org/dmartin35/pronosfoot.svg?branch=master)](https://travis-ci.org/dmartin35/pronosfoot)
+
+# pronosfoot
 Site web perso de pronos entre amis pour la Ligue 1
 
 
