@@ -2,8 +2,8 @@ language: python
 python:
   - "3.4"
 cache: pip
-#before_install:
-#  - pip install pytest pytest-cov
+before_install:
+  - pip install pytest pytest-cov
 #install:
 #  - pip install -r requirements.txt
 #services:
