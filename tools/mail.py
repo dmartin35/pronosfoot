@@ -4,9 +4,8 @@
 # Send an HTML email with an embedded image and a plain text message for
 # email clients that don't want to display the HTML.
 import smtplib
-from email.MIMEMultipart import MIMEMultipart
-from email.MIMEText import MIMEText
-
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 
 def send_html_mail(_server, _from, _to, _subject, _html_content, text_content):
     # Create the root message and fill in the from, to, and subject headers

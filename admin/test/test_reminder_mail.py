@@ -4,12 +4,14 @@ reminder mail test
 import sys
 import locale
 import datetime
+import pytest
 
 from admin.mailing.mailer import get_template
 from admin.mailing.mailer import send_mail_plain_text
 from admin.mailing.mailer import FROM
 
 
+@pytest.mark.skip(reason='Not valid for pytest')
 def test_reminder():
     locale.setlocale(locale.LC_ALL, 'fr_FR')
     now = datetime.datetime.now()

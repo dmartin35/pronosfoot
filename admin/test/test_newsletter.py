@@ -4,12 +4,14 @@ newsletter test
 import sys
 import locale
 import datetime
+import pytest
 
 from admin.mailing.mailer import get_template
 from admin.mailing.mailer import html_mail
 from admin.mailing.mailer import send_mail
 from admin.mailing.mailer import FROM
 
+@pytest.mark.skip(reason='Not valid for pytest')
 def test_newsletter(newsfile):
     """
     test fake newsletter
@@ -36,5 +38,5 @@ if __name__ == '__main__':
     if len(sys.argv) != 2:
         usage()
         sys.exit(1)
-        
+
     test_newsletter(sys.argv[1])
