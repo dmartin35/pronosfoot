@@ -3,7 +3,7 @@ python:
   - "3.4"
 cache: pip
 before_install:
-  - pip install pytest pytest-cov
+  - pip install "pytest>=2.9" pytest-cov
 #install:
 #  - pip install -r requirements.txt
 #services:
