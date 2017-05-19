@@ -1,7 +1,7 @@
 createSingleLineChart = function(container,xdata,ydata,xlabel,ylabel,ymin,ymax,tickInterval,minorTickInterval,yreversed,xlabel_prefix,ylabel_suffix,yticks)
 {
-//console.log('container','xdata','ydata','xlabel','ylabel','ymin','ymax','tickInterval','minorTickInterval','yreversed','xlabel_prefix','label_suffix');
-//console.log(container,xdata,ydata,xlabel,ylabel,ymin,ymax,tickInterval,minorTickInterval,yreversed,xlabel_prefix,ylabel_suffix);
+console.log('container','xdata','ydata','xlabel','ylabel','ymin','ymax','tickInterval','minorTickInterval','yreversed','xlabel_prefix','label_suffix');
+console.log(container,xdata,ydata,xlabel,ylabel,ymin,ymax,tickInterval,minorTickInterval,yreversed,xlabel_prefix,ylabel_suffix);
 
 	return new Highcharts.Chart({
 		chart: {
@@ -35,6 +35,14 @@ createSingleLineChart = function(container,xdata,ydata,xlabel,ylabel,ymin,ymax,t
 			title: {
 				text: xlabel
 			},
+			min: 1,
+			max: 38,
+			tickInterval: 1,
+            startOnTick: true,
+			endOnTick: true,
+			allowDecimals: false,
+			showLastLabel: true,
+			showFirstLabel: true
 		},
 		
 		yAxis: {

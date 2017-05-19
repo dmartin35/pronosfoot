@@ -76,7 +76,7 @@
             td.data('loaded', 'loaded');
 
             //createSingleLineChart('container','xdata','ydata','xlabel','ylabel','ymin','ymax','tickInterval','minorTickInterval','yreversed','xlabel_prefix','label_suffix','yticks');
-            createSingleLineChart('team_'+data.team_id+'_evo_pos_chart_ctnr', data.evo_weeks, data.evo_pos,'Journées','Position', 1, 20, 5, 0, true, 'J', ['er','nd','eme'], [1, 5, 10, 15, 20]);
+            createSingleLineChart('team_'+data.team_id+'_evo_pos_chart_ctnr', null, data.evo_pos,'Journées','Position', 1, 20, 5, 0, true, 'J', ['er','nd','eme'], [1, 5, 10, 15, 20]);
           });
         }
         tr.addClass('expanded');
