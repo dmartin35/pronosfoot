@@ -812,23 +812,22 @@ def ajax_evo_player(request, player_id):
         return HttpResponse(status=400)
     if not _validGetRequest(request):
         return HttpResponse(status=400)
-    
     if not isPlayerValid(player_id):
         return HttpResponse(status=400)
     
-    pos = player_pos_evolution(player_id)
     #ad info to context - to be passed to templates -
     context = {'evo_weeks':played_weeks(),
-               'evo_pos':pos,
-               'evo_progress':evo_progress(pos),
-               'evo_points':player_points_evolution(player_id),
-               'evo_pts_per_week':player_points_per_week(player_id),
-               'evo_name':getPlayerName(player_id),
-               'evo_nb_max':len(getAllPlayers()),
-               'chart_pts_tickInterval': 25,
-               'chart_pos_tickInterval': 1,
-               'chart_pos_minorTickInterval': 0,
+               'evo_pos':player_pos_evolution(player_id),
+               #'evo_progress':evo_progress(pos),
+               #'evo_points':player_points_evolution(player_id),
+               #'evo_pts_per_week':player_points_per_week(player_id),
+               'player_id': player_id,
+               'player_name':getPlayerName(player_id),
+               'nb_players':len(getAllPlayers()),
+               #'chart_pts_tickInterval': 25,
+               #'chart_pos_tickInterval': 1,
+               #'chart_pos_minorTickInterval': 0,
                }
-    
-    return render(request, 'lightboxes/evo.html', context)
+    return JsonResponse(context)
+    #return render(request, 'lightboxes/evo.html', context)
 

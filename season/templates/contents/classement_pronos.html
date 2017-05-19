@@ -1,12 +1,11 @@
 {% load generic_tags %}
 
 
-
-
 <table id="players_table" class="table">
 
   <thead>
   <tr>
+    <th class="revealMoreHeader text-center" scope="col"></th>
     <th scope="col">
         <div class="thFull">Position</div>
         <div class="thShort">Pos</div>
@@ -46,6 +45,10 @@
           {%if forloop.counter == players_table|length%}class="tableMid"{%endif%}
       >
 
+        <td class="revealMore" style="" tabindex="0" role="button">
+          <i class="fa fa-chevron-down" aria-hidden="true"></i>
+          <i class="fa fa-chevron-up" aria-hidden="true"></i>
+        </td>
         <td class="pos p{{forloop.counter}}" tabindex="0">
             <span class="value">{{forloop.counter}}</span>
             <span class="movement {{line.evo|movement}}"></span>
@@ -69,27 +72,12 @@
         <td class="bonnus">{{line.bonus|default_if_none:0}}</td>
         {%endif%}
       </tr>
+      <tr class="expandable">
+      <td colspan="8" data-expanded-content-url="{%url "ajax_evo_player" line.id%}">
+        <h6>Evolution de la position au classement</h6>
+        <div id="player_{{line.id}}_evo_pos_chart_ctnr" style="height: 155px;" class="container"><em>Non disponible</em></div>
+      </td></tr>
       {% endfor %}
 
   </tbody>
 </table>
-
-{%comment%}
-<script type="text/javascript">
-showPlayerEvo = function()
-{
-	var player_id = $(this).children('td.evo:first').children('a').attr('rel');
-	$.get(Urls.ajax_evo_player(player_id), function(html) {
-		if (html)
-		{
-			$('div#lb-mask').show();
-	    	$('div#lb-evo').replaceWith(html);
-			$('div#lb-evo').parent('div').show();
-		}
-	});
-};
-$(function() {
-	bindtableline('players_table',showPlayerEvo);
-});
-</script>
-{%endcomment%}

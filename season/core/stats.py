@@ -451,7 +451,7 @@ def player_pos_evolution(player_id):
                 user_table = user_table_with_bonus()
             players_pos = [x[0] for x in user_table]
             pos = players_pos.index(int(player_id)) + 1
-            pos_evo.append(pos)
+            pos_evo.append({'x': week, 'y': pos})
         except:
             pass
     return pos_evo

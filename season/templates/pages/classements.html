@@ -74,7 +74,6 @@
           var url = td.data('expanded-content-url');
           $.get(url).done(function(data){
             td.data('loaded', 'loaded');
-
             //createSingleLineChart('container','xdata','ydata','xlabel','ylabel','ymin','ymax','tickInterval','minorTickInterval','yreversed','xlabel_prefix','label_suffix','yticks');
             createSingleLineChart('team_'+data.team_id+'_evo_pos_chart_ctnr', null, data.evo_pos,'Journées','Position', 1, 20, 5, 0, true, 'J', ['er','nd','eme'], [1, 5, 10, 15, 20]);
           });
@@ -82,6 +81,27 @@
         tr.addClass('expanded');
       }
      });
+
+     $("#players_table .revealMore").on('click', function(){
+      var tr = $(this).parent();
+      if (tr.hasClass('expanded')) {
+        tr.removeClass('expanded');
+      } else {
+        var next_tr = tr.next();
+        var td = next_tr.find('td:first');
+        if (td.data('loaded') != 'loaded') {
+          // loads the inner html - only if the td was empty ie. first access
+          var url = td.data('expanded-content-url');
+          $.get(url).done(function(data){
+            td.data('loaded', 'loaded');
+            //createSingleLineChart('container','xdata','ydata','xlabel','ylabel','ymin','ymax','tickInterval','minorTickInterval','yreversed','xlabel_prefix','label_suffix','yticks');
+            createSingleLineChart('player_'+data.player_id+'_evo_pos_chart_ctnr', null, data.evo_pos,'Journées','Position', 1, data.nb_players, 2, 0, true, 'J', ['er','nd','eme'], null);
+          });
+        }
+        tr.addClass('expanded');
+      }
+     });
+
   });
 </script>
 {% endblock %}
