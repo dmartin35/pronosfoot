@@ -48,7 +48,7 @@ def __evaluate_forecast(score_a, score_b, forecast_a, forecast_b):
     
     Points attribution
     - 8 points for exact score
-    - 5 points for winning team with correct goals difference; or draw
+    ##- 5 points for winning team with correct goals difference; or draw
     - 3 points for winning team
     - 0 points otherwise
     """
@@ -66,10 +66,11 @@ def __evaluate_forecast(score_a, score_b, forecast_a, forecast_b):
         if ( (score_a == score_b and forecast_a == forecast_b) or #draw 
              (score_a > score_b and forecast_a > forecast_b) or #win
              (score_a < score_b and forecast_a < forecast_b) ): #lose
-            # 5 points for match issue found (with valid goals diff)
+            ### 5 points for match issue found (with valid goals diff)
             # 3 points for match issue found only
-            diff = (score_a - score_b) == (forecast_a - forecast_b) 
-            points = 5 if diff else 3
+            #diff = (score_a - score_b) == (forecast_a - forecast_b)
+            #points = 5 if diff else 3
+            points = 3
             #match issue found
             score = 0
             issue = 1

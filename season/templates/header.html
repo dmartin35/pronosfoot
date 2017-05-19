@@ -1,58 +1,65 @@
-<div id="masthead">
-    
-    <div class="sizeLarge">
-        <p id="pronosfoot_logo"></p>
+{% load static %}
+
+<div class="pronosfoot-header mdl-layout__header mdl-layout__header--waterfall {%if selectedmenu == 'home'%}pronosfoot-home{%endif%}">
+  <div class="mdl-layout__header-row">
+    <span class="pronosfoot-title mdl-layout-title">
+      <a href="{% url 'index' %}">
+        <img class="pronosfoot-logo-image" src="{%static "images/logo-pronosfoot-title.png"%}">
+      </a>
+    </span>
+    <!-- Add spacer, to align navigation to the right in desktop -->
+    <div class="pronosfoot-header-spacer mdl-layout-spacer"></div>
+
+    <!-- Navigation -->
+    <div class="pronosfoot-navigation-container">
+
+      <nav class="pronosfoot-navigation mdl-navigation">
+
+        <a class="mdl-navigation__link mdl-typography--text-uppercase {%if selectedmenu == 'fixtures'%}is-active{%endif%}" href="{% url 'fixtures'%}">Matches</a>
+        <a class="mdl-navigation__link mdl-typography--text-uppercase {%if selectedmenu == 'forecasts'%}is-active{%endif%}" href="{% url 'forecasts'%}">Pronotics</a>
+        <a class="mdl-navigation__link mdl-typography--text-uppercase {%if selectedmenu == 'tables'%}is-active{%endif%}" href="{% url 'tables'%}">Classements</a>
+        <a class="mdl-navigation__link mdl-typography--text-uppercase {%if selectedmenu == 'statistics'%}is-active{%endif%}" href="{% url 'stats'%}">Statistiques</a>
+
+      </nav>
     </div>
-    
-    <div id="auth" class="sizeSmall">
-    {%if not user.is_authenticated%}
-    	<div id="register" class="line1of2">
-            <p class="icon">
-            <a href="#">S'inscrire</a>
-            </p>
-        </div>
-        
-        <div class="hsep"></div>
-        
-        <div id="login" >
-            <p class="icon">
-            <a href="#">S'identifier</a>
-            </p>
-        </div>
-        
-    {%else%}
-        <div class="line1of2">
-            <p class="username">
-            {{user.username|lower|capfirst}}
-            </p>
-        </div>
-        
-        <div class="hsep"></div>
-        
-        <div id="logout" >
-            <p class="icon">
-            <a href="{%url 'logout'%}">Se d&eacute;connecter</a>
-            </p>
-        </div>
-    {%endif%}
-    </div>
+    <span class="pronosfoot-mobile-title mdl-layout-title">
+      {%if selectedmenu == 'home'%}
+        <a href="{% url 'index' %}">
+          <img class="pronosfoot-logo-image" src="{%static "images/logo-pronosfoot-title.png"%}">
+        </a>
+      {%else%}
+        {{page_title}}
+      {%endif%}
+
+    </span>
+
+    <button class="pronosfoot-more-button mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect" id="more-button">
+      <i class="material-icons">more_vert</i>
+    </button>
+    <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right mdl-js-ripple-effect" for="more-button">
+
+      {%if user.is_authenticated%}
+        <li class="logged-in-user">
+          {%comment%}
+          <span class="fa-stack fa-lg">
+            <i class="fa fa-circle-thin fa-stack-2x"></i>
+            <i class="fa fa-user fa-stack-1x"></i>
+          </span>
+          {%endcomment%}
+          <span><i class="material-icons">account_circle</i></span>
+          <span class="username">{{user.username|title}}</span>
+
+
+        </li>
+        <li class="mdl-menu__item" data-href="{% url 'logout'%}"><i class="fa fa-sign-out"></i>&nbsp;Se déconnecter</li>
+      {%else%}
+        <li class="mdl-menu__item" data-href="{% url 'login'%}"><i class="fa fa-sign-in"></i>&nbsp;Connexion</li>
+        <li class="mdl-menu__item" data-href="{% url 'register'%}"><i class="fa fa-user-o"></i>&nbsp;Inscription</li>
+      {%endif%}
+    </ul>
+
+
+
+  </div>
 </div>
 
-<script type="text/javascript">
-$(function() {
-    $('#auth div#register a').click(function(){
-    	$('div#lb-mask').show();
-	    $.get(Urls.ajax_register(), function(html) {
-	    	$('div#lb-reg').replaceWith(html);
-    		$('div#lb-reg').parent('div').show();
-    	});
-    });
-    $('#auth div#login a').click(function(){
-    	$('div#lb-mask').show();
-	    $.get(Urls.ajax_login("{{selectedmenu}}"), function(html) {
-	    	$('div#lb-login').replaceWith(html);
-    		$('div#lb-login').parent('div').show();
-    	});
-    });
-});
-</script>

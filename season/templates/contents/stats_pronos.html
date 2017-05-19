@@ -1,39 +1,47 @@
 {% load generic_tags %}
 
-<div id="stats_pronos">
 
-<div >
-	<ul>
-		<li>
-			<span>Total points:</span>
+
+
+<div class="pronosfoot-wrapper"> <!--wrapper-->
+  <div class="mdl-cell mdl-cell--6-col center">
+
+	  <h6 class="text-center">Meilleures statistiques des pronostics sur 1 journée </h6>
+	    <ul class="mdl-list center text-center">
+
+		<li class="mdl-list__item center">
+			<span>Total de points:&nbsp;</span>
 			{%if forecasts_best_points and forecasts_best_points|getdictvalue:'value'%}
-				<span class="stats_bold">{{forecasts_best_points|getdictvalue:'value'}} pts</span>
-				<span class="stats_italic">{{forecasts_best_points|getdictvalue:'players'|capFirstAll|listToComaSepStr}}</span>
+				<span class="lettrine">{{forecasts_best_points|getdictvalue:'value'}}</span>
+				<span class="mdl-typography--font-light">{{forecasts_best_points|getdictvalue:'players'|capFirstAll|listToComaSepStr}}</span>
 			{%else%}
 				<span class="na">N/A</span>
-			{%endif%}  
+			{%endif%}
 		</li>
-		
-		<li>
-			<span>Issues correctes:</span>
+		<li class="mdl-list__item center">
+			<span>Nombre d'issues correctes:&nbsp;</span>
 			{%if forecasts_best_issues and forecasts_best_issues|getdictvalue:'value'%}
-				<span class="stats_bold">{{forecasts_best_issues|getdictvalue:'value'}}</span>
-				<span class="stats_italic">{{forecasts_best_issues|getdictvalue:'players'|capFirstAll|listToComaSepStr}}</span>
+				<span class="lettrine">{{forecasts_best_issues|getdictvalue:'value'}}</span>
+				<span class="mdl-typography--font-light">{{forecasts_best_issues|getdictvalue:'players'|capFirstAll|listToComaSepStr}}</span>
 			{%else%}
 				<span class="na">N/A</span>
-			{%endif%}   
+			{%endif%}
 		</li>
-		
-		<li>
-			<span>Scores exacts:</span>
+		<li class="mdl-list__item center">
+			<span>Nombre de scores exacts:&nbsp;</span>
 			{%if forecasts_best_scores and forecasts_best_scores|getdictvalue:'value'%}
-				<span class="stats_bold">{{forecasts_best_scores|getdictvalue:'value'}}</span>
-				<span class="stats_italic">{{forecasts_best_scores|getdictvalue:'players'|capFirstAll|listToComaSepStr}}</span>
+				<span class="lettrine">{{forecasts_best_scores|getdictvalue:'value'}}</span>
+				<span class="mdl-typography--font-light">{{forecasts_best_scores|getdictvalue:'players'|capFirstAll|listToComaSepStr}}</span>
 			{%else%}
 				<span class="na">N/A</span>
-			{%endif%}  
+			{%endif%}
 		</li>
-	</ul>
+
+
+		</ul>
+
+
+
+  </div>
 </div>
 
-</div>

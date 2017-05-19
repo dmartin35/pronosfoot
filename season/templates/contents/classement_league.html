@@ -1,50 +1,7 @@
 {% load static %}
 {% load generic_tags %}
 
-<table id="league_table" class="league_table" cellpadding="0" cellspacing="0">
-	<tr class="tableheader">
-		<td>Pos.</td>
-		<td></td>
-		<td></td>
-		<td>Equipe</td>
-		<td>Pts</td>
-		<td>J</td>
-		<td>G</td>
-		<td>N</td>
-		<td>P</td>
-		<td>p</td>
-		<td>c</td>
-		<td>Diff.</td>
-	</tr>
-	
-	{%for line in league_table%}
-	<tr class="tableline">
-		<td class="pos p{{forloop.counter}} lettrine">{{forloop.counter}}</td>
-		<td class="evo {{line|getdictvalue:'evo'|evoClass}}">
-			<a href="#" rel="{{line|getdictvalue:'id'}}"></a>
-		</td>
-
-        <td class="logo">
-        {% with team_name=line.name|lower %}
-            {% with 'images/clubs/small/'|add:team_name|add:'.png' as image_static %}
-              <img src="{% static image_static %}" alt="logo"/>
-            {% endwith %}
-        {% endwith %}
-        </td>
-
-		<td class="team">{{line|getdictvalue:'name'}}</td>
-		<td class="points">{{line|getdictvalue:'pts'}}</td>
-		<td class="played">{{line|getdictvalue:'played'}}</td>
-		<td class="win">{{line|getdictvalue:'win'}}</td>
-		<td class="draw">{{line|getdictvalue:'draw'}}</td>
-		<td class="lose">{{line|getdictvalue:'lose'}}</td>
-		<td class="for">{{line|getdictvalue:'goal_for'}}</td>
-		<td class="against">{{line|getdictvalue:'goal_against'}}</td>
-		<td class="diff">{{line|getdictvalue:'diff'|goal_diff}}</td>
-	</tr>
-	{% endfor %}
-</table>
-
+{%comment%}
 <script type="text/javascript">
 showTeamEvo = function()
 {
@@ -62,3 +19,95 @@ $(function() {
 	bindtableline('league_table',showTeamEvo);
 });
 </script>
+{%endcomment%}
+
+
+
+
+
+<table id="league_table" class="table">
+
+  <thead>
+  <tr>
+    <th scope="col">
+        <div class="thFull">Position</div>
+        <div class="thShort">Pos</div>
+    </th>
+    <th class="team" scope="col">Club</th>
+    <th scope="col" class="points">
+        <div class="thFull">Points</div>
+        <div class="thShort">Pts</div>
+    </th>
+    <th scope="col">
+        <div class="thFull">Joués</div>
+        <div class="thShort">J</div>
+    </th>
+    <th scope="col">
+        <div class="thFull">Gagnés</div>
+        <div class="thShort">G</div>
+    </th>
+    <th scope="col">
+        <div class="thFull">Nuls</div>
+        <div class="thShort">N</div>
+
+    </th>
+    <th scope="col">
+        <div class="thFull">Perdus</div>
+        <div class="thShort">P</div>
+    </th>
+    <th class="hideSmall" scope="col"><abbr title="Buts pour">Bp</abbr></th>
+    <th class="hideSmall" scope="col"><abbr title="Buts contre">Bc</abbr></th>
+    <th scope="col"><abbr title="Différence de buts">Diff</abbr></th>
+    <th class="teamForm hideMed" scope="col">Forme</th>
+  </tr>
+  </thead>
+
+
+  <tbody class="tableBodyContainer">
+
+    {%for line in league_table%}
+
+      <tr
+            {%if forloop.counter == 1%}class="tableDark"{%endif%}
+            {%if forloop.counter == 2%}class="tableMid"{%endif%}
+            {%if forloop.counter == 3%}class="tableMid"{%endif%}
+            {%if forloop.counter == 4%}class="tableLight"{%endif%}
+            {%if forloop.counter == 18%}class="tableLight"{%endif%}
+            {%if forloop.counter == 19%}class="tableMid"{%endif%}
+            {%if forloop.counter == 20%}class="tableMid"{%endif%}
+      >
+
+        <td class="pos p{{forloop.counter}}" tabindex="0">
+            <span class="value">{{forloop.counter}}</span>
+            <span class="movement {{line.evo|movement}}"></span>
+        </td>
+        <td class="team" scope="row">
+            {% with team_name=line.name|lower %}
+              {% with 'images/clubs/small/'|add:team_name|add:'.png' as image_static %}
+                <img src="{% static image_static %}" alt="logo"/>
+                {% endwith %}
+            {% endwith %}
+            <span class="long">{{line.name}}</span><span class="short">{{line.name|slice:":3"|upper}} </span>
+        </td>
+        <td class="points">{{line.pts}}</td>
+        <td>{{line.played}}</td>
+        <td>{{line.win}}</td>
+        <td>{{line.draw}}</td>
+        <td>{{line.lose}}</td>
+        <td class="hideSmall">{{line.goal_for}}</td>
+        <td class="hideSmall">{{line.goal_against}}</td>
+        <td class="diff">{{line.diff|goal_diff}}</td>
+        <td class="form hideMed">
+          {%if line.form%}
+          <ul>
+            {% for form in line.form %}
+              <li tabindex="0" class="{{form}}" >{{form|WDL}}</li>
+            {%endfor%}
+          </ul>
+          {%endif%}
+        </td>
+      </tr>
+      {% endfor %}
+
+  </tbody>
+</table>

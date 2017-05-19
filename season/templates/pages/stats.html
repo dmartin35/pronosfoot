@@ -1,35 +1,47 @@
-{% extends "main.html" %}
+{% extends "page.html" %}
 
-{% block body %}
+{% block content %}
+{{block.super}}
 
-	<div class="line fullline">
-	 	<div class="col2of3 rsep">
-			<h1>Ligue 1</h1>
-			<h2>Statistiques de la Ligue 1</h2>
-			{%include 'contents/stats_league.html'%}
-		</div>
-		
-		<div class="col1of3">
-			<h1>Pronos</h1>
-			<h2>Meilleures stats des pronos</h2>
-			{%include 'contents/stats_pronos.html'%}
-		</div>
-	</div>
 
-	<div class="line fullline">
-		<div class="col1of1">
-			<h1>&eacute;quipes</h1>
-			<h2 class="floatLeft">Statistiques de </h2>
-			<div class="h2 floatLeft" style="padding-left:0;">{%include 'global/teamselection.html'%}</div>
-			
-			<script type="text/javascript">
-				$(document).ready(function() {
-			       $('#teamselection').createDropdown(Urls.ajax_stats_team,'div#stats_team');
-				});
-			</script>
-		</div>
-		{%include 'contents/stats_team.html'%}
-	</div>
-	
-	<div class="line sep"/>
+
+<div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+  <div class="mdl-tabs__tab-bar">
+      <a href="#tab-stats-league-panel" class="mdl-tabs__tab is-active">Ligue 1</a>
+      <a href="#tab-stats-pronos-panel" class="mdl-tabs__tab">Pronostics</a>
+      <a href="#tab-stats-teams-panel" class="mdl-tabs__tab">Clubs</a>
+  </div>
+
+  <div class="mdl-tabs__panel is-active" id="tab-stats-league-panel">
+    <!-- Your content goes here -->
+    <h4 class="mdl-typography--font-light mdl-typography--display-color-contrast-light text-center">Statistiques de la Ligue 1</h4>
+    {%include 'contents/stats_league.html'%}
+  </div>
+  <div class="mdl-tabs__panel" id="tab-stats-pronos-panel">
+    <!-- Your content goes here -->
+    <h4 class="mdl-typography--font-light mdl-typography--display-color-contrast-light text-center">Le coin des Parieurs</h4>
+    {%include 'contents/stats_pronos.html'%}
+  </div>
+  <div class="mdl-tabs__panel" id="tab-stats-teams-panel">
+    <!-- Your content goes here -->
+  	<h4 class="mdl-typography--font-light mdl-typography--display-color-contrast-light text-center">Statistiques des clubs</h4>
+ 	<div class="team-select-centered-wrapper">{%include 'global/teamselection.html'%}</div>
+	{%include 'contents/stats_team.html'%}
+
+  </div>
+</div>
+
+
+
+
+{% endblock %}
+
+
+{% block js %}
+{{block.super}}
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#teamselection').pf_dropdown(Urls.ajax_stats_team,'div#stats_team');
+	});
+</script>
 {% endblock %}

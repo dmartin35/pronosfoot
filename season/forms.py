@@ -88,6 +88,15 @@ class LeagueForecastForm(forms.ModelForm):
                   'winner', 'second', 'third', 'fourth',
                   'looser1','looser2','looser3']
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # disable edition mode, if vote limit date has expired
+        readonly = datetime.now() > settings.SEASON_FORECAST_MAX_DATE
+        if readonly:
+            for field in ['winner_midseason', 'winner', 'second', 'third', 'fourth',
+                          'looser1', 'looser2', 'looser3']:
+                self.fields[field].disabled = True
+
     def clean(self):
         #check loosers are all different
         fields = ['looser1','looser2','looser3']

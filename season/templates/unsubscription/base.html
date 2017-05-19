@@ -18,9 +18,18 @@
         </a>
       </div>
 
-      <!-- registration/login contents goes here -->
-      {% block subcontent %}
-      {% endblock subcontent %}
+      <div class="mdl-card__supporting-text">
+          <h6 class="text-center ">
+            {% block msg %}{% endblock msg %}
+          </h6>
+      </div>
+
+      <div class="mdl-card__actions">
+         <a class="pronosfoot-link center mdl-button mdl-js-button mdl-typography--text-uppercase" href="{% url 'index' %}" data-upgraded=",MaterialButton">
+           retour au site
+           <i class="material-icons">chevron_right</i>
+         </a>
+      </div>
 
     </div>
   </main>

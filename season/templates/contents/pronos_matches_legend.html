@@ -1,0 +1,35 @@
+<div class="pronosfoot-card-container mdl-grid">
+  <div class="center mdl-cell mdl-cell--6-col mdl-cell--6-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--2dp">
+    <div class="mdl-card__title">
+       <h4 class="mdl-card__title-text">Légende</h4>
+    </div>
+    <div class="mdl-card__supporting-text">
+      <span class="mdl-typography--font-light mdl-typography--subhead">
+      Vous pouvez modifier vos pronostics tant que le match n'a pas d&eacute;but&eacute;.
+
+      </span>
+      <ul class="legend mdl-list mdl-typography--font-light mdl-typography--subhead">
+      <li>
+        Allocation des points:
+      </li>
+      <li>
+        {% with points=0 %}{%include "global/result_forecast.html"%}{% endwith %}
+        <span class="">0 points pour mauvais pronostic</span>
+      </li>
+      <li>
+        {% with points=3 %}{%include "global/result_forecast.html"%}{% endwith %}
+        <span class="">3 points pour l'issue correcte</span>
+      </li>
+      {%comment%}
+      <li>
+          <span class="">5 points pour l'issue correcte avec bon &eacute;cart de buts</span>
+      </li>
+      {%endcomment%}
+      <li>
+        {% with points=8 %}{%include "global/result_forecast.html"%}{% endwith %}
+        <span class="">8 points pour le score exact</span>
+      </li>
+      </ul>
+    </div>
+  </div>
+</div>

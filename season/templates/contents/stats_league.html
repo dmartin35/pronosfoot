@@ -1,77 +1,77 @@
 {% load generic_tags %}
 
-<div id="stats_league">
-	<div class="col1of3 rsep col1">
-		<ul>
-		
-		<li> 
-			<span>Meilleure attaque:</span>
-			<span class="stats_bold">{{best_attack|listvalue:1|listToComaSepStr}}</span>
+
+
+<div class="pronosfoot-wrapper"> <!--wrapper-->
+
+  <div class="mdl-cell mdl-cell--6-col center">
+
+	  <ul class="mdl-list">
+
+		<li class="mdl-list__item pf-stat-item-left">
+			<span>Meilleure attaque:&nbsp;</span>
 			{%if best_attack|listvalue:0|notIsNone%}
-				<span class="stats_italic">{{best_attack|listvalue:0}} buts</span>
+				<span class="lettrine">{{best_attack|listvalue:1|listToComaSepStr}}</span>
+				<span class="mdl-typography--font-light">{{best_attack|listvalue:0}} buts</span>
 			{%else%}<span class="na">N/A</span>{%endif%}
 		</li>
-		<li>
-			<span>Meilleure d&eacute;fense:</span>
-			<span class="stats_bold">{{best_defense|listvalue:1|listToComaSepStr}}</span>
+		<li class="mdl-list__item pf-stat-item-right">
+			<span>Meilleure défense:&nbsp;</span>
 			{%if best_defense|listvalue:0|notIsNone%}
-				<span class="stats_italic">{{best_defense|listvalue:0}} buts</span>
+				<span class="lettrine">{{best_defense|listvalue:1|listToComaSepStr}}</span>
+				<span class="mdl-typography--font-light">{{best_defense|listvalue:0}} buts</span>
 			{%else%}<span class="na">N/A</span>{%endif%}
 		</li>
-		<li>
-			<span>Plus mauvaise attaque:</span>
-			<span class="stats_bold">{{poorest_attack|listvalue:1|listToComaSepStr}}</span>
+	    <li class="mdl-list__item pf-stat-item-sep"></li>
+		<li class="mdl-list__item pf-stat-item-left">
+			<span>Plus mauvaise attaque:&nbsp;</span>
 			{%if poorest_attack|listvalue:0|notIsNone%}
-				<span class="stats_italic">{{poorest_attack|listvalue:0}} buts</span>
+				<span class="lettrine">{{poorest_attack|listvalue:1|listToComaSepStr}}</span>
+				<span class="mdl-typography--font-light">{{poorest_attack|listvalue:0}} buts</span>
 			{%else%}<span class="na">N/A</span>{%endif%}
-		 </li>
-		<li>
-			<span>Plus mauvaise d&eacute;fense:</span>
-			<span class="stats_bold">{{poorest_defense|listvalue:1|listToComaSepStr}}</span>
+		</li>
+		<li class="mdl-list__item pf-stat-item-right">
+			<span>Plus mauvaise défense:&nbsp;</span>
 			{%if poorest_defense|listvalue:0|notIsNone%}
-				<span class="stats_italic">{{poorest_defense|listvalue:0}} buts</span>
+				<span class="lettrine">{{poorest_defense|listvalue:1|listToComaSepStr}}</span>
+				<span class="mdl-typography--font-light">{{poorest_defense|listvalue:0}} buts</span>
 			{%else%}<span class="na">N/A</span>{%endif%}
 		</li>
-		
-		</ul>
-	</div>
-	
-	<div class="col1of3 col2">
-		<ul>
-		
-		<li> 
-			<span>Total marqu&eacute;s:</span>
+        <li class="mdl-list__item pf-stat-item-sep"></li>
+		<li class="mdl-list__item pf-stat-item-left">
+			<span>Total de buts marqu&eacute;s:&nbsp;</span>
 			{%if total_goals|notIsNone%}
-				<span class="stats_bold">{{total_goals}}</span>
-				<span class="stats_italic">buts</span>
+				<span class="lettrine">{{total_goals}}</span>
+				<span class="mdl-typography--font-light">buts</span>
 			{%else%}<span class="na">N/A</span>{%endif%}
 		</li>
-		
-		<li> 
-			<span>Moyenne par match:</span>
+		<li class="mdl-list__item pf-stat-item-right">
+			<span>Moyenne de buts par match:&nbsp;</span>
 			{%if avg_goals|notIsNone%}
-				<span class="stats_bold">{{avg_goals|float_dbledigit}}</span>
-				<span class="stats_italic">buts</span>
+				<span class="lettrine">{{avg_goals|float_dbledigit}}</span>
+				<span class="mdl-typography--font-light">buts</span>
 			{%else%}<span class="na">N/A</span>{%endif%}
 		</li>
-		
-		<li> 
-			<span>Journ&eacute;e la plus prol&eacute;fique:</span>
+        <li class="mdl-list__item pf-stat-item-sep"></li>
+		<li class="mdl-list__item pf-stat-item-left">
+			<span>Journ&eacute;e la plus prolifique:&nbsp;</span>
 			{%if most_goals|notIsNone%}
-				<span class="stats_bold">{{most_goals}}</span>
-				<span class="stats_italic">buts</span>
+				<span class="lettrine">{{most_goals}}</span>
+				<span class="mdl-typography--font-light">buts</span>
 			{%else%}<span class="na">N/A</span>{%endif%}
 		</li>
-
-		<li> 
-			<span>Journ&eacute;e la moins prol&eacute;fique:</span>
+		<li class="mdl-list__item pf-stat-item-right">
+			<span>Journ&eacute;e la moins prolifique:&nbsp;</span>
 			{%if less_goals|notIsNone%}
-				<span class="stats_bold">{{less_goals}}</span>
-				<span class="stats_italic">buts</span>
+				<span class="lettrine">{{less_goals}}</span>
+				<span class="mdl-typography--font-light">buts</span>
 			{%else%}<span class="na">N/A</span>{%endif%}
 		</li>
-		
-		</ul>
-	</div>
 
+	</ul>
+
+
+  </div>
+  <div class="mdl-cell mdl-cell--2-col"></div>
 </div>
+

@@ -1,0 +1,15 @@
+{%with icon_id|default:"legend" as id %}
+{%if points == 0 or points == "0"%}
+  <i id="{{id}}-pts-0" class="fa fa-star-o pf-error" aria-hidden="true"></i>
+  <div class="mdl-tooltip" for="{{id}}-pts-0">Mauvais pronostic: 0 points</div>
+{%elif points == 3 or points == "3"%}
+  <i id="{{id}}-pts-3" class="fa fa-star-half-o pf-success" aria-hidden="true"></i>
+  <div class="mdl-tooltip" for="{{id}}-pts-3">Issue correcte: 3 points</div>
+{%elif points == 5 or points == "5"%}
+  <i id="{{id}}-pts-5" class="fa fa-star-half-o pf-success" aria-hidden="true"></i>
+  <div class="mdl-tooltip" for="{{id}}-pts-5">Issue correcte & bon écart de buts: 5 points</div>
+{%elif points == 8 or points == "8"%}
+  <i id="{{id}}-pts-8" class="fa fa-star pf-success" aria-hidden="true"></i>
+  <div class="mdl-tooltip" for="{{id}}-pts-8">Score exact: 8 points</div>
+{%endif%}
+{%endwith%}

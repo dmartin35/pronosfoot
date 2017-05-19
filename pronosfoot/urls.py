@@ -18,17 +18,21 @@ from django.conf.urls import url
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.generic import TemplateView
 from django.contrib.auth import views as auth_views
+from django.contrib.auth.urls import urlpatterns as auth_urlpatterns
 from season import views
 
-urlpatterns = [
-    url(r'^password_reset/$', auth_views.password_reset, name='password_reset'),
-    url(r'^password_reset/done/$', auth_views.password_reset_done, name='password_reset_done'),
-    url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
-        auth_views.password_reset_confirm, name='password_reset_confirm'),
-    url(r'^reset/done/$', auth_views.password_reset_complete, name='password_reset_complete'),
-]
+# urlpatterns = [
+#
+#     url(r'^login/$', auth_views.login, name='login'),
+#     url(r'^logout/$', auth_views.logout, name='logout'),
+#     url(r'^password_reset/$', auth_views.password_reset, name='password_reset'),
+#     url(r'^password_reset/done/$', auth_views.password_reset_done, name='password_reset_done'),
+#     url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+#         auth_views.password_reset_confirm, name='password_reset_confirm'),
+#     url(r'^reset/done/$', auth_views.password_reset_complete, name='password_reset_complete'),
+# ]
 
-urlpatterns += [
+urlpatterns = auth_urlpatterns + [
     url(r'^ajax/matches/(\d+)$', views.ajax_fixtures, name='ajax_fixtures_week'),
     url(r'^ajax/calendrier/(\d+)/(\d+)?$', views.ajax_calendar, name='ajax_monthly_calendar'),
     url(r'^ajax/pronos/matches/(\d+)$', views.ajax_forecasts_fixtures, name='ajax_forecasts_fixtures'),
@@ -47,8 +51,6 @@ urlpatterns += [
     url(r'^ajax/evo/equipe/(\d+)$', views.ajax_evo_team, name='ajax_evo_team'),
     url(r'^ajax/evo/joueur/(\d+)$', views.ajax_evo_player, name='ajax_evo_player'),
 
-    url(r'^login/$', views.login, name='login'),
-    url(r'^logout/$', auth_views.logout, name='logout'),
     url(r'^register/$', views.register, name='register'),
     url(r'^unsubscribe/(newsletter)/(.*)$', views.unsubscribe, name='unsubscribe_newsletter'),
     url(r'^unsubscribe/(reminder)/(.*)$', views.unsubscribe, name='unsubscribe_reminder'),

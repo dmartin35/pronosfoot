@@ -48,22 +48,50 @@ def full_league_table_until(week):
             table[idx].extend([evo[idx]])
     return table
 
-TEAMS_TABLE_KEYS = ['id','name','pts','played','win','draw','lose','goal_for','goal_against','diff']
-TEAMS_TABLE_EVO_KEYS = ['id','name','pts','played','win','draw','lose','goal_for','goal_against','diff','evo']
 
+TRENDS = {(1, 0, 0): 'win', (0, 1, 0): 'draw', (0, 0, 1): 'lose'}
+
+
+def team_last_five(team_id, until=None):
+    """
+    returns the team results form WDL for the 5 latests matches
+    :param team_id: ID of the team 
+    :param until: ID of the team
+    :return: list of string win, draw, lose
+    """
+    query = Table.objects.filter(team=team_id, week__gt=0)
+    if until:
+        query = query.filter(week__lte=until)
+    query = query.order_by('week').all()
+    return [TRENDS.get((x.win, x.draw, x.lose)) for x in query][-5:]
+
+
+TEAMS_TABLE_KEYS = ['id','name','pts','played','win','draw','lose','goal_for','goal_against','diff', 'form']
+TEAMS_TABLE_EVO_KEYS = TEAMS_TABLE_KEYS + ['evo']
+
+
+#from tools.debug import log_exec_time
+#@log_exec_time
 def full_league_table_until__dict(week):
     """
     returns the league table until a given week (included)
     (each line is a dict) 
     """
     table = [list(x) for x in league_table_until_with_teamid(week)]
+
+    # extend with the team 5-last results form - NB ! taking 0.020-0.025ms instead of < 0.002 !
+    for idx in range(0, len(table)):
+        team_id = table[idx][0]
+        table[idx].append(team_last_five(team_id, until=week))
+
     if week > 1:
         table_last = [list(x) for x in league_table_until_with_teamid(week-1)]
         #calculate team position evolution (by team name)
         evo = list_evolution([x[0] for x in table], [x[0] for x in table_last])
         #extend table with position evolution (last item)
         for idx in range(0,len(table)):
-            table[idx].extend([evo[idx]])
+            table[idx].append(evo[idx])
+
         #convert list of list to list of dict
         return [list_to_dict(TEAMS_TABLE_EVO_KEYS, x) for x in table]
     #convert list of list to list of dict

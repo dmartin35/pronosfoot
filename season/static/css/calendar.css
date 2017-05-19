@@ -1,71 +1,180 @@
-div#calendar{
-	height: 270px;
-}
-
-table.calendar td, 
-table.calendar th {
-	width: 35px;
-	height: 35px;
-	text-align: center;
-	padding:0;
-}
-
-table.calendar td{
-	cursor: default;
-}
-
-table.calendar td.hover{
-	cursor: pointer;
-}
 
 
-.matchday {
-	background-color: #E5DDD7;
+.legend .color {
+  width: 16px;
+  height: 16px;
 }
-.matchday.hover {
-	background-color: #D4CCC6;
+
+.legend .color+.label {
+    position: relative;
+    top: -2px;
 }
-.empty {
-	background-color: #E89090;
+
+.legend .color:after{
+  content: "";
+  position: inherit;
+  left: 50%;
+  top: 50%;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: inline-block;
 }
-.empty:hover {
-	background-color: #D78080;
+
+.legend .empty:after {
+    background-color: #E89090;
 }
-.half {
+.legend .half:after {
 	background-color: #F5C484;
 }
-.half:hover {
-	background-color: #E4B373;
-}
-.full {
+.legend .full:after {
 	background-color: #B5E8A2;
 }
-.full:hover {
-	background-color: #A4D791;
+.legend .matchday:after {
+    background: rgba(0, 0, 0, 0.10);
 }
 
-table.calendar div#previous,
-table.calendar div#next{
-	height: 16px;
-	width: 16px;
-	margin-left:7px;
+
+
+
+.c-datepicker {
+  width: 300px;
+  text-align: center;
+  -webkit-tap-highlight-color: transparent;
+  background-color: white;
+  }
+
+
+.c-datepicker__month-title{
 }
 
-table.calendar div#previous
-{
-	background: transparent url("/static/images/nav.png") no-repeat 0 0;
+.rd-month-label {
+  height: 56px;
+  line-height: 56px;
+  font-size: 14px;
+  font-weight: 800; }
+
+.c-datepicker__back, .c-datepicker__next{
+  /*position: absolute;*/
+  border: 0;
+  background: white;
+  font-family: 'Material Icons';
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "liga" 1;
+  font-style: normal;
+  text-transform: none;
+  line-height: 1;
+  font-size: 24px;
+  width: 56px;
+  height: 56px;
+  display: inline-block;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  cursor: pointer;
+   color: #3c3c3c;
+  }
+
+  .c-datepicker__back:focus, .c-datepicker__next:focus {
+    outline: 0; }
+
+     .c-datepicker__back:hover, .c-datepicker__next:hover{
+     color: #000;
+     }
+
+.c-datepicker__back {
+  left: 0; float: left;}
+
+.c-datepicker__next {
+  right: 0; float: right; }
+
+.c-datepicker__back:before {
+  content: 'chevron_left'; }
+
+.c-datepicker__next:after {
+  content: 'chevron_right'; }
+
+
+.c-datepicker__day-body {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.8);
+  width: 36px;
+  height: 36px;
+
+  position: relative;
 }
 
-table.calendar div#next{
-	background: transparent url("/static/images/nav.png") no-repeat -16px 0;
+.c-datepicker__day-body:hover {
+     /*color: white;*/
 }
 
-table.calendar div#previous.over
-{
-	background-position: 0 -17px;
+
+.c-datepicker__day--selected{
+  cursor: pointer;
 }
 
-table.calendar div#next.over
-{
-	background-position: -16px -17px;
-}
+.c-datepicker__day--selected::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.05);
+
+  }
+
+
+.c-datepicker__day--selected.empty::after {
+  background-color: #E89090;
+    z-index: -1;
+  }
+
+.c-datepicker__day--selected.half::after {
+  background-color: #F5C484;
+    z-index: -1;
+  }
+
+
+.c-datepicker__day--selected.full::after {
+  background-color: #B5E8A2;
+    z-index: -1;
+  }
+
+
+.c-datepicker__day--selected.empty,
+.c-datepicker__day--selected.half,
+.c-datepicker__day--selected.full{
+  color: #fff;
+  z-index: 1;
+  }
+
+
+.c-datepicker__day-head {
+  color: rgba(0, 0, 0, 0.54);
+  font-size: 12px;
+  height: 36px; }
+
+
+
+.rd-day-prev-month {
+  opacity: 0.1;
+  pointer-events: none; }
+
+.rd-day-next-month {
+  opacity: 0.1;
+  pointer-events: none; }
+
+.c-datepicker__calendar {
+  height: 335px; }
+
+.c-datepicker__date {
+  left: 0;
+  right: 0;
+  width: 300px;
+  }
+
+.c-datepicker__days {
+  margin: 10px 20px; }
+

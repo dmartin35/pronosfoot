@@ -2,6 +2,8 @@
 {% load generic_tags %}
 {% load humanize %}
 
+
+{%comment%}
 <table id="fixtures" class="fixtures" cellpadding="0" cellspacing="0">
 	<tbody>
 	{% for day in days %}
@@ -38,3 +40,62 @@
 	{% endfor %}
 	</tbody>
 </table>
+
+{%endcomment%}
+
+
+{% spaceless %}
+<div id="fixtures" class="fixtures mdl-grid">
+  <div class="mdl-cell center mdl-cell--6-col mdl-cell--6-col-tablet">
+  {% for day in days %}
+    <time datetime="{{day|date:"l j F Y"|capfirst}}" class="date">
+      <h5 class="mdl-typography--font-light">{{day|date:"l j F Y"|capfirst}}</h5>
+    </time>
+    <ul class="match-list mdl-list">
+    {% for fixture in fixtures %}
+      {% ifequal fixture.day day %}
+        <li class="mdl-list__item ">
+          <div class="fixture">
+
+            <span class="team">
+              <span class="team-name {{fixture|winner:'home'}}">
+                <span class="long">{{fixture.team_a}}</span><span class="short">{{fixture.team_a|slice_str:3|upper}} </span>
+              </span>
+              <span class="team-logo">
+                {% with team_name=fixture.team_a|lower %}
+                    {% with 'images/clubs/small/'|add:team_name|add:'.png' as image_static %}
+                      <img src="{% static image_static %}" alt="{{team_name}} logo"/>
+                    {% endwith %}
+                {% endwith %}
+              </span>
+            </span>
+
+            {%if fixture.score_a != None and fixture.score_b != None%}
+            <span class="score mdl-typography--font-light">{{fixture.score_a}}<span>&nbsp;-&nbsp;</span>{{fixture.score_b}}</span>
+            {%else%}
+            <time class="mdl-typography--font-light" datetime="{{fixture.hour|time:"H:i"}}">{{fixture.hour|time:"H:i"}}</time>
+            {%endif%}
+
+            <span class="team">
+              <span class="team-logo">
+                {% with team_name=fixture.team_b|lower %}
+                    {% with 'images/clubs/small/'|add:team_name|add:'.png' as image_static %}
+                      <img src="{% static image_static %}" alt="{{team_name}} logo"/>
+                    {% endwith %}
+                {% endwith %}
+              </span>
+              <span class="team-name {{fixture|winner:'away'}}">
+                <span class="long">{{fixture.team_b}}</span><span class="short">{{fixture.team_b|slice_str:3|upper}} </span>
+              </span>
+            </span>
+
+          </div>
+        </li>
+
+      {% endifequal %}
+    {% endfor %}
+    </ul>
+  {%endfor%}
+  </div>
+</div>
+{% endspaceless %}

@@ -1,48 +1,49 @@
-{% extends "main.html" %}
+{% extends "page.html" %}
+{% load static %}
 
-{% block body %}
-	
-	<div class="line fullline">
-		<div class="col2of3">
-			<h1>Matches &amp; R&eacute;sultats</h1>
-			<h2 class="floatLeft">Saison {{season}} | </h2>
-			<div class="h2 floatLeft" style="padding-left:0;">{%include "global/weekselection.html"%}</div>
-			{%include 'contents/fixtures.html'%}
-		</div>
-	
-		<div class="col1of3">
-			<h1>Calendrier</h1>
-			{%include 'contents/calendar.html'%}
-			<h3>L&eacute;gende</h3>
-			<ul class="legend">
-				{%if not user.is_authenticated%}
-				<li>
-					<span class="matchday color">&nbsp;</span>
-					<span class="info">Jour de matches</span>
-				</li>
-				{%else%}
-				<li>
-					<span class="empty color">&nbsp;</span>
-					<span class="info">Aucun pronostic</span>
-				</li>
-				<li>
-					<span class="half color">&nbsp;</span>
-					<span class="info">Pronostics partiels</span>
-				</li>
-				<li>
-					<span class="full color">&nbsp;</span>
-					<span class="info">Pronostics complets</span>
-				</li>
-				{%endif%}
-			</ul>
-		</div>	
-	</div>
-	<div class="line sep"/>
-	
+
+     {%block mobile-title%}titre mobile
+      {%endblock mobile-title%}
+
+{% block content %}
+{{block.super}}
+
+
+<div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+  <div class="mdl-tabs__tab-bar">
+      <a href="#tab-fixtures-panel" class="mdl-tabs__tab is-active">Journée</a>
+      <a href="#tab-calendar-panel" class="mdl-tabs__tab">Calendrier</a>
+  </div>
+
+  <div class="mdl-tabs__panel is-active" id="tab-fixtures-panel">
+    <!-- Your content goes here -->
+    <div class="pronosfoot-wrapper">
+	  <h4 class="mdl-typography--font-light mdl-typography--display-color-contrast-light text-center">Matches & résultats par journée</h4>
+    </div>
+
+	  {%include "global/weekselection.html"%}
+      {%include 'contents/fixtures.html'%}
+  </div>
+  <div class="mdl-tabs__panel" id="tab-calendar-panel">
+    <!-- Your content goes here -->
+    <div class="pronosfoot-wrapper">
+	<h4 class="mdl-typography--font-light mdl-typography--display-color-contrast-light text-center">Calendrier des jours de matches</h4>
+	  {%include 'contents/calendar.html'%}
+	  {%include 'contents/calendar_legend.html'%}
+    </div>
+  </div>
+
+</div>
+
+
+{% endblock %}
+
+{% block js %}
+{{block.super}}
 <script type="text/javascript">
 	$(document).ready(function() {
-       $('#weekselection').createDropdown(Urls.ajax_fixtures_week,'table#fixtures');
+       $('#weekselection').pf_dropdown(Urls.ajax_fixtures_week,'#fixtures');
 	});
-</script>	
+</script>
 {% endblock %}
 

@@ -1,5 +1,5 @@
 {% extends "base.html" %}
 
-{% block css %} {{block.super}} {% endblock css %}
-{% block content %}{% endblock content %}
-{% block js %} {{block.super}} {% endblock js %}
+{% block css %} {{block.super}} {% include "_css.html"%} {% endblock css %}
+{% block top %} {{block.super}} {% include "top.html"%} {% endblock top %}
+{% block js %} {{block.super}} {% include "_js.html"%} {% endblock js %}

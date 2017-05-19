@@ -1,8 +1,7 @@
-{% extends "base_light.html" %}
+{% extends "error.html" %}
 
-{% block msg %}
-<h2>
+{% block error-title %}Perdu!{% endblock %}
+
+{% block error-details %}
 La page que vous avez demand&eacute; n'a pu &ecirc;tre trouv&eacute;e.
-</h2>
-<h3>Retour &agrave; la page d'accueil de <a href="{%url 'index'%}">Pronos Foot</a></h3>
-{% endblock msg %}
+{% endblock %}

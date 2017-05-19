@@ -1,5 +1,114 @@
-{% extends "main.html" %}
+{% extends "page.html" %}
 
-{% block body %}
-	{%include 'contents/home_panel.html'%}
+
+{% block top %}
+
+  <div class="pronosfoot-player-main-section mdl-typography--text-center">
+    <div class="logo-font pronosfoot-slogan">Pronostiquez. Gagnez.</div>
+    <div class="logo-font pronosfoot-sub-slogan mdl-typography--headline ">Faites vos pronostics... Gagnez des points. Battez vos amis.</div>
+  </div>
+
 {% endblock %}
+
+{% block content %}
+
+
+  <div class="pronosfoot-customized-section">
+    <div class="pronosfoot-customized-section-text">
+      <div class="mdl-typography--font-light mdl-typography--display-1-color-contrast">Toute la Ligue 1!</div>
+      <p class="mdl-typography--font-light">
+        Pronostiquez & évaluez vos compétences sur la saison complète de Ligue 1.
+        <br>
+      </p>
+    </div>
+    <div class="pronosfoot-L1-image"></div>
+  </div>
+
+
+  <div class="pronosfoot-more-section">
+    
+    <div class="pronosfoot-card-container mdl-grid">
+      <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+        {%comment%}
+        <div class="mdl-card__media">
+          <img src="images/more-from-1.png">
+        </div>
+        {%endcomment%}
+        <div class="mdl-card__title">
+           <h4 class="mdl-card__title-text">Matches</h4>
+        </div>
+        <div class="mdl-card__supporting-text">
+          <span class="mdl-typography--font-light mdl-typography--subhead">Voir le calendrier des matches & les résultats par journée.</span>
+        </div>
+        <div class="mdl-card__actions">
+           <a class="pronosfoot-link mdl-button mdl-js-button mdl-typography--text-uppercase" href="{% url 'fixtures'%}">
+             voir le calendrier
+             <i class="material-icons">chevron_right</i>
+           </a>
+        </div>
+      </div>
+
+      <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+        {%comment%}
+        <div class="mdl-card__media">
+          <img src="images/more-from-4.png">
+        </div>
+        {%endcomment%}
+        <div class="mdl-card__title">
+           <h4 class="mdl-card__title-text">Pronostics</h4>
+        </div>
+        <div class="mdl-card__supporting-text">
+          <span class="mdl-typography--font-light mdl-typography--subhead">Saisissez vos pronostics par journée, comparez avec vos adversaires, suivez vos résultats. Devinez le champion à l'avance!</span>
+        </div>
+        <div class="mdl-card__actions">
+           <a class="pronosfoot-link mdl-button mdl-js-button mdl-typography--text-uppercase" href="{% url 'forecasts'%}">
+             A vos pronos
+             <i class="material-icons">chevron_right</i>
+           </a>
+        </div>
+      </div>
+
+      <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+        {%comment%}
+        <div class="mdl-card__media">
+          <img src="images/more-from-2.png">
+        </div>
+        {%endcomment%}
+        <div class="mdl-card__title">
+           <h4 class="mdl-card__title-text">Classements</h4>
+        </div>
+        <div class="mdl-card__supporting-text">
+          <span class="mdl-typography--font-light mdl-typography--subhead">Les classements de la Ligue 1 & des joueurs sont mis à jours tous les jours de matches. Analysez les évolutions dans le classement.</span>
+        </div>
+        <div class="mdl-card__actions">
+           <a class="pronosfoot-link mdl-button mdl-js-button mdl-typography--text-uppercase" href="{% url 'tables'%}">
+             voir le classement
+             <i class="material-icons">chevron_right</i>
+           </a>
+        </div>
+      </div>
+
+      <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+        {%comment%}
+        <div class="mdl-card__media">
+          <img src="images/more-from-3.png">
+        </div>
+        {%endcomment%}
+        <div class="mdl-card__title">
+           <h4 class="mdl-card__title-text">Statistiques</h4>
+        </div>
+        <div class="mdl-card__supporting-text">
+          <span class="mdl-typography--font-light mdl-typography--subhead">Regardez les chiffres clés de la saison. Comparez les statistiques des équipes.</span>
+        </div>
+        <div class="mdl-card__actions">
+           <a class="pronosfoot-link mdl-button mdl-js-button mdl-typography--text-uppercase" href="{% url 'stats'%}">
+             voir les Statistiques
+             <i class="material-icons">chevron_right</i>
+           </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
+

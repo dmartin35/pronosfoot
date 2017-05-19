@@ -11,7 +11,8 @@ from season.queries import avg_goals_scored, best_stats, \
     goals_scored_away, goals_scored_home, goals_taken_away, goals_taken_home, \
     issue_stats, less_goals_scored, matches_played, most_goals_scored, team_points, \
     team_win_draw_lose, total_goals_scored, users_stats, league_table_until_with_teamid, \
-    user_total_until, user_table_until_week, user_table_with_bonus, user_total 
+    user_total_until, user_table_until_week, user_table_with_bonus, user_total, \
+    team_win_draw_lose_goals
 from season.core.season import endOfSeason
 from season.core.tables import team_played_weeks
 from season.core.tables import played_weeks
@@ -143,6 +144,20 @@ def team_WDL(team_id):
         lose =  100.0 * float(wdl[2]) / float(total)
         return ['%0.f'%win,'%0.f'%draw,'%0.f'%lose]
     return []
+
+def team_wdl_goals(team_id):
+    """
+    returns the sums of Win/Draw/Lose/Goals for/Goals against
+    for a team for the entire season 
+    """
+    counts = list(team_win_draw_lose_goals(team_id)[0])
+    return {
+        'won': counts[0],
+        'drawn': counts[1],
+        'lost': counts[2],
+        'gf': counts[3],
+        'ga': counts[4],
+    }
 
 def team_forecasts_trend(team_id):
     """

@@ -1,55 +1,28 @@
 (function($) {
-jQuery.fn.createDropdown = function(ajaxgetrequest,container,ajaxrespvalid) {
-	//request is the ajax request to be called on item click
-	//container if the section that will be replaced with 
-	//html code in response of request
-	//ajaxrespvalid if defined must be a function returning true|false 
-	var $ajaxgetrequest = ajaxgetrequest;
-	var $container = container;
+jQuery.fn.pf_dropdown = function(url,container_id) {
+    /*
+    * url of the ajax request to be called on item select change
+	* container_id is the section that will be replaced with
+	* html code in response of request
+    */
+
+	var $url = url;
+	var $container_id = container_id;
 
    	return this.each(function() {
 		var $this = $(this);
 		var $this_id = "#"+$(this).attr("id");
 
-      	$($this_id+" dt a").toggle(function(){
-    		//open dropdown
-    		$(this).addClass("opened");
-    		$($this_id+" dd ul").show();
-    	},function(){
-			//close dropdown
-    		$(this).removeClass("opened");
-    		$($this_id+" dd ul").hide();
-    	});
-                        
-        $($this_id+" dd ul li a").click(function() {
-            var text = $(this).html();
-            var val = $(this).find("span.value").html();
-			//change selected value of the dropdown
-			$($this_id+" dt a span.selected").html(text);
-            //click to apply toggle
-        	$($this_id+" dt a").click();
-			$.get($ajaxgetrequest(val),function(data){
-				valid = true;
-				if (typeof ajaxrespvalid != "undefined")
-				{
-					valid = ajaxrespvalid(data);
-				}
+        $(this).on("change", function(){
+            var team_id = $( this ).val();
 
-				//replace container html content - if data valid
-				if (valid) $($container).replaceWith(data);
-			}); 
-			
-        });
-          
-        $(document).bind('click', function() {
+            $.get($url(team_id),function(data){
+			    //replace container html content
+				$($container_id).replaceWith(data);
+			});
 
-            if ($($this_id+" dd ul").is(':visible'))
-            {
-            	//click to apply toggle
-            	$($this_id+" dt a").click();
-            }
         });
-        
+
     });
 };
 })(jQuery);

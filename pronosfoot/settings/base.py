@@ -29,7 +29,7 @@ DEBUG = False
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+    #'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'django_js_reverse',
     'season',
+    'admin',
 ]
 
 MIDDLEWARE = [
@@ -118,7 +119,8 @@ USE_L10N = True
 
 USE_TZ = True
 
-DEFAULT_CHARSET = 'iso-8859-1' #or latin1
+#DEFAULT_CHARSET = 'iso-8859-1' #or latin1
+DEFAULT_CHARSET = 'utf8'
 
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale'),
@@ -128,7 +130,7 @@ LOCALE_PATHS = (
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'public', 'static')
 
 
 # # Absolute path to the directory that holds media.
@@ -160,4 +162,4 @@ DATE_FORMAT = '%Y-%m-%d'
 TIME_FORMAT = '%H:%M:%S'
 
 SEASON = '2016/2017'
-SEASON_FORECAST_MAX_DATE = datetime.datetime(2017,10,31,23,59,59)
+SEASON_FORECAST_MAX_DATE = datetime.datetime(2016,10,31,23,59,59)

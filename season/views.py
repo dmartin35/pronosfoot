@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.http import Http404, HttpResponse, JsonResponse
 from django.template.response import TemplateResponse
+from django.utils.translation import ugettext as _
 import json
 
 from django.contrib.auth.views import login as djangologin
@@ -17,8 +18,8 @@ from django.template import Context, loader
 from season.models import Player
 from season.models import Mailing
 from auth.forms import UserCreationForm
-from auth.decorators import ajax_login_required
-from auth.decorators import ajax_logged_in
+# from auth.decorators import ajax_login_required
+# from auth.decorators import ajax_logged_in
 from tools.utils import evo_progress
 
 #SEASON IMPORTS
@@ -72,6 +73,7 @@ from season.core.stats import less_draws
 from season.core.stats import less_losses
 from season.core.stats import team_trends
 from season.core.stats import team_WDL
+from season.core.stats import team_wdl_goals
 from season.core.stats import team_forecasts_trend
 from season.core.stats import forecasts_best_stats
 from season.core.stats import fixture_forecasts_trend
@@ -143,10 +145,7 @@ def _validAjaxRequest(request):
 #     })))
 
 
-@ajax_logged_in
 def register(request):
-    if not _validAjaxRequest(request):
-        return HttpResponse(status=400)
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
@@ -175,17 +174,17 @@ def register(request):
     # return render(request, 'registration/register.html', {'form': form})
 
 
-@ajax_logged_in
-def login(request):
-    """
-    should get here after POST sent from ajax login lightbox
-    """
-    if not _validAjaxRequest(request):
-        return HttpResponse(status=400)
-    if not _validPostRequest(request):
-        return HttpResponse(status=400)
-    
-    return djangologin(request)
+# #@ajax_logged_in
+# def login(request):
+#     """
+#     should get here after POST sent from ajax login lightbox
+#     """
+#     if not _validAjaxRequest(request):
+#         return HttpResponse(status=400)
+#     if not _validPostRequest(request):
+#         return HttpResponse(status=400)
+#
+#     return djangologin(request)
 
 
 def index(request):
@@ -193,7 +192,7 @@ def index(request):
     render the home page
     """
     #ad info to context - to be passed to templates -
-    context = {'selectedmenu':'pronosfoot'}
+    context = {'selectedmenu':'home', 'page_title': _('Home'),}
     return render(request, 'pages/home.html', context)
 
 
@@ -204,8 +203,11 @@ def fixtures(request, week):
     #get closest week from today's date
     today = datetime.datetime.now().strftime(settings.DATE_FORMAT)
 
-    if week and not isWeekValid(week):
-        raise Http404
+    if week:
+        if not isWeekValid(week):
+            raise Http404
+        else:
+            week = int(week)
 
     week = week or getWeekAuto(today, WEEK_CLOSEST)
 
@@ -218,10 +220,11 @@ def fixtures(request, week):
     #get previous and next month 
     (prev_y,prev_m) = previous_month(firstday.year, firstday.month)
     (next_y,next_m) = next_month(firstday.year, firstday.month)
-        
+
     #ad info to context - to be passed to templates -
-    context = {'selectedmenu':'matches',
-               'currentweek':week, 
+    context = {'selectedmenu':'fixtures',
+               'page_title': _('Fixtures'),
+               'currentweek':week,
                'weeks':getAllWeeks(), 
                'fixtures':fixturesList(week),
                'days':days, 
@@ -276,9 +279,12 @@ def forecasts(request,week):
         #get next week from today's date
         today = requesttime.strftime(settings.DATE_FORMAT)
         week = getWeekAuto(today, WEEK_CLOSEST)
+    else:
+        week = int(week)
         
     #ad info to context - to be passed to templates -
-    context = {'selectedmenu':'pronos',
+    context = {'selectedmenu':'forecasts',
+               'page_title': _('Forecasts'),
                'currentweek':week,
                'weeks':getAllWeeks(),
                'days':fixturesDays(week),
@@ -290,12 +296,13 @@ def forecasts(request,week):
                'fl_saved':False,
                'fl_vote_date':settings.SEASON_FORECAST_MAX_DATE,
                'fl_res':leagueForecastsResultsForPlayer(request.user.id),
+               'fl_res_teams':leagueForecastsResults(),
                }
             
     return render(request, 'pages/pronos.html',context)
 
 
-@ajax_login_required
+#@ajax_login_required
 def ajax_forecasts_fixtures(request, week):
     """
     validate/save the forecasts from POST request
@@ -326,7 +333,7 @@ def ajax_forecasts_fixtures(request, week):
     return render(request, 'contents/pronos_matches.html',context)
 
     
-@ajax_login_required
+#@ajax_login_required
 def ajax_forecasts_league(request):
     """
     validate/save the forecasts from POST request
@@ -362,7 +369,8 @@ def tables(request):
     eos = endOfSeason()
     
     #ad info to context - to be passed to templates -
-    context = {'selectedmenu':'classements',
+    context = {'selectedmenu':'tables',
+               'page_title': _('Tables'),
                'season':settings.SEASON,
                'currentweek':currentweek,
                'weeks':played_weeks(),
@@ -447,7 +455,8 @@ def stats(request):
     team = firstAvailableTeam()
     
     #ad info to context - to be passed to templates -
-    context = {'selectedmenu':'stats',
+    context = {'selectedmenu':'statistics',
+               'page_title': _('Statistics'),
                'best_attack':best_attack(),
                'best_defense':best_defense(),
                'poorest_attack':poorest_attack(),
@@ -460,6 +469,7 @@ def stats(request):
                'less_losses':less_losses(),
                'teams':getAllTeams(),
                'w_d_l':team_WDL(team.id),
+               'team_wdl_goals': team_wdl_goals(team.id),
                'weeks':getAllWeeks(),
                'team_name':team.name,
                'pts_avg':team_points_avg(team.id),
@@ -618,6 +628,7 @@ def ajax_stats_team(request,team_id):
     
     #ad info to context - to be passed to templates -
     context = {'w_d_l':team_WDL(team_id),
+               'team_wdl_goals': team_wdl_goals(team_id),
                'team_name':getTeamName(team_id),
                'pts_avg':team_points_avg(team_id),
                }
@@ -679,7 +690,7 @@ def ajax_forecasts_trends_for_week(request, week):
 
     return JsonResponse(week_trends)
 
-@ajax_login_required
+#@ajax_login_required
 def ajax_forecasts_results(request, week):
     """
     returns the html popup code for all forecasts results 

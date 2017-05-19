@@ -1,4 +1,5 @@
 from django.template import Library
+import contextlib
 
 register = Library()
 
@@ -200,7 +201,19 @@ def evoClass(value):
         else:
             return ''
     except:
-        return '' 
+        return ''
+
+@register.filter(name='movement')
+def movement(value):
+    """ returns the movement css class"""
+    with contextlib.suppress(ValueError, TypeError):
+        intvalue = int(value)
+        if intvalue > 0:
+            return 'up'
+        elif intvalue < 0:
+            return 'down'
+    # any other case
+    return 'none'
 
 @register.filter(name='boolToInt')
 def boolToInt(val):
@@ -232,3 +245,16 @@ def int_list(mylist):
         return [int(x) for x in mylist]
     except:
         return mylist
+
+@register.filter('WDL')
+def wdl(value):
+    """
+    convert win/draw/lose into single char - french localized
+    :param value: string
+    :return: single char string
+    """
+    return {'win': 'G', 'draw': 'N', 'lose': 'P'}.get(value)
+
+@register.filter('slice_str')
+def slice_string(value, count):
+    return str(value)[:int(count)]

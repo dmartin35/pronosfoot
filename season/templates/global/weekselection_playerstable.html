@@ -1,20 +1,16 @@
 {% load generic_tags %}
 {% load humanize %}
 
-<dl id="weekselection_players" class="dropdown" style="float:right;">
-    <dt><a href="#"><span class="selected">{%if eos%}final{%else%}g&eacute;n&eacute;ral{%endif%}</span><span class="link">&nbsp;</span></a></dt>
-    <dd>
-        <ul>
-        	<li id="week_players_">
-        		<a href="#">{%if eos%}final{%else%}g&eacute;n&eacute;ral{%endif%}
-        		<span class="value">&nbsp;</span></a>
-        	</li>
-        	{% for week in weeks %}
-            	<li id="week_players_{{week}}">
-            		<a href="#">{{week|french_ordinal:'f'}} journ&eacute;e
-            		<span class="value">{{week}}</span></a>
-            	</li>
-            {% endfor %}
-		</ul>
-	</dd>
-</dl>
+
+<h6 class="text-center">
+
+  <span class=" mdl-typography--display-color-contrast-light ">Saison {{season}} | </span>
+
+  <select id="weekselection_players">
+      <option value="" >{%if eos%}final{%else%}général{%endif%}</option>
+      {% for week in weeks reversed %}
+          <option value="{{week}}" >{{week|french_ordinal:'f'}} journ&eacute;e</option>
+      {% endfor %}
+  </select>
+
+</h6>

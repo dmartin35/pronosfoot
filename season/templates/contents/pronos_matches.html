@@ -1,138 +1,151 @@
 {% load static %}
 {% load generic_tags %}
+{% load i18n %}
 
-<table id="forecasts" class="fixtures" cellpadding="0" cellspacing="0">
 
-	{% for day in days %}
-		<tr class="tableheader"><td class="day" colspan="8">{{day|date:"l j F Y"|capfirst}}</td></tr>
-		{% for form in ff_formset.forms %}
-			{% ifequal form.day day %}
-			<tr class="tableline
-			{%if form.score_a.errors%}error{%endif%}
-			{%if form.score_b.errors%}error{%endif%}
-			">
-				<td class="hour">
-					{%if form.hour%}{{form.hour|time:"H:i"}}{%endif%}
-					
-					<!-- hidden inputs -->
-					{{form.fixture}}
-					{{form.user_id}}
-				</td>
+{% spaceless %}
+<div id="forecasts" class="fixtures forecasts mdl-grid">
+  <div class="mdl-cell center mdl-cell--8-col mdl-cell--12-col-tablet mdl-cell--4-col-phone">
+  {% for day in days %}
+    <time datetime="{{day|date:"l j F Y"|capfirst}}" class="date">
+      <h5 class="mdl-typography--font-light">{{day|date:"l j F Y"|capfirst}}</h5>
+    </time>
+    <ul class="match-list mdl-list">
+    {% for form in ff_formset.forms %}
+      {% ifequal form.day day %}
 
-				<td class="logo_team_a">
-					{% with team_name=form.team_a|lower %}
-						{% with 'images/clubs/small/'|add:team_name|add:'.png' as image_static %}
-						  <img src="{% static image_static %}" alt="{{team_name}} logo"/>
-						{% endwith %}
-					{% endwith %}
-				</td>
+        <li class="mdl-list__item {%if form.score_a.errors%}error{%endif%}{%if form.score_b.errors%}error{%endif%}">
+          <div class="fixture forecast">
+			<!-- hidden inputs -->
+			{{form.fixture}}
+			{{form.user_id}}
 
-				<td class="team_a">{{form.team_a}}</td>
-				<td class="score_team_a {%if form.score_a.errors%}error{%endif%}">
-					{{form.score_a}}
-					{%if form.readonly%}
-					<script type="text/javascript">
-						var txtfield = document.getElementById('id_{{form.score_a.html_name}}');
-						if (txtfield)
-						{
-							//txtfield must be readOnly so that value can not be modified 
-							txtfield.readOnly= true;
-							txtfield.setAttribute("class", "inactive");
-						};
-					</script>
-					{%endif%}
-				</td>
-				<td class="team_separator">-</td>
-				<td class="score_team_b {%if form.score_b.errors%}error{%endif%}">
-					{{form.score_b}}
-					
-					{%if form.readonly%}
-					<script type="text/javascript">
-						var txtfield = document.getElementById('id_{{form.score_b.html_name}}');
-						if (txtfield)
-						{
-							//txtfield must be readOnly so that value can not be modified 
-							txtfield.readOnly= true; 
-							txtfield.setAttribute("class", "inactive");
-						};
-					</script>
-					{%endif%}
-				</td>
-				<td class="team_b">{{form.team_b}}</td>
+            <span class="team">
+              <span class="team-name">
+                <span class="long">{{form.team_a}}</span><span class="short">{{form.team_a|slice_str:3|upper}} </span>
+              </span>
+              <span class="team-logo">
+                {% with team_name=form.team_a|lower %}
+                    {% with 'images/clubs/small/'|add:team_name|add:'.png' as image_static %}
+                      <img src="{% static image_static %}" alt="{{team_name}} logo"/>
+                    {% endwith %}
+                {% endwith %}
+              </span>
+            </span>
 
-				<td class="logo_team_b">
-					{% with team_name=form.team_b|lower %}
-						{% with 'images/clubs/small/'|add:team_name|add:'.png' as image_static %}
-						  <img src="{% static image_static %}" alt="{{team_name}} logo"/>
-						{% endwith %}
-					{% endwith %}
-				</td>
+            <span class="forecast-team">
+            <div class="mdl-textfield mdl-js-textfield {%if form.readonly%}is-disabled{%endif%}">
+               <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" maxlength="2" id="{{form.score_a.id_for_label}}"
+                      name="{{form.score_a.html_name}}" value="{{form.score_a.value|default_if_none:""}}" {%if form.readonly%}disabled="disabled"{%endif%}>
+               <label class="mdl-textfield__label" for="{{form.score_a.id_for_label}}">
+                 <span class="long">Score</span><span class="short">A</span>
+               </label>
+             </div>
+            </span>
 
-				<td class="nostyle stats_link">
-					{%if form.nb_forecasts%}
-					<a href="#" onclick="javascript:show_forecasts_stats('{{form.fixture_id}}')">
-					<img id="stats_fixture_{{form.fixture_id}}" class="stats" src="{% static 'images/stats.png' %}" alt="stats">
-					</a>
-					{%endif%}
-				</td>
-				<td class="nostyle res_link"><span id="results_forecast_{{form.fixture_id}}" class="leg_res_{{form.points}}">&nbsp;</span></td>
-			</tr>
-			{% endifequal %}
-		{% endfor %}
-	{% endfor %}
-	
-	{%if week_points|notIsNone%}
-	<tr class="tablefooter">
-		<td colspan="8">
-			Total:
-		</td>
-		<td colspan="2">
-			<strong>{{week_points}}</strong> pts
-		</td>
-	</tr>	
+
+            <span class="forecast-sep">&nbsp;-&nbsp;</span>
+
+
+            <span class="forecast-team">
+            <div class="mdl-textfield mdl-js-textfield {%if form.readonly%}is-disabled{%endif%}">
+               <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" maxlength="2" id="{{form.score_b.id_for_label}}"
+                      name="{{form.score_b.html_name}}" value="{{form.score_b.value|default_if_none:""}}" {%if form.readonly%}disabled="disabled"{%endif%}>
+               <label class="mdl-textfield__label" for="{{form.score_b.id_for_label}}">
+                 <span class="long">Score</span><span class="short">B</span>
+               </label>
+             </div>
+            </span>
+
+
+            <span class="team">
+              <span class="team-name">
+                <span class="long">{{form.team_b}}</span><span class="short">{{form.team_b|slice_str:3|upper}} </span>
+              </span>
+              <span class="team-logo">
+                {% with team_name=form.team_b|lower %}
+                    {% with 'images/clubs/small/'|add:team_name|add:'.png' as image_static %}
+                      <img src="{% static image_static %}" alt="{{team_name}} logo"/>
+                    {% endwith %}
+                {% endwith %}
+              </span>
+            </span>
+
+
+            </span>
+          </div>
+
+          {%if form.points|notIsNone%}
+		  <div class="result forecast text-center">
+			  {% with form.points as points %}
+			  	{% with form.fixture_id as icon_id%}
+                  {%include "global/result_forecast.html"%}
+                {% endwith %}
+              {% endwith %}
+		  </div>
+          {%endif%}
+        </li>
+
+      {% endifequal %}
+    {% endfor %}
+    </ul>
+  {%endfor%}
+
+	<ul class="mdl-list">
+
+    {%if week_points|notIsNone%}
+		<li class="mdl-list__item total-pts">
+          <span>
+			Total:&nbsp;<span class="lettrine">{{week_points}}</span>&nbsp;points
+          </span>
+		</li>
+
 	{%endif%}
-	
-	{%if ff_formset.forms|can_submit_formset%}
-	<tr class="tablefooter">
-		<td colspan="8">
-			{{ ff_formset.management_form }}
-			<ul class="buttons">
-			    <li>
-			        <input id="ff_submit" type="submit" class="submit" value="Valider"/>
-			    </li>
-			    <li>
-			        <input id="ff_cancel" type="button" class="button" value="Annuler"/>
-			    </li>
-			    <li class="{% if ff_formset.errors|haserrors %}error{%endif%} 
-						   {% if ff_saved %}success{%endif%}">&nbsp;
-				{% if ff_saved %}
-				Vos pronostics ont &eacute;t&eacute; enregistr&eacute;s
-				{% endif %}
-				{% if ff_formset.errors|haserrors %}
+
+    {%if ff_formset.forms|can_submit_formset%}
+    {{ ff_formset.management_form }}
+
+        <li class="mdl-list__item">
+          <input id="ff_cancel" type="button" class="mdl-button mdl-js-button mdl-js-ripple-effect" value="Annuler" style="margin-left: auto;"/>
+          &nbsp;&nbsp;
+          <input id="ff_submit" type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" value="Valider"/>
+        </li>
+        {% if ff_saved or ff_formset.errors|haserrors  %}
+        <li class="mdl-list__item ">&nbsp;
+          <span class="center {% if ff_saved %}pf-success{%endif%}{% if ff_formset.errors|haserrors %}pf-error{%endif%}">
+			{% if ff_saved %}
+			Vos pronostics ont &eacute;t&eacute; enregistr&eacute;s
+			{% endif %}
+			{% if ff_formset.errors|haserrors %}
 				Veuillez corriger les erreurs
-				{% endif %}			    
-			    </li>
-			</ul>
-		</td>
-	</tr>
-	{%endif%}
-	
-</table>
+			{% endif %}
+          </span>
+        </li>
+        {%endif%}
+
+    {%endif%}
+	</ul>
+
+  </div>
+</div>
+{% endspaceless %}
+
+
+
+
+
+
+
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		$('input[type="text"]').focus(function() {
-			$(this).parent().parent().addClass("current");
-		});
-		$('input[type="text"]').blur(function() {
-			$(this).parent().parent().removeClass("current");
-		});
-		
-		//do not allow inactive field to have focus - in complement of readOnly
-		$('input[type="text"].inactive').focus(function() {
-			$(this).blur();
-		});
-		
+
+		// needs to refresh mdl components bindind when this page is refreshed by ajax
+		componentHandler.upgradeDom('MaterialTextfield', 'mdl-textfield');
+		componentHandler.upgradeDom('MaterialTooltip', 'mdl-tooltip');
+
+
+		{%comment%}
 		/*
 	    $.getJSON(Urls.ajax_forecast_trends_week("{{currentweek}}"), function(data) {
 	    	for (fixture_id in data)
@@ -145,28 +158,12 @@
 	    	load_popup_events();
     	});
     	*/
-    	
-    	{%if week_points|notIsNone%}
-    	$.getJSON(Urls.ajax_forecasts_results("{{currentweek}}"), function(data) {
-    		/* JSON object is returned when user not authenticated */
-	    	if (typeof data == 'object' && data.not_authenticated == true)return;
-	    	for (fixture_id in data)
-	    	{
-	    	    popup_html = data[fixture_id];
-	    	    result_link_name = '#results_forecast_'+fixture_id;
-	    	    $(result_link_name).parent().append(popup_html);
-	    	    $(result_link_name).parent().addClass('has_popup');
-	    	}
-	    	load_popup_events();
-    	});
-    	{%endif%}
-		
+    	{%endcomment%}
+
+
 		$('#ff_cancel').click(function(){
 			$.get(Urls.ajax_forecasts_fixtures("{{currentweek}}"),function(data){
-				if (check_ajax_logged_in(data))
-				{
-					$('table#forecasts').replaceWith(data);
-				}
+				$('#forecasts').replaceWith(data);
 			});
 		});
 		
@@ -188,16 +185,15 @@
 		      url: Urls.ajax_forecasts_fixtures("{{currentweek}}"),
 		      data: postdata,
 		      success: function(html) {
-		      	if (check_ajax_logged_in(html))
-		      	{
-			  		$('table#forecasts').replaceWith(html);
-		  		}
+		      	$('#forecasts').replaceWith(html);
 		      }
 		    });
 		    return false;
 	    	
 		});
-		
+
+		{%comment%}
+		/*
 		show_forecasts_stats = function(fixture_id){
 			$.get(Urls.ajax_players_forecasts_fixture(fixture_id), function(html) {
 				if (html)
@@ -208,6 +204,9 @@
 				}
 			});
 		};
+		*/
+		{%endcomment%}
+
 		
 	});
 </script>

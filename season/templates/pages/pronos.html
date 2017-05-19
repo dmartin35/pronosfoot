@@ -1,57 +1,41 @@
-{% extends "main.html" %}
+{% extends "page.html" %}
 
-{% block body %}
-	<div class="line fullline">
-		<div class="col2of3">
-			<h1>Matches &amp; R&eacute;sultats</h1>
-			<h2 class="floatLeft">Saison {{season}} | </h2>
-			<div class="h2 floatLeft" style="padding-left:0;">{%include "global/weekselection.html"%}</div>
-			{%include 'contents/pronos_matches.html'%}
-			<div class="legend">
-				<h3>L&eacute;gende</h3>
-				<p class="info">
-					Vous pouvez modifier vos pronostics tant que le match n'a pas d&eacute;but&eacute;.<br/>
-					Allocation des points:
-					<ul>
-					<li>
-						<span class="leg_res_0">&nbsp;</span>
-						<span class="">0 points pour mauvais pronostic</span>
-					</li>
-					<li>
-						<span class="leg_res_3">&nbsp;</span>
-						<span class="">3 points pour l'issue correcte</span>
-					</li>
-					<li>
-						<span class="leg_res_5">&nbsp;</span>
-						<span class="">5 points pour l'issue correcte avec bon &eacute;cart de buts</span>
-					</li>
-					<li>
-						<span class="leg_res_8">&nbsp;</span>
-						<span class="">8 points pour le score exact</span>
-					</li>
-					</ul> 
-				</p>
-			</div>
-		</div>
-	
-		<div class="col1of3">
-			<h1>Saison</h1>
-			<h2>Pronostics de la saison</h2>
-			{%include 'contents/pronos_saison.html'%}
-			<div class="legend">
-				<h3>L&eacute;gende</h3>
-				<p class="info">
-					Vous pouvez modifier vos pronostics jusqu'au {{fl_vote_date|date:"d F Y H:i"}}.
-					Vous obtiendrez un bonus de 20 points par bon pronostic sur le classement final.
-				</p>		
-			</div>
-		</div>	
-	</div>
-	<div class="line sep"/>
+{% block content %}
+{{block.super}}
+
+
+<div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+  <div class="mdl-tabs__tab-bar">
+      <a href="#tab-forecasts-day-panel" class="mdl-tabs__tab is-active">Journée</a>
+      <a href="#tab-forecasts-season-panel" class="mdl-tabs__tab">Saison</a>
+  </div>
+
+  <div class="mdl-tabs__panel is-active" id="tab-forecasts-day-panel">
+    <!-- Your content goes here -->
+    <div class="pronosfoot-wrapper">
+	  <h4 class="mdl-typography--font-light mdl-typography--display-color-contrast-light text-center">Vos pronostics & résultats par journée</h4>
+	  {%include "global/weekselection.html"%}
+	  {%include 'contents/pronos_matches.html'%}
+	  {%include 'contents/pronos_matches_legend.html'%}
+    </div>
+
+  </div>
+  <div class="mdl-tabs__panel" id="tab-forecasts-season-panel">
+    <!-- Your content goes here -->
+    <div class="pronosfoot-wrapper">
+	  <h4 class="mdl-typography--font-light mdl-typography--display-color-contrast-light text-center">Vos pronostics pour l'issue de la saison {{season}}</h4>
+	  {%include 'contents/pronos_saison.html'%}
+	  {%include 'contents/pronos_saison_legend.html'%}
+    </div>
+
+  </div>
+
+</div>
+
 	
 <script type="text/javascript">
 	$(document).ready(function() {
-       $('#weekselection').createDropdown(Urls.ajax_forecasts_fixtures,'table#forecasts', check_ajax_logged_in);
+       $('#weekselection').pf_dropdown(Urls.ajax_forecasts_fixtures,'#forecasts');
 	});
 </script>	
 

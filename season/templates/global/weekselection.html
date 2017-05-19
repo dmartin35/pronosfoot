@@ -1,16 +1,20 @@
 {% load generic_tags %}
 {% load humanize %}
 
-<dl id="weekselection" class="dropdown" style="float:right;">
-    <dt><a href="#"><span class="selected">{{currentweek|toint|french_ordinal:'f'}} journ&eacute;e</span><span class="link">&nbsp;</span></a></dt>
-    <dd>
-        <ul>
-        	{% for week in weeks %}
-            	<li id="week_{{week}}">
-            		<a href="#">{{week|french_ordinal:'f'}} journ&eacute;e
-            		<span class="value">{{week}}</span></a>
-            	</li>
-            {% endfor %}
-		</ul>
-	</dd>
-</dl>
+<h6 class="text-center">
+
+  <span class=" mdl-typography--display-color-contrast-light ">Saison {{season}} | </span>
+
+  <select id="weekselection">
+      {% if reversed %}
+          {% for week in weeks reversed%}
+              <option value="{{week}}" {%if week == currentweek %} selected="selected"{%endif%} >{{week|french_ordinal:'f'}} journ&eacute;e</option>
+          {% endfor %}
+      {% else %}
+          {% for week in weeks %}
+              <option value="{{week}}" {%if week == currentweek %} selected="selected"{%endif%} >{{week|french_ordinal:'f'}} journ&eacute;e</option>
+          {% endfor %}
+      {% endif %}
+  </select>
+
+</h6>

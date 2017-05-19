@@ -1,100 +1,44 @@
-{% csrf_token %}
+{% extends "registration/base.html" %}
+{% load i18n %}
 
-<div id="lb-login">
-	<p class="lb-header"></p>
-	<p class="lb-title">s'identifier</p>
-    
-	<div class="lb-content">
-    	<fieldset>
-			{% if form.errors %}
-	    		<strong class="error">Erreur d'identification.</strong>
-	  		{% endif %}
-    		<ol>
-    			<li>
-	    		<label>Pseudo</label>
-	    		<input type="text" class="text" name="username" id="username" value="{{form.data.username}}"/>
-	    		</li>
-    		
-    			<li>
-	    		<label>Mot de passe</label>
-	    		<input type="password" class="password" name="password" id="password" value="{{form.data.password}}" />
-	    		<span class="info"><a id="reset_pwd" href="#">Mot de passe oubli&eacute; ?</a></span>
-	    		</li>
-    		
-    		</ol>
-    		
-    	</fieldset>
-		
+{% block subcontent %}
+<form action="{%url 'login'%}{% if next %}?next={{next}}{% endif %}" method="POST">
+    {% csrf_token %}
+
+	{% if form.non_field_errors %}
+	<div class="mdl-card__supporting-text">
+		<h6 class="pf-error text-center ">Erreur d'identification.</h6>
+		<div class="mdl-form {%if form.non_field_errors%}is-invalid{%endif%}">
+			<span class="mdl-form__error">{{form.non_field_errors.0}}</span>
+		</div>
 	</div>
-	<ul class="lb-buttons">
-	    <li>
-	        <input type="submit" class="submit" value="Entrer"/>
-	    </li>
-	</ul>
-	
-	</form>
-	
-	<p class="close"><a id="lb-close-login"></a></p>
-</div>
+	{% endif %}
 
-<script type="text/javascript">
-$(function() {
-    $('div#lb-login p.close a').bind('click',function(){
-        $('div#lb-mask').hide();
-        jQuery.each($(this).parents('div.lb'),function(){$(this).hide();});
-    });
-    
-    $('div#lb-login').keydown(function(event) {        
-        if (event.keyCode == 13) {//Enter Key pressed
-            //Submit form - via click triggered on submit button
-            $('div#lb-login input.submit').click();
-            return false;
-        }
-     });
-    
-    $('div#lb-login input.submit').click(function(){
-    	
-    	var postdata={
-          'username':$('#username').val(), 
-          'password':$('#password').val()
-     	};
-    	
-    	 $.ajax({
-	      type: "POST",
-	      url: Urls.login(),
-	      data: postdata,
-	      success: function(response) {
-	      console.log(typeof(response));
-	      //console.log(response);
-	      	
-	      	/* JSON object is returned when user not authenticated */
-	    	if (typeof response == 'object' && response.not_authenticated == true)
-	    	{
-	    		$('div#lb-login').replaceWith(response.html);
-	    	}else{
-	    		//console.log('{{next}}');
-				//document.location.href='{{next}}';
-				document.location.href=Urls.index();
-	    	}
-	      	
-	      }
-	    });
-	    return false;
-    	
-    });
-    
-    $('div#lb-login a#reset_pwd').click(function(){
-		//display mask
-    	$('div#lb-mask').show();
-		//close login lb    	
-        jQuery.each($(this).parents('div.lb'),function(){$(this).hide();});
-       	//get reset pwd lb
-    	$.get(Urls.password_reset(),function(html){
-	       	//display reset pwd lb
-	       	$('div#lb-pwd').replaceWith(html);
-    		$('div#lb-pwd').parent('div').show();
-    	});
-    });
-    
-});
-</script>
+	<div class="mdl-card__supporting-text">
+
+		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label {%if form.username.errors%}is-invalid{%endif%}">
+			<input class="mdl-textfield__input" type="text" id="username" name="username" value="{{form.data.username}}"/>
+			<label class="mdl-textfield__label" for="username">{{form.username.label}}</label>
+			{%if form.username.errors%}
+				<span class="mdl-textfield__error">{{form.username.errors.0 }}</span>
+			{%endif%}
+		</div>
+		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label {%if form.password.errors%}is-invalid{%endif%}">
+			<input class="mdl-textfield__input" type="password" name="password" id="password" value="{{form.data.password}}" />
+			<label class="mdl-textfield__label" for="password">{{form.password.label}}</label>
+			{%if form.password.errors%}
+				<span class="mdl-textfield__error">{{form.password.errors.0 }}</span>
+			{%endif%}
+		</div>
+
+
+	</div>
+	<div class="mdl-card__actions ">
+		<input type="submit" class="center mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" value="connexion"/>
+	</div>
+	<div class="mdl-card__actions ">
+		<span class="text-center center"><a id="reset_pwd" href="{%url 'password_reset'%}">{% trans "Forgotten password" %}?</a></span>
+	</div>
+</form>
+{% endblock %}
+

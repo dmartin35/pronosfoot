@@ -1,90 +1,138 @@
 {% load static %}
 {% load generic_tags %}
 
-<div id="stats_team" style="clear:both;">
-
-	<div class="col1of3">
 
 
+<div id="stats_team" class="pronosfoot-wrapper">
+
+	<div class="team-logo-centered-wrapper ">
 		{% with team_name=team_name|lower %}
-			{% with 'images/clubs/large/'|add:team_name|add:'.png' as image_static %}
-				<img class="logo_large" src="{% static image_static %}" alt=""/>
+			{% with 'images/clubs/xlarge/'|add:team_name|add:'.png' as image_static %}
+				<img class="pronosfoot-logo-xlarge center" src="{% static image_static %}" alt=""/>
 			{% endwith %}
 		{% endwith %}
+	</div>
+
+	<div class="stats-wrapper">
+		<div class="statsnumber-wrapper">
+			<div class="stat-wrapper stat-wrapper-wins"><span class="stat-value W">{{team_wdl_goals.won|default_if_none:0}}</span>
+			<span class="stat-label">victoires</span>
+			</div>
+			<div class="stat-wrapper stat-wrapper-nulls"><span class="stat-value D">{{team_wdl_goals.drawn|default_if_none:0}}</span>
+			<span class="stat-label">matchs nuls</span>
+			</div>
+			<div class="stat-wrapper stat-wrapper-loses"><span class="stat-value L">{{team_wdl_goals.lost|default_if_none:0}}</span>
+			<span class="stat-label">défaites</span>
+			</div>
+			<div class="stat-wrapper stat-wrapper-goals"><span class="stat-value W">{{team_wdl_goals.gf|default_if_none:0}}</span>
+			<span class="stat-label">buts marqués</span>
+			</div>
+			<div class="stat-wrapper stat-wrapper-incgoals"><span class="stat-value L">{{team_wdl_goals.ga|default_if_none:0}}</span>
+			<span class="stat-label">buts contre</span>
+			</div>
+		</div>
+	</div>
 
 
-		<ul>
-		<li>
-			<span>S&eacute;rie en cours:</span>
+	<div class="mdl-grid">
+
+		  <div class="mdl-cell mdl-cell--5-col center">
+
+		    <ul class="mdl-list">
+
+			<li class="mdl-list__item">
+				<span class="lettrine">{{consecutive_wins}}</span>
+				<span>victoire cons&eacute;cutives</span>
+			</li>
+			<li class="mdl-list__item">
+				<span class="lettrine">{{consecutive_draws}}</span>
+				<span>matches nuls cons&eacute;cutifs</span>
+			</li>
+			<li class="mdl-list__item">
+				<span class="lettrine">{{consecutive_losses}}</span>
+				<span>d&eacute;faites cons&eacute;cutives</span>
+			</li>
+			<li class="mdl-list__item">
+				<span class="lettrine">{{consecutive_noloss}}</span>
+				<span>matches cons&eacute;cutifs sans d&eacute;faite</span>
+			</li>
+			<li class="mdl-list__item">
+				<span class="lettrine">{{consecutive_nowin}}</span>
+				<span>matches cons&eacute;cutifs sans victoire</span>
+			</li>
+
+			</ul>
+		  </div>
+
+		<div class="mdl-cell mdl-cell--5-col center">
+
+		    <ul class="mdl-list">
+
 			{%if last_five%}
-			<span class="team_trend">
-				{%for val in last_five%}
-				<span class="{{val}}">{{val}}</span>
-				{%endfor%}
-			</span>
-			{%else%}
-				<span class="na">N/A</span>
-			{%endif%}  
-		</li>
-		<li>
-			<span class="lettrine">{{consecutive_wins}}</span>
-			<span>victoire cons&eacute;cutives</span>
-		</li>
-		<li>
-			<span class="lettrine">{{consecutive_draws}}</span>
-			<span>matches nuls cons&eacute;cutifs</span>
-		</li>
-		<li>
-			<span class="lettrine">{{consecutive_losses}}</span>
-			<span>d&eacute;faites cons&eacute;cutives</span>
-		</li>
-		<li>
-			<span class="lettrine">{{consecutive_noloss}}</span>
-			<span>matches cons&eacute;cutifs sans d&eacute;faite</span>
-		</li>
-		<li>
-			<span class="lettrine">{{consecutive_nowin}}</span>
-			<span>matches cons&eacute;cutifs sans victoire</span>
-		</li>
-		
-		<li>
-			<span class="lettrine">{{pts_avg|float_dbledigit}}</span>
-			<span>points par match</span>
-		</li>
-		
-		<li>
-			<span class="lettrine">{{goals_scored_avg|float_dbledigit}}</span>
-			<span>buts marqu&eacute;s par match</span>
-		</li>
-		
-		<li>
-			<span class="lettrine">{{goals_taken_avg|float_dbledigit}}</span>
-			<span>buts encaiss&eacute;s par match</span>
-		</li>
-		</ul>
-	</div>
+			<li class="mdl-list__item">
+				<span>S&eacute;rie en cours &nbsp; </span>
+				<span class="team_trend">
+					{%for val in last_five%}
+					<span class="{{val}}">{{val}}</span>
+					{%endfor%}
+				</span>
+			</li>
+			{%endif%}
 
-	<div class="col1of3 lsep">
-		<h4>Tendance des r&eacute;sultats</h4>
-		<div id="team_wdl_chart_ctnr" class="container" style="width: 275px; height: 185px; margin: 0 auto;float:left;"><em>Non disponible</em></div>	
-	</div>
-	
-	<div class="col1of3 lsep">
-		<h4>Tendance des pronostics</h4>
-		<div id="team_pronos_chart_ctnr" class="container" style="width: 275px; height: 185px; margin: 0 auto;float:left;"><em>Non disponible</em></div>	
-	</div>
+
+			<li class="mdl-list__item">
+				<span class="lettrine">{{pts_avg|float_dbledigit}}</span>
+				<span>points par match</span>
+			</li>
+
+			<li class="mdl-list__item">
+				<span class="lettrine">{{goals_scored_avg|float_dbledigit}}</span>
+				<span>buts marqu&eacute;s par match</span>
+			</li>
+
+			<li class="mdl-list__item">
+				<span class="lettrine">{{goals_taken_avg|float_dbledigit}}</span>
+				<span>buts encaiss&eacute;s par match</span>
+			</li>
+			</ul>
+		  </div>
+
+	  </div>
+
+	<div class="mdl-grid">
+
+		  <div class="mdl-cell mdl-cell--5-col center">
+			<h6>Tendance des pronostics</h6>
+		    <div id="team_pronos_chart_ctnr" class="container" style="width: 275px; height: 185px; margin: 0 auto;float:left;">
+				<span class="na">Non disponible</span>
+			</div>
+
+		  </div>
+		  <div class="mdl-cell mdl-cell--5-col center" >
+			<h6>Tendance des résultats</h6>
+			<div id="team_wdl_chart_ctnr" class="container" style="width: 275px; height: 185px; margin: 0 auto;float:left;">
+				<span class="na">Non disponible</span>
+			</div>
+		  </div>
+
+
+	  </div>
+
     
 </div>
 
 <script type="text/javascript">
 $(document).ready(function() {
+	var wdl_colors = ['#8bc34a', '#adadad', '#D3423D'];
 	{%if w_d_l%}
-		createPieChart('team_wdl_chart_ctnr',[['G',{{w_d_l|listvalue:0}}],['N',{{w_d_l|listvalue:1}}],['P',{{w_d_l|listvalue:2}}]],'percent');
+		createPieChart('team_wdl_chart_ctnr',[['Gagnés',{{w_d_l|listvalue:0}}],['Nuls',{{w_d_l|listvalue:1}}],['Perdus',{{w_d_l|listvalue:2}}]],'percent',wdl_colors);
 	{%endif%}
 
 	if ( ({{team_forecasts_win}}>0) || ({{team_forecasts_draw}}>0) || ({{team_forecasts_lose}}>0) )
 	{
-		createPieChart('team_pronos_chart_ctnr',[['G',{{team_forecasts_win}}],['N',{{team_forecasts_draw}}],['P',{{team_forecasts_lose}}]],'percent');
+		createPieChart('team_pronos_chart_ctnr',[['Gagnés',{{team_forecasts_win}}],['Nuls',{{team_forecasts_draw}}],['Perdus',{{team_forecasts_lose}}]],'percent',wdl_colors);
 	}
 });
 </script>
+
+

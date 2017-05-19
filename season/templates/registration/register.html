@@ -1,110 +1,60 @@
-{% csrf_token %}
+{% extends "registration/base.html" %}
 
-<div id="lb-reg">
-    <p class="lb-header"></p>
-    <p class="lb-title">s'inscrire</p>
-    <div class="lb-content">
-    	<fieldset>
-			{% if form.errors %}
-	    		<strong class="error">Erreur d'inscription.</strong>
-	  		{% endif %}
-    		<ol>
-    			<li>
-	    		<label class="{%if form.username.errors%}error{%endif%}">Pseudo *</label>
-	    		<input type="text" class="text" name="username" id="username" value="{{form.data.username}}"/>
-	    		{%if form.username.errors%}
-	    			<span class="info error">{%for error in form.username.errors%}{{error}}{%endfor%}</span>
-	    		{%endif%}
-	    		</li>
-    		
-    			<li>
-	    		<label class="{%if form.email.errors%}error{%endif%}">Adresse E-Mail *</label>
-	    		<input type="text" class="text" name="email" value="{{form.data.email}}" id="email"/>
-	    		{%if form.email.errors%}
-	    			<span class="info error">{%for error in form.email.errors%}{{error}}{%endfor%}</span>
-	    		{%endif%}
-	    		</li>
-	    		
-    			<li>
-	    		<label class="{%if form.password1.errors%}error{%endif%}">Mot de passe *</label>
-	    		<input type="password" class="text" name="password1" value="{{form.data.password1}}" id="password1"/>
-	    		{%if form.password1.errors%}
-	    			<span class="info error">{%for error in form.password1.errors%}{{error}}{%endfor%}</span>
-	    		{%endif%}
 
-	    		</li>
-	    		
-    			<li>
-	    		<label class="{%if form.password2.errors%}error{%endif%}">Confirmation du mot de passe *</label>
-	    		<input type="password" class="text" name="password2" value="{{form.data.password2}}" id="password2"/>
-	    		{%if form.password2.errors%}
-	    			<span class="info error">{%for error in form.password2.errors%}{{error}}{%endfor%}</span>
-	    			<br/>
-	    		{%endif%}
-	    		<span class="info">* Champs obligatoires</span>
-	    		</li>
-    		
-    		</ol>
-    		
-    	</fieldset>
-	</div>
-	<ul class="lb-buttons">
-	    <li>
-	        <input type="submit" class="submit" value="Valider"/>
-	    </li>
-	    <li>
-	        <input type="button" class="button" value="Annuler"/>
-	    </li>
-	</ul>
-    <p class="close"><a id="lb-close-reg"></a></p>
-</div>
+{% block subcontent %}
+<form action="{%url 'register'%}" method="POST">
+  {% csrf_token %}
 
-<script type="text/javascript">
-$(function() {
-    $('div#lb-reg p.close a').bind('click',function(){
-        $('div#lb-mask').hide();
-        jQuery.each($(this).parents('div.lb'),function(){$(this).hide();});
-    });
-    $('div#lb-reg ul.lb-buttons input.button').bind('click',function(){
-        $('div#lb-mask').hide();
-        jQuery.each($(this).parents('div.lb'),function(){$(this).hide();});
-    });
-    
-    $('div#lb-reg').keydown(function(event) {        
-        if (event.keyCode == 13) {//Enter Key pressed
-            //Submit form - via click triggered on submit button
-            $('div#lb-reg input.submit').click();
-            return false;
-        }
-     });
-    
-    $('div#lb-reg input.submit').click(function(){
-    	
-    	var postdata={
-          'username':$('#username').val(),
-          'email':$('#email').val(), 
-          'password1':$('#password1').val(),
-          'password2':$('#password2').val()
-     	};
-    	
-    	 $.ajax({
-	      type: "POST",
-	      url: Urls.register(),
-	      data: postdata,
-	      success: function(response) {
-	      	
-	      	/* JSON object is returned when user not authenticated */
-	    	if (typeof response == 'object' && response.not_authenticated == true)
-	    	{
-	    		$('div#lb-reg').replaceWith(response.html);
-	    	}else{
-				document.location.href=Urls.index();
-	    	}
-	      	
-	      }
-	    });
-	    return false;
-    	
-    });
-});
-</script>
+  {% if form.non_field_errors %}
+  <div class="mdl-card__supporting-text">
+    <h6 class="pf-error text-center ">Erreur d'inscription.</h6>
+    <div class="mdl-form {%if form.non_field_errors%}is-invalid{%endif%}">
+      <span class="mdl-form__error">{{form.non_field_errors.0}}</span>
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="mdl-card__supporting-text">
+
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label {%if form.username.errors%}is-invalid{%endif%}">
+      <input class="mdl-textfield__input" type="text" id="username" name="username"  value="{{form.data.username}}"/>
+      <label class="mdl-textfield__label" for="username">{{form.username.label}}</label>
+      {%if form.username.errors%}
+          <span class="mdl-textfield__error">{{form.username.errors.0 }}</span>
+      {%endif%}
+    </div>
+
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label {%if form.email.errors%}is-invalid{%endif%}">
+      <input class="mdl-textfield__input" type="text" id="email" name="email" value="{{form.data.email}}"/>
+      <label class="mdl-textfield__label" for="email">{{form.email.label}}</label>
+      {%if form.email.errors%}
+          <span class="mdl-textfield__error">{{form.email.errors.0 }}</span>
+      {%endif%}
+    </div>
+
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label {%if form.password1.errors%}is-invalid{%endif%}">
+      <input class="mdl-textfield__input" type="password" name="password1" id="password1" value="{{form.data.password1}}" />
+      <label class="mdl-textfield__label" for="password1">{{form.password1.label}}</label>
+      {%if form.password1.errors%}
+          <span class="mdl-textfield__error">{{form.password1.errors.0 }}</span>
+      {%endif%}
+    </div>
+
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label {%if form.password2.errors%}is-invalid{%endif%}">
+      <input class="mdl-textfield__input" type="password" name="password2" id="password2" value="{{form.data.password2}}" />
+      <label class="mdl-textfield__label" for="password2">{{form.password2.label}}</label>
+      {%if form.password2.errors%}
+          <span class="mdl-textfield__error">{{form.password2.errors.0 }}</span>
+      {%endif%}
+    </div>
+
+  </div>
+
+  <div class="mdl-card__actions ">
+    <a href="{% url 'index' %}" class="mdl-button mdl-js-button mdl-js-ripple-effect">annuler</a>
+    <input type="submit" class="float-right mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" value="inscription"/>
+  </div>
+
+</form>
+{% endblock %}
+

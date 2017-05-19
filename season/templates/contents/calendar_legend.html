@@ -1,0 +1,30 @@
+<div class="pronosfoot-card-container mdl-grid">
+  <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--2dp center">
+    <div class="mdl-card__title">
+       <h4 class="mdl-card__title-text">Légende</h4>
+    </div>
+    <div class="mdl-card__supporting-text">
+      <ul class="legend mdl-list ">
+        {%if not user.is_authenticated%}
+        <li>
+            <span class="matchday color">&nbsp;</span>
+            <span class="label mdl-typography--font-light mdl-typography--subhead">Jour de matches</span>
+        </li>
+        {%else%}
+        <li>
+            <span class="empty color">&nbsp;</span>
+            <span class="label mdl-typography--font-light mdl-typography--subhead">Aucun pronostic</span>
+        </li>
+        <li>
+            <span class="half color">&nbsp;</span>
+            <span class="label mdl-typography--font-light mdl-typography--subhead">Pronostics partiels</span>
+        </li>
+        <li>
+            <span class="full color">&nbsp;</span>
+            <span class="label mdl-typography--font-light mdl-typography--subhead">Pronostics complets</span>
+        </li>
+        {%endif%}
+      </ul>
+    </div>
+  </div>
+</div>

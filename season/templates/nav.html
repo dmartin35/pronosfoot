@@ -1,31 +1,45 @@
-<ul id="nav">
-    <li id="pronosfoot">
-    	<a title="" href="{% url 'index' %}"></a>
-	</li>
-    <li id="matches" 
- 	 {%ifequal selectedmenu 'matches'%} class="current" {%endifequal%}>
-    	<a title="" href="{% url 'fixtures'%}"></a>
-    </li>
-    <li id="pronos"
-     {%ifequal selectedmenu 'pronos'%} class="current" {%endifequal%}>
-    	<a title="" href="{% url 'forecasts'%}"></a>
-    </li>
-    <li id="classements"
-     {%ifequal selectedmenu 'classements'%} class="current" {%endifequal%}>
-    	<a title="" href="{% url 'tables'%}"></a>
-    </li>
-    <li id="stats"
-     {%ifequal selectedmenu 'stats'%} class="current" {%endifequal%}>
-    	<a title="" href="{% url 'stats'%}"></a>
-    </li>
-    {# extra li; to have darker zone on the rigth #}
-    <li id="right">&nbsp;</li>
-</ul>
+{% load static %}
 
-{%if not user.is_authenticated%}
-<script type="text/javascript">
-$(function() {
-	bind_to_need_login('#nav #pronos a');
-});
-</script>
-{%endif%}
+  <div class="pronosfoot-drawer mdl-layout__drawer">
+    <!--
+    <span class="mdl-layout-title">
+      <img class="pronosfoot-logo-image" src="{%static "images/logo-pronosfoot-title.png"%}">
+    </span>
+    -->
+
+    <nav class="mdl-navigation">
+
+      {%if user.is_authenticated%}
+        <div class="pf-thumb">
+          <span class="logged-in-user">
+            <div><i class="material-icons">account_circle</i></div>
+            {%comment%}
+            <span class="fa-stack fa-lg">
+              <i class="fa fa-circle-thin fa-stack-2x"></i>
+              <i class="fa fa-user fa-stack-1x"></i>
+            </span>
+            {%endcomment%}
+            <span class="username">{{user.username|title}}</span>
+
+          </span>
+          <span><a class="mdl-navigation__link" href="{% url 'logout'%}"> <i class="fa fa-sign-out"></i>Se déconnecter</a></span>
+        </div>
+
+      {%endif%}
+      <div class="pronosfoot-drawer-space"></div>
+
+      <a class="mdl-navigation__link {%if selectedmenu == 'home'%}is-active{%endif%}" href="{% url 'index' %}">Accueil</a>
+      <a class="mdl-navigation__link {%if selectedmenu == 'fixtures'%}is-active{%endif%}" href="{% url 'fixtures'%}">Matches</a>
+      <a class="mdl-navigation__link {%if selectedmenu == 'forecasts'%}is-active{%endif%}" href="{% url 'forecasts'%}">Pronostics</a>
+      <a class="mdl-navigation__link {%if selectedmenu == 'tables'%}is-active{%endif%}" href="{% url 'tables'%}">Classements</a>
+      <a class="mdl-navigation__link {%if selectedmenu == 'statistics'%}is-active{%endif%}" href="{% url 'stats'%}">Statistiques</a>
+
+      {%if not user.is_authenticated%}
+      <div class="pronosfoot-drawer-separator"></div>
+
+      <a class="mdl-navigation__link" href="{% url 'login'%}"><i class="fa fa-sign-in"></i>&nbsp;Connexion</a>
+      <a class="mdl-navigation__link" href="{% url 'register'%}"><i class="fa fa-user-o"></i>&nbsp;Inscription</a>
+      {%endif%}
+    </nav>
+  </div>
+

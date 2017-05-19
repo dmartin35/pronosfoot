@@ -1,47 +1,80 @@
 {% load generic_tags %}
 
-<table id="players_table" class="players_table" cellpadding="0" cellspacing="0">
-	<tr class="tableheader">
-		<td>Pos.</td>
-		<td></td>
-		<td>Joueur</td>
-		<td>Pts</td>
-		<td>Scores</td>
-		<td>Issues</td>
-		<td>Matches</td>
-		{%if eos and final_players_table%}<td>Bonus</td>{%endif%}
-		<td>Moy.</td>
-	</tr>
-	
-	{%for line in players_table%}
-	<tr class="tableline">
-		<td class="pos lettrine 
-			{%ifequal forloop.counter 1%}first{%endifequal%}
-			{%ifequal forloop.counter players_table|length%}last{%endifequal%}
-		">
-			{{forloop.counter}}
-		</td>
-		<td class="evo {{line|getdictvalue:'evo'|evoClass}}">
-			<a href="#" rel="{{line|getdictvalue:'id'}}"></a>
-		</td>
-		<td class="player">{{line|getdictvalue:'name'|lower|capfirst}}</td>
-		<td class="points">{%if line|has_key:'total' and line|getdictvalue:'total'%}
-								{{line|getdictvalue:'total'}}
-						   {%else%}
-							   {%if line|has_key:'pts'%}{{line|getdictvalue:'pts'}}{%else%}0{%endif%}
-						   {%endif%}
-		</td>
-		<td class="scores">{%if line|has_key:'scores'%}{{line|getdictvalue:'scores'}}{%else%}0{%endif%}</td>
-		<td class="issues">{%if line|has_key:'issues'%}{{line|getdictvalue:'issues'}}{%else%}0{%endif%}</td>
-		<td class="played">{%if line|has_key:'matches'%}{{line|getdictvalue:'matches'}}{%else%}0{%endif%}</td>
-		{%if eos and final_players_table%}
-		<td class="bonus">{%if line|has_key:'bonus' and line|getdictvalue:'bonus'%}{{line|getdictvalue:'bonus'}}{%else%}0{%endif%}</td>
-		{%endif%}
-		<td class="average">{{line|avg_table_line}}</td>
-	</tr>
-	{% endfor %}
+
+
+
+<table id="players_table" class="table">
+
+  <thead>
+  <tr>
+    <th scope="col">
+        <div class="thFull">Position</div>
+        <div class="thShort">Pos</div>
+    </th>
+    <th class="team" scope="col">Joueur</th>
+    <th scope="col" class="points">
+        <div class="thFull">Points</div>
+        <div class="thShort">Pts</div>
+    </th>
+    <th class="hideSmall" scope="col">
+        <div class="thFull">Scores</div>
+    </th>
+    <th class="hideSmall" scope="col">
+        <div class="thFull">Issues</div>
+    </th>
+    <th class="hideSmall" scope="col">
+        <div class="thFull">Matches</div>
+    </th>
+    <th scope="col">
+        <div class="thFull">Moyenne</div>
+        <div class="thShort">Moy</div>
+    </th>
+	{%if eos and final_players_table%}
+	  <th scope="col">
+          <div class="thFull">Bonus</div>
+      </th>
+    {%endif%}
+  </tr>
+  </thead>
+
+
+  <tbody class="tableBodyContainer">
+
+    {%for line in players_table%}
+      <tr
+          {%if forloop.counter == 1%}class="tableDark"{%endif%}
+          {%if forloop.counter == players_table|length%}class="tableMid"{%endif%}
+      >
+
+        <td class="pos p{{forloop.counter}}" tabindex="0">
+            <span class="value">{{forloop.counter}}</span>
+            <span class="movement {{line.evo|movement}}"></span>
+        </td>
+        <td class="team" scope="row">
+            <span class="long">{{line.name|lower|capfirst}}</span>
+            <span class="short">{{line.name|lower|capfirst|truncatechars:25}} </span>
+        </td>
+        <td class="points">
+          {%if line.total %}
+            {{line.total}}
+          {%else%}
+            {{line.pts|default:0}}
+          {%endif%}
+        </td>
+        <td class="hideSmall">{{line.scores|default_if_none:0}}</td>
+        <td class="hideSmall">{{line.issues|default_if_none:0}}</td>
+        <td class="hideSmall">{{line.matches|default_if_none:0}}</td>
+        <td class="avg">{{line|avg_table_line|default_if_none:'-'}}</td>
+        {%if eos and final_players_table%}
+        <td class="bonnus">{{line.bonus|default_if_none:0}}</td>
+        {%endif%}
+      </tr>
+      {% endfor %}
+
+  </tbody>
 </table>
 
+{%comment%}
 <script type="text/javascript">
 showPlayerEvo = function()
 {
@@ -59,3 +92,4 @@ $(function() {
 	bindtableline('players_table',showPlayerEvo);
 });
 </script>
+{%endcomment%}

@@ -12,4 +12,19 @@ avec mise à jour auto des calendrier & resultats issus du site officiel de la L
 Il fonctionne toujours en production sous django 1.0.2 & python 2.5.
 Je démarre une tentative de rajeunir ce projet et surtout mettre à jour les dépendances utilisées.
 Le code est maintenant porté sur django 1.10 & python 3.4+.
+Nouveau design utilisant material design.
+
+Crons
+-----
+pronosfoot@ssh:~$ crontab -l
+# m h  dom mon dow   command
+30 23 * * * ~/pronosfoot/admin/cron_task_launcher.sh daily.py
+0 12 * * * ~/pronosfoot/admin/cron_task_launcher.sh daily_remind.py
+0 0 * * * ~/pronosfoot/admin/cron_task_launcher.sh maintenance.py
+
+Notes
+-----
+
+- Remplacer maintenance.py par python manage.py clearsessions
+
 

@@ -294,6 +294,20 @@ def team_win_draw_lose(team_id):
     """ % (team_id)
     return executeRawSqlQuery(request)
 
+
+def team_win_draw_lose_goals(team_id):
+    """
+    return the number of win, draw, lose, goals scored, goals against
+    for the given team for the entire season
+    """
+    request = """
+    SELECT sum(win), sum(draw), sum(lose), sum(goal_for), sum(goal_against)
+    FROM season_table
+    WHERE team_id = '%s'
+    """ % (team_id)
+    return executeRawSqlQuery(request)
+
+
 def count_team_forecasts(team_id):
     """
     count the number of forecasts for a team

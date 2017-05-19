@@ -1,39 +1,60 @@
-{% extends "main.html" %}
+{% extends "page.html" %}
+{% load static %}
 
-{% block body %}
-	
-	<div class="line fullline">
-	 	<div class="col1of2">
-			<h1>Ligue 1</h1>
-			{%if league_table%}
-				<h2 class="floatLeft">Classement g&eacute;n&eacute;ral | Saison {{season}} {%if currentweek%}| {%endif%}</h2>
-				{%if currentweek%}
-				<div class="h2 floatLeft" style="padding-left:0;">{%include "global/weekselection.html"%}</div>
-				{%endif%}
-				{%include 'contents/classement_league.html'%}
-			{%else%}
-				<h4>Le classement sera disponible d&egrave;s la parution des premiers r&eacute;sultats.</h4>
-			{%endif%}
-		</div>
-		
-		<div class="col1of2">
-			<h1>Joueurs</h1>
-			{%if players_table%}
-				<h2 class="floatLeft">Classement </h2>
-				<div class="h2 floatLeft" style="padding-left:0;">{%include "global/weekselection_playerstable.html"%}</div>
-				{%include 'contents/classement_pronos.html'%}
-			{%else%}
-				<h4>Le classement sera disponible d&egrave;s la parution des premiers r&eacute;sultats.</h4>
-			{%endif%}
-		</div>
-	</div>
-	
-	<div class="line sep"/>
+
+{% block css %}
+{{block.super}}
+<link type="text/css" rel="stylesheet" href="{%static 'css/premierleague.css'%}" />
+{% endblock css %}
+
+{% block content %}
+{{block.super}}
+
+
+<div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+  <div class="mdl-tabs__tab-bar">
+      <a href="#tab-table-league-panel" class="mdl-tabs__tab is-active">Ligue 1</a>
+      <a href="#tab-table-players-panel" class="mdl-tabs__tab">Joueurs</a>
+  </div>
+
+  <div class="mdl-tabs__panel is-active" id="tab-table-league-panel">
+    <!-- Your content goes here -->
+	  <h4 class="mdl-typography--font-light mdl-typography--display-color-contrast-light text-center">Classement général de la Ligue 1</h4>
+
+      <div class="pronosfoot-wrapper table">
+	  {%if league_table%}
+	  {%if currentweek%} {%with reversed=True%}{%include "global/weekselection.html"%}{%endwith%}{%endif%}
+	  {%include 'contents/classement_league.html'%}
+	  {%else%}
+		<p class="mdl-typography--font-light na text-center">
+			Le classement sera disponible d&egrave;s la parution des premiers r&eacute;sultats.
+		</p>
+		{%endif%}
+      </div>
+
+  </div>
+  <div class="mdl-tabs__panel" id="tab-table-players-panel">
+    <!-- Your content goes here -->
+	  <h4 class="mdl-typography--font-light mdl-typography--display-color-contrast-light text-center">Classement général des joueurs</h4>
+
+	  <div class="pronosfoot-wrapper table">
+	  {%if players_table%}
+        {%if currentweek%} {%include "global/weekselection_playerstable.html"%}{%endif%}
+        {%include 'contents/classement_pronos.html'%}
+	  {%else%}
+          <p class="mdl-typography--font-light na text-center">
+			Le classement sera disponible d&egrave;s la parution des premiers r&eacute;sultats.
+          </p>
+      {%endif%}
+      </div>
+  </div>
+
+
 	
 <script type="text/javascript">
 	$(document).ready(function() {
-       $('#weekselection').createDropdown(Urls.ajax_table_league_week,'table#league_table');
-       $('#weekselection_players').createDropdown(Urls.ajax_table_players_week,'table#players_table');
+       $('#weekselection').pf_dropdown(Urls.ajax_table_league_week,'table#league_table');
+       $('#weekselection_players').pf_dropdown(Urls.ajax_table_players_week,'table#players_table');
 	});
 </script>		
 {% endblock %}
