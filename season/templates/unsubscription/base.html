@@ -1,0 +1,32 @@
+{% extends "page.html" %}
+{% load static %}
+
+{% block header %}  {% endblock %}
+{% block nav %} {% endblock %}
+{% block top %}  {% endblock %}
+{% block footer %}  {% endblock %}
+
+{% block content %}
+
+<div class="mdl-layout-login mdl-js-layout mdl-color--grey-100">
+  <main class="mdl-layout-login__content">
+    <div class="mdl-card mdl-shadow--6dp">
+
+      <div class="mdl-card__title ">
+        <a class="center" href="{% url 'index' %}">
+          <img class="pronosfoot-logo-image" src="{%static "images/logo-pronosfoot-title.png"%}">
+        </a>
+      </div>
+
+      <!-- registration/login contents goes here -->
+      {% block subcontent %}
+      {% endblock subcontent %}
+
+    </div>
+  </main>
+</div>
+
+{% endblock %}
+
+
+
