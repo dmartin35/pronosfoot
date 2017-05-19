@@ -32,11 +32,15 @@
 
 </div>
 
-	
-<script type="text/javascript">
-	$(document).ready(function() {
-       $('#weekselection').pf_dropdown(Urls.ajax_forecasts_fixtures,'#forecasts');
-	});
-</script>	
+{% endblock %}
 
+
+
+{% block js %}
+{{block.super}}
+<script type="text/javascript">
+  $(document).ready(function() {
+     $('#weekselection').pf_dropdown(Urls.ajax_forecasts_fixtures,'#forecasts');
+  });
+</script>
 {% endblock %}

@@ -75,6 +75,7 @@
 }
 .table th.revealMoreHeader {
 	padding:0;
+	display: table-cell;
 	vertical-align:middle
 }
 .table td {
@@ -97,12 +98,15 @@
 	display:inline-block
 }
 .table .revealMore {
+    display: table-cell;
 	background:#f8f8f8;
 	-webkit-transition:all .2s;
 	transition:all .2s;
 	cursor:pointer;
-	width:5rem
+	/*width:2.5rem;*/
+	min-width: 20px;
 }
+/*
 .table .revealMore .icn {
 	margin:0 auto;
 	-webkit-transition:-webkit-transform .2s cubic-bezier(.77,0,.175,1);
@@ -110,22 +114,49 @@
 	transition:transform .2s cubic-bezier(.77,0,.175,1);
 	transition:transform .2s cubic-bezier(.77,0,.175,1), -webkit-transform .2s cubic-bezier(.77,0,.175,1)
 }
-.table .revealMore:focus,.table .revealMore:hover {
+*/
+.table .revealMore i {
+    color: rgba(0,0,0,0.54);
+    font-weight: 100;
+    font-size: 12px;
+
+    margin:0 auto;
+	-webkit-transition:-webkit-transform .2s cubic-bezier(.77,0,.175,1);
+	transition:-webkit-transform .2s cubic-bezier(.77,0,.175,1);
+	transition:transform .2s cubic-bezier(.77,0,.175,1);
+	transition:transform .2s cubic-bezier(.77,0,.175,1), -webkit-transform .2s cubic-bezier(.77,0,.175,1)
+}
+/*.table .revealMore:focus,*/
+.table .revealMore:hover {
+/*
 	background:#e90052;
 	border-bottom-color:#e90052
+	*/
+	background:#D3423D;
+	border-bottom-color:#D3423D;
 }
+/*
 .table .revealMore:focus .icn,.table .revealMore:hover .icn {
 	content:'';
 	background:url(../i/sprites/global-sprite.png) -1016px -452px no-repeat;
 	width:15px;
 	height:9px
+}*/
+/*.table .revealMore:focus i,*/
+.table .revealMore:hover i {
+    color: white;
 }
+.table .revealMore i.fa-chevron-down {display: block;}
+.table .revealMore i.fa-chevron-up {display: none;color: white;}
+
+/*
 @media (-webkit-min-device-pixel-ratio:2),(min-resolution:192dpi) {
 	.table .revealMore:focus .icn,.table .revealMore:hover .icn {
 		background-image:url(../i/sprites/global-sprite@x2.png);
 		background-size:1130px 1097px
 	}
 }
+*/
 .table .movement {
 	position:relative;
 	display:inline-block;
@@ -278,13 +309,15 @@
 	display:none
 }
 .table tr.expanded {
-	background:#38003c;
+	background:#3849a2;
 	color:#fff
 }
 .table tr.expanded .revealMore {
-	background:#e90052;
-	border-bottom-color:#e90052
+	background:#3849a2;
+	border-bottom-color:#38003c;
+	color:#fff
 }
+/*
 .table tr.expanded .revealMore .icn {
 	content:'';
 	background:url(../i/sprites/global-sprite.png) -1016px -452px no-repeat;
@@ -299,8 +332,14 @@
 		background-size:1130px 1097px
 	}
 }
-.table tr.expanded .revealMore:focus,.table tr.expanded .revealMore:hover {
-	background:#b60040
+*/
+.table tr.expanded .revealMore i.fa-chevron-down {display: none;}
+.table tr.expanded .revealMore i.fa-chevron-up {display: block;}
+
+/*.table tr.expanded .revealMore:focus,*/
+.table tr.expanded .revealMore:hover {
+	background:#D3423D;
+	border-bottom-color:#D3423D;
 }
 .table tr.expanded .badgeContainer {
 	background:#fff
@@ -337,6 +376,18 @@
 }
 .table .expandable a {
 	text-decoration:none
+}
+.table .expandable h6 {
+	background-color: white;
+	margin: 0;
+	padding: 10px;
+}
+.table .expandable .container {
+    background-color: #fff;
+}
+.table .expandable .container em {
+    padding: 10px;
+    display: block;
 }
 .table .expandable .expandableTeam {
 	float:left;
@@ -548,8 +599,8 @@
 	.table .team {
 		width:25%
 	}
-	.table .revealMore {
-		width:4rem
+	.table .revealMoreHeader, .table .revealMore {
+		display: none !important;
 	}
 	.table .hideSmall,.table .thFull {
 		display:none

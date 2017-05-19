@@ -1,6 +1,7 @@
 """
 STATS MANAGEMENT
 """
+import contextlib
 from django.db.models.aggregates import Sum
 from season.models import Table
 from season.models import LeagueForecast
@@ -16,6 +17,7 @@ from season.queries import avg_goals_scored, best_stats, \
 from season.core.season import endOfSeason
 from season.core.tables import team_played_weeks
 from season.core.tables import played_weeks
+from season.core.tables import TRENDS
 
 
 __all__ = ['best_attack','best_defense','poorest_attack','poorest_defense',
@@ -26,7 +28,8 @@ __all__ = ['best_attack','best_defense','poorest_attack','poorest_defense',
            'goals_scored_stats','team_goals_avg','team_points_avg',
            'team_points_evolution','team_pos_evolution',
            'player_points_evolution','player_pos_evolution',
-           'player_points_per_week', 'team_points_per_week'
+           'player_points_per_week', 'team_points_per_week',
+           'team_pos_evo_series'
            ]
 
 def __extract_goal_stats_info(stats):
@@ -357,6 +360,36 @@ def team_pos_evolution(team_id):
         except:
             pass
     return pos_evo
+
+
+WDL_COLORS = {'win': '#8bc34a', 'draw': '#adadad', 'lose': '#D3423D'}
+
+
+def team_pos_evo_series(team_id):
+    """
+    Returns the evolution of the position for the team, 
+    with the color for the related fixture WDL result,
+    for each match day
+    :param team_id: 
+    :return: json
+    """
+    series = []
+    for week in team_played_weeks(team_id):
+        with contextlib.suppress(Exception):
+            day_pos = Table.objects.get(team=team_id, week=week)
+            fixture_result = TRENDS.get((day_pos.win, day_pos.draw, day_pos.lose))
+            table_until = league_table_until_with_teamid(week)
+            team_ids = [x[0] for x in table_until]
+            position = team_ids.index(int(team_id)) + 1
+
+            point = {
+                'x': week,
+                'y': position,
+                'color': WDL_COLORS.get(fixture_result)
+            }
+            series.append(point)
+    return series
+
 
 def player_points_evolution(player_id):
     """

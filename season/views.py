@@ -86,6 +86,7 @@ from season.core.stats import team_points_per_week
 from season.core.stats import player_points_evolution
 from season.core.stats import player_pos_evolution
 from season.core.stats import player_points_per_week
+from season.core.stats import team_pos_evo_series
 #TEAMS IMPORT
 from season.core.teams import firstAvailableTeam
 from season.core.teams import isTeamValid
@@ -746,6 +747,38 @@ def ajax_forecasts_league_results(request):
         res[title] = tplstring
 
     return JsonResponse(res)
+#
+# def ajax_evo_team(request, team_id):
+#     """
+#     returns the evolution of the position,
+#     progression and points
+#     for a team for the season
+#     """
+#     if not _validAjaxRequest(request):
+#         return HttpResponse(status=400)
+#     if not _validGetRequest(request):
+#         return HttpResponse(status=400)
+#
+#     if not isTeamValid(team_id):
+#         return HttpResponse(status=400)
+#
+#     pos = team_pos_evolution(team_id)
+#     #ad info to context - to be passed to templates -
+#     context = {'evo_weeks':team_played_weeks(team_id),
+#                'evo_pos':pos,
+#                'evo_progress':evo_progress(pos),
+#                'evo_points':team_points_evolution(team_id),
+#                'evo_pts_per_week':team_points_per_week(team_id),
+#                'evo_name':getTeamName(team_id),
+#                'evo_nb_max':len(getAllTeams()),
+#                'chart_pts_tickInterval': 10,
+#                'chart_pos_tickInterval': 5,
+#                'chart_pos_minorTickInterval': 1,
+#                }
+#
+#     return render(request, 'lightboxes/evo.html',context)
+
+
 
 def ajax_evo_team(request, team_id):
     """
@@ -757,25 +790,16 @@ def ajax_evo_team(request, team_id):
         return HttpResponse(status=400)
     if not _validGetRequest(request):
         return HttpResponse(status=400)
-    
     if not isTeamValid(team_id):
         return HttpResponse(status=400)
-    
-    pos = team_pos_evolution(team_id)
-    #ad info to context - to be passed to templates -
-    context = {'evo_weeks':team_played_weeks(team_id),
-               'evo_pos':pos,
-               'evo_progress':evo_progress(pos),
-               'evo_points':team_points_evolution(team_id),
-               'evo_pts_per_week':team_points_per_week(team_id),
-               'evo_name':getTeamName(team_id),
-               'evo_nb_max':len(getAllTeams()),
-               'chart_pts_tickInterval': 10,
-               'chart_pos_tickInterval': 5,
-               'chart_pos_minorTickInterval': 1,
+
+    # ad info to context - to be passed to templates -
+    context = {'evo_weeks': team_played_weeks(team_id),
+               'evo_pos': team_pos_evo_series(team_id),
+               'team_id': team_id,
+               'team_name': getTeamName(team_id),
                }
-    
-    return render(request, 'lightboxes/evo.html',context)
+    return JsonResponse(context)
 
 
 def ajax_evo_player(request, player_id):

@@ -1,7 +1,11 @@
-createSingleLineChart = function(container,xdata,ydata,xlabel,ylabel,ymin,ymax,tickInterval,minorTickInterval,yreversed,xlabel_prefix,ylabel_suffix)
+createSingleLineChart = function(container,xdata,ydata,xlabel,ylabel,ymin,ymax,tickInterval,minorTickInterval,yreversed,xlabel_prefix,ylabel_suffix,yticks)
 {
+//console.log('container','xdata','ydata','xlabel','ylabel','ymin','ymax','tickInterval','minorTickInterval','yreversed','xlabel_prefix','label_suffix');
+//console.log(container,xdata,ydata,xlabel,ylabel,ymin,ymax,tickInterval,minorTickInterval,yreversed,xlabel_prefix,ylabel_suffix);
+
 	return new Highcharts.Chart({
 		chart: {
+		    type: 'line',
             renderTo: container,
 			plotBackgroundColor: null,
 			plotBorderWidth: null,
@@ -11,7 +15,9 @@ createSingleLineChart = function(container,xdata,ydata,xlabel,ylabel,ymin,ymax,t
 		title: {
 			text: null
 		},
-        
+        subtitle: {
+            text: null
+        },
         credits: {
             enabled: false
         },
@@ -37,14 +43,16 @@ createSingleLineChart = function(container,xdata,ydata,xlabel,ylabel,ymin,ymax,t
 			},
 			tickInterval: tickInterval,
 			minorTickInterval: minorTickInterval,
+			tickPositions: yticks,
 			min: ymin,
 			max: ymax,
-			startOnTick: false,
-			endOnTick: false,
+			//minRange: 5,
+			startOnTick: true,
+			endOnTick: true,
 			allowDecimals: false,
 			reversed : yreversed,
-			showLastLabel: false,
-			showFirstLabel: false
+			showLastLabel: true,
+			showFirstLabel: true
 		},
 			
 		plotOptions: {
@@ -87,7 +95,6 @@ createSingleLineChart = function(container,xdata,ydata,xlabel,ylabel,ymin,ymax,t
 		},
 		
 		series: [{
-			type: 'line',
 			data: ydata
 		}]
 	});

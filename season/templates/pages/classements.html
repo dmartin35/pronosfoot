@@ -48,13 +48,40 @@
       {%endif%}
       </div>
   </div>
+</div>
 
 
-	
+{% endblock %}
+
+
+{% block js %}
+{{block.super}}
+<script type="text/javascript" src="{%static 'jquery/singlelinechart.js'%}"></script>
 <script type="text/javascript">
-	$(document).ready(function() {
-       $('#weekselection').pf_dropdown(Urls.ajax_table_league_week,'table#league_table');
-       $('#weekselection_players').pf_dropdown(Urls.ajax_table_players_week,'table#players_table');
-	});
-</script>		
+  $(document).ready(function() {
+     $('#weekselection').pf_dropdown(Urls.ajax_table_league_week,'table#league_table');
+     $('#weekselection_players').pf_dropdown(Urls.ajax_table_players_week,'table#players_table');
+
+     $("#league_table .revealMore").on('click', function(){
+      var tr = $(this).parent();
+      if (tr.hasClass('expanded')) {
+        tr.removeClass('expanded');
+      } else {
+        var next_tr = tr.next();
+        var td = next_tr.find('td:first');
+        if (td.data('loaded') != 'loaded') {
+          // loads the inner html - only if the td was empty ie. first access
+          var url = td.data('expanded-content-url');
+          $.get(url).done(function(data){
+            td.data('loaded', 'loaded');
+
+            //createSingleLineChart('container','xdata','ydata','xlabel','ylabel','ymin','ymax','tickInterval','minorTickInterval','yreversed','xlabel_prefix','label_suffix','yticks');
+            createSingleLineChart('team_'+data.team_id+'_evo_pos_chart_ctnr', data.evo_weeks, data.evo_pos,'Journées','Position', 1, 20, 5, 0, true, 'J', ['er','nd','eme'], [1, 5, 10, 15, 20]);
+          });
+        }
+        tr.addClass('expanded');
+      }
+     });
+  });
+</script>
 {% endblock %}
