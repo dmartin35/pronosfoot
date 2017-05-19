@@ -1,7 +1,7 @@
 createSingleLineChart = function(container,xdata,ydata,xlabel,ylabel,ymin,ymax,tickInterval,minorTickInterval,yreversed,xlabel_prefix,ylabel_suffix,yticks)
 {
-console.log('container','xdata','ydata','xlabel','ylabel','ymin','ymax','tickInterval','minorTickInterval','yreversed','xlabel_prefix','label_suffix');
-console.log(container,xdata,ydata,xlabel,ylabel,ymin,ymax,tickInterval,minorTickInterval,yreversed,xlabel_prefix,ylabel_suffix);
+//console.log('container','xdata','ydata','xlabel','ylabel','ymin','ymax','tickInterval','minorTickInterval','yreversed','xlabel_prefix','label_suffix');
+//console.log(container,xdata,ydata,xlabel,ylabel,ymin,ymax,tickInterval,minorTickInterval,yreversed,xlabel_prefix,ylabel_suffix);
 
 	return new Highcharts.Chart({
 		chart: {
