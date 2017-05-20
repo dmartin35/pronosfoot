@@ -62,7 +62,7 @@
      $('#weekselection').pf_dropdown(Urls.ajax_table_league_week,'table#league_table');
      $('#weekselection_players').pf_dropdown(Urls.ajax_table_players_week,'table#players_table');
 
-     $("#league_table .revealMore").on('click', function(){
+     $("#tab-table-league-panel").on('click', '.revealMore', function(){
       var tr = $(this).parent();
       if (tr.hasClass('expanded')) {
         tr.removeClass('expanded');
@@ -82,7 +82,7 @@
       }
      });
 
-     $("#players_table .revealMore").on('click', function(){
+     $("#tab-table-players-panel").on('click', '.revealMore', function(){
       var tr = $(this).parent();
       if (tr.hasClass('expanded')) {
         tr.removeClass('expanded');
