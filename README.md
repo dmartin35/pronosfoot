@@ -16,11 +16,13 @@ Nouveau design utilisant material design.
 
 Crons
 -----
+```bash
 pronosfoot@ssh:~$ crontab -l
 # m h  dom mon dow   command
 30 23 * * * ~/pronosfoot/admin/cron_task_launcher.sh daily.py
 0 12 * * * ~/pronosfoot/admin/cron_task_launcher.sh daily_remind.py
 0 0 * * * ~/pronosfoot/admin/cron_task_launcher.sh maintenance.py
+```
 
 Notes
 -----
