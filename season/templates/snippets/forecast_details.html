@@ -1,0 +1,78 @@
+{% load generic_tags %}
+
+{%if fixture.score_a != None and fixture.score_b != None %}
+<div>
+     <h6>Score final du match</h6>
+{%comment%}@todo mettre le score final ici
+{%include "snippets/fixture.html" %}
+{%endcomment%}
+  <div class="fixture">
+  <span class="score mdl-typography--font-light">{{fixture.score_a}}<span>&nbsp;-&nbsp;</span>{{fixture.score_b}}</span>
+  </div>
+</div>
+{%endif%}
+
+<h6>Tendance des pronostics</h6>
+{%if trend.nb_team_a_win or trend.nb_team_b_win or trend.nb_draw%}
+{%comment%}
+	<div id="forecast_trend_fixture_{{fixture.id}}" class="container" style="width: 100%; height: 150px; margin: 0 auto;"></div>
+{%endcomment%}
+  <div class="trend">
+    <span class="win" style="width: {{trend.nb_team_a_win|default_if_none:0|toint}}% !important; ">{%if trend.nb_team_a_win|default_if_none:0|toint > 0%}{{trend.nb_team_a_win|default_if_none:0|toint}}%{%endif%}</span>
+    <span class="draw" style="width: {{trend.nb_draw|default_if_none:0|toint}}% !important; ">{%if trend.nb_draw|default_if_none:0|toint > 0%}{{trend.nb_draw|default_if_none:0|toint}}%{%endif%}</span>
+    <span class="lose" style="width: {{trend.nb_team_b_win|default_if_none:0|toint}}% !important; ">{%if trend.nb_team_b_win|default_if_none:0|toint > 0%}{{trend.nb_team_b_win|default_if_none:0|toint}}%{%endif%}</span>
+  </div>
+  <div class="trend-legend text-center" style="clear:both;">
+    <span class="win color"></span><span class="label">Victoire de {{fixture.team_a}}</span>
+    <span class="draw color"></span><span class="label">Match nul</span>
+    <span class="lose color"></span><span class="label">Victoire de {{fixture.team_b}}</span>
+  </div>
+  </div>
+
+{%else%}
+  <span class="info">La tendance sera disponible dès les premiers pronostics</span>
+{%endif%}
+
+
+<h6>Pronostics des autres joueurs</h6>
+{%if fixture.is_started%}
+  {%if trend.nb_team_a_win or trend.nb_team_b_win or trend.nb_draw%}
+    <select class="center">
+      {%for forecast in forecasts%}
+        <option>{{forecast.user.name|lower|capfirst}}: {{forecast.score_a}}-{{forecast.score_b}}{%if forecast.points != None%} ({{forecast.points}} points){%endif%}</option>
+      {%endfor%}
+    </select>
+  {%else%}
+    <span class="info">Aucun pronostics enregistrés pour ce match.</span>
+  {%endif%}
+{%else%}
+  <span class="info">Les pronostics des joueurs seront disponibles après le début du match.</span>
+{%endif%}
+
+
+{%comment%}
+{%if trend.nb_team_a_win or trend.nb_team_b_win or trend.nb_draw%}
+<script type="text/javascript">
+$(function() {
+    //not ideal solution !   
+	var series = [{
+		name: "Victoire de {{fixture.team_b}}",
+		data: [{{trend.nb_team_b_win|default_if_none:0}}],
+		color: "#D3423D",
+	},{
+		name: "Match nul",
+		data: [{{trend.nb_draw|default_if_none:0}}],
+		color: "#adadad",
+	}, {
+		name: "Victoire de {{fixture.team_a}}",
+		data: [{{trend.nb_team_a_win|default_if_none:0}}],
+		color: "#8bc34a",
+	}];
+	createStackedBarChart ("forecast_trend_fixture_{{fixture.id}}",series);
+
+    // does not work ... no js error tough !
+	//createStackedBarChart("forecast_trend_fixture_{{fixture.id}}",eval("{% autoescape off %}{{trend_chart}}{% endautoescape %}"));
+});
+</script>
+{%endif%}
+{%endcomment%}

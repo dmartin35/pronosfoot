@@ -13,8 +13,11 @@
     <ul class="match-list mdl-list">
     {% for form in ff_formset.forms %}
       {% ifequal form.day day %}
-
         <li class="mdl-list__item {%if form.score_a.errors%}error{%endif%}{%if form.score_b.errors%}error{%endif%}">
+          <div class="revealMore forecast text-center">
+              <i class="fa fa-chevron-down" aria-hidden="true"></i>
+              <i class="fa fa-chevron-up" aria-hidden="true"></i>
+          </div>
           <div class="fixture forecast">
 			<!-- hidden inputs -->
 			{{form.fixture}}
@@ -86,6 +89,11 @@
           {%endif%}
         </li>
 
+        <li class="mdl-list__item expandable" data-expanded-content-url="{%url "ajax_forecast_trend_fixture" form.fixture.value %}"
+          data-player-id="{{form.user_id.value}}" data-fixture-id="{{form.fixture.value}}">
+
+        </li>
+
       {% endifequal %}
     {% endfor %}
     </ul>
@@ -131,34 +139,12 @@
 {% endspaceless %}
 
 
-
-
-
-
-
-
 <script type="text/javascript">
 	$(document).ready(function(){
 
 		// needs to refresh mdl components bindind when this page is refreshed by ajax
 		componentHandler.upgradeDom('MaterialTextfield', 'mdl-textfield');
 		componentHandler.upgradeDom('MaterialTooltip', 'mdl-tooltip');
-
-
-		{%comment%}
-		/*
-	    $.getJSON(Urls.ajax_forecast_trends_week("{{currentweek}}"), function(data) {
-	    	for (fixture_id in data)
-	    	{
-	    	    popup_html = data[fixture_id];
-	    	    stats_link_name = '#stats_fixture_'+fixture_id;
-	    	    $(stats_link_name).parent().append(popup_html);
-	    	    $(stats_link_name).parent().addClass('has_popup');
-	    	}
-	    	load_popup_events();
-    	});
-    	*/
-    	{%endcomment%}
 
 
 		$('#ff_cancel').click(function(){
@@ -192,21 +178,5 @@
 	    	
 		});
 
-		{%comment%}
-		/*
-		show_forecasts_stats = function(fixture_id){
-			$.get(Urls.ajax_players_forecasts_fixture(fixture_id), function(html) {
-				if (html)
-				{
-					$('div#lb-mask').show();
-			    	$('div#lb-pronos-stats').replaceWith(html);
-					$('div#lb-pronos-stats').parent('div').show();
-				}
-			});
-		};
-		*/
-		{%endcomment%}
-
-		
 	});
 </script>

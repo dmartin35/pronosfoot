@@ -1,0 +1,39 @@
+{% load static %}
+{% load generic_tags %}
+{% load humanize %}
+
+<div class="fixture">
+
+  <span class="team">
+    <span class="team-name {{fixture|winner:'home'}}">
+      <span class="long">{{fixture.team_a}}</span><span class="short">{{fixture.team_a|slice_str:3|upper}} </span>
+    </span>
+    <span class="team-logo">
+      {% with team_name=fixture.team_a|lower %}
+          {% with 'images/clubs/small/'|add:team_name|add:'.png' as image_static %}
+            <img src="{% static image_static %}" alt="{{team_name}} logo"/>
+          {% endwith %}
+      {% endwith %}
+    </span>
+  </span>
+
+  {%if fixture.score_a != None and fixture.score_b != None%}
+  <span class="score mdl-typography--font-light">{{fixture.score_a}}<span>&nbsp;-&nbsp;</span>{{fixture.score_b}}</span>
+  {%else%}
+  <time class="mdl-typography--font-light" datetime="{{fixture.hour|time:"H:i"}}">{{fixture.hour|time:"H:i"}}</time>
+  {%endif%}
+
+  <span class="team">
+    <span class="team-logo">
+      {% with team_name=fixture.team_b|lower %}
+          {% with 'images/clubs/small/'|add:team_name|add:'.png' as image_static %}
+            <img src="{% static image_static %}" alt="{{team_name}} logo"/>
+          {% endwith %}
+      {% endwith %}
+    </span>
+    <span class="team-name {{fixture|winner:'away'}}">
+      <span class="long">{{fixture.team_b}}</span><span class="short">{{fixture.team_b|slice_str:3|upper}} </span>
+    </span>
+  </span>
+
+</div>

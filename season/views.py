@@ -36,6 +36,7 @@ from season.core.fixtures import fixturesDaysAndWeeksForMonth
 from season.core.fixtures import fixtureTeams
 from season.core.fixtures import isFixtureValid
 from season.core.fixtures import hasFixtureStarted
+from season.core.fixtures import getFixture
 #CALENDAR IMPORTS
 from tools.cal import monthcal
 from tools.cal import previous_month
@@ -585,34 +586,34 @@ def ajax_calendar(request,year,month):
     return render(request, 'contents/calendar.html',context)
 
     
-def ajax_login(request,redirect):
-    """
-    returns the login page
-    """
-    #ad info to context - to be passed to templates -
-    context = {'next':redirect if redirect in ['matches','pronos','classements','stats'] else ''}
-    return render(request, 'registration/login.html', context)
+# def ajax_login(request,redirect):
+#     """
+#     returns the login page
+#     """
+#     #ad info to context - to be passed to templates -
+#     context = {'next':redirect if redirect in ['matches','pronos','classements','stats'] else ''}
+#     return render(request, 'registration/login.html', context)
+#
+#
+# def ajax_register(request):
+#     """
+#     returns the registration page
+#     """
+#     return render(request, 'registration/register.html')
 
 
-def ajax_register(request):
-    """
-    returns the registration page
-    """
-    return render(request, 'registration/register.html')
-
-
-def ajax_timeout(request):
-    """
-    returns the time out page
-    """
-    return render(request, 'lightboxes/timeout.html')
-
-
-def ajax_need_login(request):
-    """
-    returns the need login page
-    """
-    return render(request, 'lightboxes/needlogin.html')
+# def ajax_timeout(request):
+#     """
+#     returns the time out page
+#     """
+#     return render(request, 'lightboxes/timeout.html')
+#
+#
+# def ajax_need_login(request):
+#     """
+#     returns the need login page
+#     """
+#     return render(request, 'lightboxes/needlogin.html')
 
 
 def ajax_stats_team(request,team_id):
@@ -640,26 +641,26 @@ def ajax_stats_team(request,team_id):
     return render(request, 'contents/stats_team.html', context)
 
 
-def ajax_players_forecasts_for_fixture(request,fixture_id):
-    """
-    returns the list of forecasts, for all players,
-    for a given fixture; only if fixture has started 
-    Avoid seeing other player's forecast, when modification is alowed 
-    """
-    if not _validAjaxRequest(request):
-        return HttpResponse(status=400)
-    if not _validGetRequest(request):
-        return HttpResponse(status=400)
-    
-    if not isFixtureValid(fixture_id):
-        return HttpResponse(status=400)
-    
-    context = {'players_forecasts':getFixtureForecasts(fixture_id),
-               'trend_forecasts':fixture_forecasts_trend(fixture_id),
-               'fixture_teams':fixtureTeams(fixture_id),
-               'fixture_started':hasFixtureStarted(fixture_id),
-               }
-    return render(request, 'lightboxes/forecast_stats.html',context)
+# def ajax_players_forecasts_for_fixture(request,fixture_id):
+#     """
+#     returns the list of forecasts, for all players,
+#     for a given fixture; only if fixture has started
+#     Avoid seeing other player's forecast, when modification is alowed
+#     """
+#     if not _validAjaxRequest(request):
+#         return HttpResponse(status=400)
+#     if not _validGetRequest(request):
+#         return HttpResponse(status=400)
+#
+#     if not isFixtureValid(fixture_id):
+#         return HttpResponse(status=400)
+#
+#     context = {'players_forecasts':getFixtureForecasts(fixture_id),
+#                'trend_forecasts':fixture_forecasts_trend(fixture_id),
+#                'fixture_teams':fixtureTeams(fixture_id),
+#                'fixture_started':hasFixtureStarted(fixture_id),
+#                }
+#     return render(request, 'lightboxes/forecast_stats.html',context)
 
 
 def ajax_forecasts_trends_for_week(request, week):
@@ -690,6 +691,47 @@ def ajax_forecasts_trends_for_week(request, week):
         week_trends[fixture.id] = tplstring
 
     return JsonResponse(week_trends)
+
+def ajax_forecast_trend_fixture(request, fixture_id):
+    """
+    Returns the trend of forecast for a specific fixture, for all players - for graph
+    If the match is started, also returns the list of forecasts for each player - for comparison
+    If the match is over, returns the fixture result - for final score display
+    """
+    if not _validAjaxRequest(request):
+        return HttpResponse(status=400)
+    if not _validGetRequest(request):
+        return HttpResponse(status=400)
+
+    fixture = getFixture(fixture_id)
+    if not fixture:
+        return HttpResponse(status=400)
+
+    fixture.is_started = hasFixtureStarted(fixture_id)
+    trend = fixture_forecasts_trend(fixture_id)
+    # series = [{
+    #     'name': 'Victoire  de {}'.format(fixture.team_b),
+    #     'data': trend.get('nb_team_b_win', 0),
+    #     'color': '#D3423D',
+    # }, {
+    #     'name': 'Match nul',
+    #     'data': trend.get('nb_draw', 0),
+    #     'color': '#adadad',
+    # }, {
+    #     'name': 'Victoire  de {}'.format(fixture.team_a),
+    #     'data': trend.get('nb_team_a_win', 0),
+    #     'color': '#8bc34a',
+    # }]
+
+    context = {
+        'trend': trend,
+        'forecasts': getFixtureForecasts(fixture_id),
+        'fixture': fixture,
+        # 'trend_chart': series,
+    }
+
+    return render(request, 'snippets/forecast_details.html', context)
+
 
 #@ajax_login_required
 def ajax_forecasts_results(request, week):

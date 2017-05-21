@@ -72,6 +72,7 @@
   -webkit-font-smoothing: antialiased;
   cursor: pointer;
    color: #656565;
+   color: rgba(0,0,0,0.54);
   }
 
   .c-datepicker__back:focus, .c-datepicker__next:focus {

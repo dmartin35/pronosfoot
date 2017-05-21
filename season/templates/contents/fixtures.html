@@ -3,47 +3,6 @@
 {% load humanize %}
 
 
-{%comment%}
-<table id="fixtures" class="fixtures" cellpadding="0" cellspacing="0">
-	<tbody>
-	{% for day in days %}
-		<tr class="tableheader"><td class="day" colspan="8">{{day|date:"l j F Y"|capfirst}}</td></tr>
-		{% for fixture in fixtures %}
-			{% ifequal fixture.day day %}
-			<tr class="tableline">
-				<td class="hour">{%if fixture.hour%}{{fixture.hour|time:"H:i"}}{%endif%}</td>
-
-				<td class="logo_team_a">
-					{% with team_name=fixture.team_a|lower %}
-						{% with 'images/clubs/small/'|add:team_name|add:'.png' as image_static %}
-						  <img src="{% static image_static %}" alt="{{team_name}} logo"/>
-						{% endwith %}
-					{% endwith %}
-				</td>
-
-				<td class="team_a {{fixture|winner:'home'}}">{{fixture.team_a}}</td>
-				<td class="score_team_a">{% ifnotequal fixture.score_a None %} {{fixture.score_a}} {% endifnotequal %}</td>
-				<td class="team_separator">-</td>
-				<td class="score_team_b">{% ifnotequal fixture.score_b None %} {{fixture.score_b}} {% endifnotequal %}</td>
-				<td class="team_b {{fixture|winner:'away'}}">{{fixture.team_b}}</td>
-
-				<td class="logo_team_b">
-					{% with team_name=fixture.team_b|lower %}
-						{% with 'images/clubs/small/'|add:team_name|add:'.png' as image_static %}
-						  <img src="{% static image_static %}" alt="{{team_name}} logo"/>
-						{% endwith %}
-					{% endwith %}
-				</td>
-			</tr>
-			{% endifequal %}
-		{% endfor %}
-	{% endfor %}
-	</tbody>
-</table>
-
-{%endcomment%}
-
-
 {% spaceless %}
 <div id="fixtures" class="fixtures mdl-grid">
   <div class="mdl-cell center mdl-cell--6-col mdl-cell--6-col-tablet">

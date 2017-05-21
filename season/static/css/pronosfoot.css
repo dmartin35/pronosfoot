@@ -616,3 +616,106 @@ background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0
   .fixture .team-name .long {display: none;}
   .fixture .team-name .short {display: inline-block;}
 }
+
+.forecast.revealMore {
+    width: 10%;
+}
+
+.forecast.revealMore i {
+    -webkit-font-smoothing: antialiased;
+    cursor: pointer;
+    color: rgba(0,0,0,0.54);
+    font-weight: 100;
+    font-size: 12px;
+}
+.forecast.revealMore i:hover {
+    color: #000;
+}
+.forecast.revealMore i.fa-chevron-down {display: block;}
+.forecast.revealMore i.fa-chevron-up {display: none;}
+
+.forecasts .expandable {display: none;}
+.forecasts .expandable h6{
+	margin: 0;
+	padding: 10px;
+	font-weight: 300;
+}
+
+.forecasts .expanded+.expandable {
+	display:block;
+	width: 100%;
+	background-color: #e9e9e9;
+	max-height: none;
+    border-bottom: 1px solid #989898;
+
+}
+
+.forecasts .expanded .forecast.revealMore i.fa-chevron-down {display: none;}
+.forecasts .expanded .forecast.revealMore i.fa-chevron-up {display: block;}
+
+.forecasts .expandable .trend{
+    color: white;
+    text-align: center;
+    line-height: 30px;
+    padding: 0 16px;
+    /*display: inline-block;*/
+}
+.forecasts .expandable .trend .win,
+.forecasts .expandable .trend .draw,
+.forecasts .expandable .trend .lose{
+    /*
+    display: block;
+    float: left;
+    */
+    height: 30px !important;
+    position: relative;
+    /*display: inherit;*/
+    float: left;
+}
+
+.forecasts .expandable .trend .win{
+    background-color: #8bc34a;
+}
+.forecasts .expandable .trend .draw{
+    background-color: #adadad;
+}
+.forecasts .expandable .trend .lose{
+    background-color: #D3423D;
+}
+
+.forecasts .expandable .trend-legend {
+    font-size: 14px;
+    padding: 16px;
+}
+
+.forecasts .expandable .trend-legend .label{
+    top: -2px;
+    position: relative;
+}
+
+.forecasts .expandable .trend-legend .color:after{
+    content: "";
+    position: inherit;
+    left: 50%;
+    top: 50%;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0 8px;
+}
+.forecasts .expandable .trend-legend .color.win:after{
+    background-color: #8bc34a;
+}
+.forecasts .expandable .trend-legend .color.draw:after{
+    background-color: #adadad;
+}
+.forecasts .expandable .trend-legend .color.lose:after{
+    background-color: #D3423D;
+}
+
+.forecasts .expandable .info {
+    font-size: 14px;
+    font-weight: 300;
+    padding: 0 16px;
+}

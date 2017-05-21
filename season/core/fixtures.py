@@ -9,7 +9,8 @@ import calendar
 
 __all__ = ['fixtures','fixturesDays','fixuresDaysForMonth',
            'countFixuresPerDayForMonth','fixturesDaysAndWeeksForMonth',
-           'fixturesOfTheDay','fixtureTeams','isFixtureValid','hasFixtureStarted']
+           'fixturesOfTheDay','fixtureTeams','isFixtureValid','hasFixtureStarted',
+           'getFixture']
 
 def fixtures(week):
     """
@@ -92,3 +93,11 @@ def hasFixtureStarted(fixture_id):
         return True
     else:
         return False
+
+
+def getFixture(fixture_id):
+    """ return the fixure for given ID, or None if not found """
+    try:
+        return Fixture.objects.get(id=fixture_id)
+    except Fixture.DoesNotExist:
+        return None

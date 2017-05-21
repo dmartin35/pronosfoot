@@ -41,6 +41,24 @@
 <script type="text/javascript">
   $(document).ready(function() {
      $('#weekselection').pf_dropdown(Urls.ajax_forecasts_fixtures,'#forecasts');
+
+     $("#tab-forecasts-day-panel").on('click', '.revealMore', function(){
+      var parent = $(this).parent();
+      if (parent.hasClass('expanded')) {
+        parent.removeClass('expanded');
+      } else {
+        var next = parent.next();
+        if (next.data('loaded') != 'loaded') {
+          // loads the inner html - only if the innerhtml was empty ie. first access
+          var url = next.data('expanded-content-url');
+          $.get(url).done(function(data){
+            next.data('loaded', 'loaded');
+            next.html(data);
+          });
+        }
+        parent.addClass('expanded');
+      }
+     });
   });
 </script>
 {% endblock %}
