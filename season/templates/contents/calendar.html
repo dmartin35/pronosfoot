@@ -26,14 +26,13 @@
 
             <tbody class="c-datepicker__days-body">
 
-
             {%for week in calendar%}
               <tr class="c-datepicker__days-row">
                 {%for day in week%}
                   <td class="c-datepicker__day-body
                     {%if day_to_week|has_key:day%}
                       c-datepicker__day--selected
-                      {%if forecasts_cal%}{{forecasts_cal|getdictvalue:day}}{%endif%}
+                      {%if forecasts_cal%}{{forecasts_cal|getdictvalue:day}}{%else%}matchday{%endif%}
                     {%endif%}
                   ">{%if day%}{{day}}{%endif%}</td>
                 {%endfor%}
