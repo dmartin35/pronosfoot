@@ -34,7 +34,9 @@
                       c-datepicker__day--selected
                       {%if forecasts_cal%}{{forecasts_cal|getdictvalue:day}}{%else%}matchday{%endif%}
                     {%endif%}
-                  ">{%if day%}{{day}}{%endif%}</td>
+                  "
+                  {%if day_to_week|has_key:day%}data-week="{{day_to_week|getdictvalue:day}}"{%endif%}
+                  >{%if day%}{{day}}{%endif%}</td>
                 {%endfor%}
 	          </tr>
             {%endfor%}
@@ -63,7 +65,7 @@
 
 
 		$('#calendar .matchday').click(function(){
-			var week = $(this).html();
+			var week = $(this).data('week');
 			window.location= Urls.fixtures(week);
 			//hack a click in the weekselection dropdown
 			//$('#weekselection li#week_'+week+' a').click();
@@ -71,7 +73,7 @@
 		
 		$('#calendar .empty, #calendar .half, #calendar .full').click(function(event){
 			event.stopPropagation();
-			var week = $(this).html();
+			var week = $(this).data('week');
 			window.location= Urls.forecasts(week);
 		});
 		
