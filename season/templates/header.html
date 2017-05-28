@@ -2,6 +2,17 @@
 
 <div class="pronosfoot-header mdl-layout__header mdl-layout__header--waterfall {%if selectedmenu == 'home'%}pronosfoot-home{%endif%}">
   <div class="mdl-layout__header-row">
+    <span class="pronosfoot-mobile-title mdl-layout-title">
+      {%if selectedmenu == 'home'%}
+        <a href="{% url 'index' %}">
+          <img class="pronosfoot-logo-image" src="{%static "images/logo-pronosfoot-title.png"%}">
+        </a>
+      {%else%}
+        {{page_title}}
+      {%endif%}
+
+    </span>
+
     <span class="pronosfoot-title mdl-layout-title">
       <a href="{% url 'index' %}">
         <img class="pronosfoot-logo-image" src="{%static "images/logo-pronosfoot-title.png"%}">
@@ -22,16 +33,6 @@
 
       </nav>
     </div>
-    <span class="pronosfoot-mobile-title mdl-layout-title">
-      {%if selectedmenu == 'home'%}
-        <a href="{% url 'index' %}">
-          <img class="pronosfoot-logo-image" src="{%static "images/logo-pronosfoot-title.png"%}">
-        </a>
-      {%else%}
-        {{page_title}}
-      {%endif%}
-
-    </span>
 
     <button class="pronosfoot-more-button mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect" id="more-button">
       <i class="material-icons">more_vert</i>

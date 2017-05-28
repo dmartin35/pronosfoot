@@ -586,7 +586,7 @@ table th {
 
   .pronosfoot-mobile-title {
     display: block !important;
-    position: absolute;
+    position: static;
     transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     color: white;
   }
