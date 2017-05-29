@@ -3,7 +3,9 @@ import os
 import sys
 
 if __name__ == "__main__":
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "pronosfoot.settings.dev")
+    dev_found = os.path.exists(os.path.join(os.path.dirname(__file__), 'pronosfoot', 'settings', 'dev.py'))
+    settings_mod = "pronosfoot.settings.dev" if dev_found else "pronosfoot.settings"
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", settings_mod)
     try:
         from django.core.management import execute_from_command_line
     except ImportError:
