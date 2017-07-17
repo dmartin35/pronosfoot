@@ -37,69 +37,64 @@
 
 /* Icons img-slice from LFP */
 
+#top #clubs_l1 a, #top #clubs_l2 a{background-image:url(../images/logos_30_l1_l2.png);}
 
-#top #clubs_l1 a{background-image:url(../images/logos_30_l1_l2.png);}
+/*Amiens SC*/
+#top #clubs_l1 a.logo_500240{background-position:0 0px;}
 
-/*Angers*/
-#top #clubs_l1 a.logo_501931{background-position:0 0px;}
-
-/*SC Bastia*/
-#top #clubs_l1 a.logo_508009{background-position:0 -45px;}
+/*Angers SCO*/
+#top #clubs_l1 a.logo_501931{background-position:0 -45px;}
 
 /*Girondins de Bordeaux*/
 #top #clubs_l1 a.logo_500211{background-position:0 -90px;}
 
-/*CAEN*/
-#top #clubs_l1 a.logo_500075{background-position:0 -138px;}
+/*SM Caen*/
+#top #clubs_l1 a.logo_500075{background-position:0 -135px;}
 
 /*Dijon FCO*/
 #top #clubs_l1 a.logo_547450{background-position:0 -180px;}
 
-/*Guingamp*/
+/*EA Guingamp*/
 #top #clubs_l1 a.logo_500126{background-position:0 -225px;}
 
-/*LOSC Lille*/
+/*LOSC*/
 #top #clubs_l1 a.logo_500054{background-position:0 -270px;}
 
-/*FC Lorient*/
-#top #clubs_l1 a.logo_501913{background-position:0 -315px;}
-
 /*Olympique Lyonnais*/
-#top #clubs_l1 a.logo_500080{background-position:0 -360px;}
+#top #clubs_l1 a.logo_500080{background-position:0 -315px;}
 
 /*Olympique de Marseille*/
-#top #clubs_l1 a.logo_500083{background-position:0 -405px;}
+#top #clubs_l1 a.logo_500083{background-position:0 -360px;}
 
-/*METZ*/
-#top #clubs_l1 a.logo_500154{background-position:0 -450px;}
+/*FC Metz*/
+#top #clubs_l1 a.logo_500154{background-position:0 -405px;}
 
-/*Monaco*/
-#top #clubs_l1 a.logo_500091{background-position:0 -495px;}
+/*AS Monaco*/
+#top #clubs_l1 a.logo_500091{background-position:0 -450px;}
 
-/*Montpellier Herault SC*/
-#top #clubs_l1 a.logo_500099{background-position:0 -540px;}
+/*Montpellier Hérault SC*/
+#top #clubs_l1 a.logo_500099{background-position:0 -495px;}
 
-/*NANCY*/
-#top #clubs_l1 a.logo_500302{background-position:0 -585px;}
-
-/*Nantes*/
-#top #clubs_l1 a.logo_501904{background-position:0 -630px;}
+/*FC Nantes*/
+#top #clubs_l1 a.logo_501904{background-position:0 -540px;}
 
 /*OGC Nice*/
-#top #clubs_l1 a.logo_500208{background-position:0 -675px;}
+#top #clubs_l1 a.logo_500208{background-position:0 -585px;}
 
 /*Paris Saint-Germain*/
-#top #clubs_l1 a.logo_500247{background-position:0 -720px;}
+#top #clubs_l1 a.logo_500247{background-position:0 -630px;}
 
 /*Stade Rennais FC*/
-#top #clubs_l1 a.logo_500015{background-position:0 -765px;}
+#top #clubs_l1 a.logo_500015{background-position:0 -675px;}
 
 /*AS Saint-Etienne*/
-#top #clubs_l1 a.logo_500225{background-position:0 -810px;}
+#top #clubs_l1 a.logo_500225{background-position:0 -720px;}
+
+/*RC Strasbourg Alsace*/
+#top #clubs_l1 a.logo_500191{background-position:0 -765px;}
 
 /*Toulouse FC*/
-#top #clubs_l1 a.logo_524391{background-position:0 -855px;}
+#top #clubs_l1 a.logo_524391{background-position:0 -810px;}
 
-
-
-
+/*ESTAC Troyes*/
+#top #clubs_l1 a.logo_500073{background-position:0 -855px;}

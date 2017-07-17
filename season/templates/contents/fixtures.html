@@ -32,7 +32,11 @@
             {%if fixture.score_a != None and fixture.score_b != None%}
             <span class="score mdl-typography--font-light">{{fixture.score_a}}<span>&nbsp;-&nbsp;</span>{{fixture.score_b}}</span>
             {%else%}
-            <time class="mdl-typography--font-light" datetime="{{fixture.hour|time:"H:i"}}">{{fixture.hour|time:"H:i"}}</time>
+              {%if fixture.hour|time:"H:i" == '00:00'%}
+                <time class="mdl-typography--font-light" datetime=":">:</time>
+              {%else%}
+                <time class="mdl-typography--font-light" datetime="{{fixture.hour|time:"H:i"}}">{{fixture.hour|time:"H:i"}}</time>
+              {%endif%}
             {%endif%}
 
             <span class="team">

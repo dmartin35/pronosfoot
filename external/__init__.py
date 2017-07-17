@@ -7,7 +7,7 @@ from tools.file import read_file_lines
 LFP_TEAM_MAP = {}
 LFP_TEAM_REVERSE_MAP = {}
 
-LFP_SEASON_ID = 100
+LFP_SEASON_ID = 101
 
 CALENDAR_URL = 'http://lfp.fr/iCalendar/ligue1.ics'
 #SCORE_URL = 'http://www.lfp.fr/ligue1/calendrier_resultat#sai=%d&jour=%s'

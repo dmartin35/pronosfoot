@@ -41,7 +41,7 @@ def extract_week(desc):
     get the week from the fixture description: 
     Ligue 1 - XXeme journee
     """
-    groups = extract_regexp_groups('Ligue 1 - (?P<week>\d*)\w*',desc)
+    groups = extract_regexp_groups('Ligue 1 (?P<naming>\w+\s)?- (?P<week>\d*)\w*',desc)
     return groups['week']
 
 def ical_to_fixtures(ical):

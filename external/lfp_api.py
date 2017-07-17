@@ -31,7 +31,7 @@ def get_calendar():
         ical = escape_accent(ical)
         return ical_to_fixtures(ical)
     except Exception as e:
-        print('error getting LFP calender:',e)
+        print('error getting LFP calendar:',e)
         pass
     return []
 

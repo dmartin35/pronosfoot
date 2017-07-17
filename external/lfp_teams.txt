@@ -1,10 +1,8 @@
 Angers SCO:Angers
 AS Monaco:Monaco
-AS Nancy Lorraine:Nancy
 AS Saint-Etienne:Saint-Etienne
 Dijon FCO:Dijon
 EA Guingamp:Guingamp
-FC Lorient:Lorient
 FC Metz:Metz
 FC Nantes:Nantes
 Girondins de Bordeaux:Bordeaux
@@ -14,7 +12,9 @@ OGC Nice:Nice
 Olympique de Marseille:Marseille
 Olympique Lyonnais:Lyon
 Paris Saint-Germain:Paris
-SC Bastia:Bastia
 SM Caen:Caen
 Stade Rennais FC:Rennes
 Toulouse FC:Toulouse
+RC Strasbourg Alsace:Strasbourg
+Amiens SC:Amiens
+ESTAC Troyes:Troyes
