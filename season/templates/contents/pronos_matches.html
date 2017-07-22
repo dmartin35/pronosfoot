@@ -91,7 +91,7 @@
 
         <li class="mdl-list__item expandable" data-expanded-content-url="{%url "ajax_forecast_trend_fixture" form.fixture.value %}"
           data-player-id="{{form.user_id.value}}" data-fixture-id="{{form.fixture.value}}">
-
+          <div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active center"></div>
         </li>
 
       {% endifequal %}
@@ -145,6 +145,7 @@
 		// needs to refresh mdl components bindind when this page is refreshed by ajax
 		componentHandler.upgradeDom('MaterialTextfield', 'mdl-textfield');
 		componentHandler.upgradeDom('MaterialTooltip', 'mdl-tooltip');
+		componentHandler.upgradeDom('MaterialSpinner', 'mdl-spinner');
 
 
 		$('#ff_cancel').click(function(){

@@ -4,3 +4,5 @@ requests
 django-js-reverse>=0.7.2,<1.0
 arrow
 mysqlclient
+beautifulsoup4
+django-memoize

@@ -6,11 +6,12 @@ from tools.utils import distinct
 import datetime
 from django.db.models import Count
 import calendar
+from external.odds import get_odds
 
 __all__ = ['fixtures','fixturesDays','fixuresDaysForMonth',
            'countFixuresPerDayForMonth','fixturesDaysAndWeeksForMonth',
            'fixturesOfTheDay','fixtureTeams','isFixtureValid','hasFixtureStarted',
-           'getFixture']
+           'getFixture', 'get_fixture_odds']
 
 def fixtures(week):
     """
@@ -99,5 +100,19 @@ def getFixture(fixture_id):
     """ return the fixure for given ID, or None if not found """
     try:
         return Fixture.objects.get(id=fixture_id)
+    except Fixture.DoesNotExist:
+        return None
+
+
+def get_fixture_odds(fixture_id):
+    """
+    returns the Odds for the given fixture - returns None if odds are not found (ie. probably too early) 
+    :param fixture_id: 
+    :return: namedtuple Odds
+    """
+    try:
+        fixture = Fixture.objects.get(id=fixture_id)
+        all_odds = get_odds()
+        return all_odds.get((fixture.team_a.name, fixture.team_b.name))
     except Fixture.DoesNotExist:
         return None

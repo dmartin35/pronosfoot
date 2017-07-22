@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django_js_reverse',
     'season',
     'admin',
+    'memoize',
 ]
 
 MIDDLEWARE = [

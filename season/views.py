@@ -37,6 +37,7 @@ from season.core.fixtures import fixtureTeams
 from season.core.fixtures import isFixtureValid
 from season.core.fixtures import hasFixtureStarted
 from season.core.fixtures import getFixture
+from season.core.fixtures import get_fixture_odds
 #CALENDAR IMPORTS
 from tools.cal import monthcal
 from tools.cal import previous_month
@@ -697,6 +698,7 @@ def ajax_forecast_trend_fixture(request, fixture_id):
     Returns the trend of forecast for a specific fixture, for all players - for graph
     If the match is started, also returns the list of forecasts for each player - for comparison
     If the match is over, returns the fixture result - for final score display
+    Returns the Match Odds from external API
     """
     if not _validAjaxRequest(request):
         return HttpResponse(status=400)
@@ -723,11 +725,15 @@ def ajax_forecast_trend_fixture(request, fixture_id):
     #     'color': '#8bc34a',
     # }]
 
+
+
     context = {
         'trend': trend,
         'forecasts': getFixtureForecasts(fixture_id),
         'fixture': fixture,
         # 'trend_chart': series,
+        # give odds only for fixture to come - not for match over
+        'odds': get_fixture_odds(fixture_id) if fixture.score_a is None and fixture.score_b is None else None,
     }
 
     return render(request, 'snippets/forecast_details.html', context)
