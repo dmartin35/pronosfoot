@@ -19,6 +19,7 @@ before_script:
 script:
   - py.test --cov=.
   - echo $TRAVIS_TEST_RESULT
-  - ls
-  
+  - ls -a
+  - find . -name ".coverage"
+
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
