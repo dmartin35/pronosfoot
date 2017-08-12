@@ -11,3 +11,5 @@ before_install:
 #  - mysql
 script:
   - py.test
+after_success:
+  - CODECLIMATE_REPO_TOKEN=b75aa588efe2080cf10e1c10a37e554a8b06f65fb08535dba1613ed725f7e424 codeclimate-test-reporter
