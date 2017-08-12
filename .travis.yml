@@ -21,5 +21,7 @@ script:
   - echo $TRAVIS_TEST_RESULT
   - ls -a
   - find . -name ".coverage"
+  - cat .coverage
+  - cat tests/.coverage
 
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
