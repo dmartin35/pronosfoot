@@ -1,22 +1,26 @@
+import os
 import unittest
-
+from unittest import mock
 import logging
 logging.basicConfig()
 
 from external.lfp_results import parse_results_page
-from external.lfp_api import get_score
-
-#html = open('lfp_84_01.html', 'r').read()
-#res = parse_results_page(html)
-#print(res)
-# Test: OK
+from . import TEST_LFP_TEAM_MAP
 
 
-class TestLFPApi(unittest.TestCase):
+class TestLFPResults(unittest.TestCase):
 
-    def test_get_scores(self):
+    @mock.patch.dict('external.lfp_results.LFP_TEAM_MAP', TEST_LFP_TEAM_MAP)
+    def test_parse_lfp_results(self):
 
-        self.assertEqual(get_score(1, 'Bastia', 'Paris'), (0, 1))
-        self.assertEqual(get_score(1, 'Monaco', 'Guimgamp'), (2, 2))
-        self.assertEqual(get_score(1, 'Montpellier', 'Angers'), (1, 0))
+        fpath = os.path.join(os.path.dirname(__file__), 'lfp_101_01.html')
+        html = open(fpath, 'r').read()
+        results = parse_results_page(html)
 
+        self.assertNotEqual(results, None)
+        self.assertEqual(len(results), 10)
+
+        print(results)
+        self.assertTrue({'team_a': 'Monaco', 'team_b': 'Toulouse', 'score_a': 3, 'score_b': 2} in results)
+        self.assertTrue({'team_a': 'Troyes', 'team_b': 'Rennes', 'score_a': 1, 'score_b': 1} in results)
+        self.assertTrue({'team_a': 'Marseille', 'team_b': 'Dijon', 'score_a': 3, 'score_b': 0} in results)

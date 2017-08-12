@@ -8,25 +8,17 @@ Présentation
 ------------
 Ce site est un "vieux" projet né 2010, pour remplacer les fichiers excel envoyés par mails entre copains,
 avec mise à jour auto des calendrier & resultats issus du site officiel de la LFP.
+Le site fournit aussi les côtes des matches issues du site officiel FDJ.
 
-Il fonctionne toujours en production sous django 1.0.2 & python 2.5.
-Je démarre une tentative de rajeunir ce projet et surtout mettre à jour les dépendances utilisées.
-Le code est maintenant porté sur django 1.10 & python 3.4+.
-Nouveau design utilisant material design.
+Conçu initialement avec django 1.0.2 & python 2.5, ce projet est maintenant porté sur django 1.10 & python 3.4+.
+Nouveau design utilisant material design, pour rajeunir le visuel & mode adaptif pour tous les écrans.
 
 Crons
 -----
 ```bash
 pronosfoot@ssh:~$ crontab -l
 # m h  dom mon dow   command
-30 23 * * * ~/pronosfoot/admin/cron_task_launcher.sh daily.py
-0 12 * * * ~/pronosfoot/admin/cron_task_launcher.sh daily_remind.py
-0 0 * * * ~/pronosfoot/admin/cron_task_launcher.sh maintenance.py
+0 23 * * * ~/.python/venv/pronosfoot/bin/python ~/pronosfoot/manage.py daily
+0 12 * * * ~/.python/venv/pronosfoot/bin/python ~/pronosfoot/manage.py reminder
+0 0 * * * ~/.python/venv/pronosfoot/bin/python ~/pronosfoot/manage.py clearexpiredsessions
 ```
-
-Notes
------
-
-- Remplacer maintenance.py par python manage.py clearsessions
-
-

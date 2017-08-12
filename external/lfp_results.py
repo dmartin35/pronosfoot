@@ -15,7 +15,7 @@ def parse_results_page(content):
     to extract list of fixtures that have a match score
     """
     results = []
-    for match in re.finditer(FIXTURES_SCORES_REGEXP, content, re.MULTILINE | re.DOTALL):
+    for match in re.finditer(FIXTURES_SCORES_REGEXP, content, re.MULTILINE | re.DOTALL | re.IGNORECASE):
         try:
             team_a = escape_accent(match.group('team_a').strip())
             team_b = escape_accent(match.group('team_b').strip())
