@@ -7,8 +7,8 @@ python:
 cache: pip
 before_install:
   - pip install "pytest>=2.9" pytest-cov
-  - pip install coverage
-  - pip install codeclimate-test-reporter
+#  - pip install coverage
+#  - pip install codeclimate-test-reporter
 #  - pip install pytest-flake8
 #install:
 #  - pip install -r requirements.txt
@@ -19,6 +19,6 @@ before_script:
   - chmod +x ./cc-test-reporter
 script:
   - ./cc-test-reporter before-build
-#  - py.test --cov=. --cov-report xml
-  - coverage xml
+  - py.test --cov=. --cov-report xml
+#  - coverage xml
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
