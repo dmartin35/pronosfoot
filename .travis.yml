@@ -3,10 +3,11 @@ python:
   - "3.4"
 cache: pip
 before_install:
-  - pip install "pytest>=2.9" pytest-cov pytest-flake8
+  - pip install "pytest>=2.9" pytest-cov
+#  - pip install pytest-flake8
 #install:
 #  - pip install -r requirements.txt
 #services:
 #  - mysql
 script:
-  - py.test --flake8
+  - py.test
