@@ -34,6 +34,7 @@ from season import views
 
 urlpatterns = auth_urlpatterns + [
     url(r'^ajax/matches/(\d+)$', views.ajax_fixtures, name='ajax_fixtures_week'),
+    url(r'^ajax/matches/equipe/(\d+)$', views.ajax_fixtures_team, name='ajax_fixtures_team'),
     url(r'^ajax/calendrier/(\d+)/(\d+)?$', views.ajax_calendar, name='ajax_monthly_calendar'),
     url(r'^ajax/pronos/matches/(\d+)$', views.ajax_forecasts_fixtures, name='ajax_forecasts_fixtures'),
     url(r'^ajax/pronos/matches/resultats/(\d+)$', views.ajax_forecasts_results, name='ajax_forecasts_results'),

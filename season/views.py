@@ -39,6 +39,7 @@ from season.core.fixtures import hasFixtureStarted
 from season.core.fixtures import isFixtureFinished
 from season.core.fixtures import getFixture
 from season.core.fixtures import get_fixture_odds
+from season.core.fixtures import get_team_fixtures
 #CALENDAR IMPORTS
 from tools.cal import monthcal
 from tools.cal import previous_month
@@ -225,6 +226,9 @@ def fixtures(request, week):
     (prev_y,prev_m) = previous_month(firstday.year, firstday.month)
     (next_y,next_m) = next_month(firstday.year, firstday.month)
 
+    teams = getAllTeams()
+    first_team = teams[0]
+
     #ad info to context - to be passed to templates -
     context = {'selectedmenu':'fixtures',
                'page_title': _('Fixtures'),
@@ -238,6 +242,9 @@ def fixtures(request, week):
                'prev_year':prev_y,'prev_month':prev_m,
                'next_year':next_y,'next_month':next_m,
                'day_to_week':fixturesDaysAndWeeksForMonth(firstday.year, firstday.month),
+               'teams': teams,
+               'team_id': first_team,
+               'team_fixtures': get_team_fixtures(first_team),
                }
 
     #get player forecasts count for calendar
@@ -268,7 +275,24 @@ def ajax_fixtures(request,week):
                }
     
     return render(request, 'contents/fixtures.html',context)
-    
+
+
+def ajax_fixtures_team(request, team_id):
+
+    if not _validAjaxRequest(request):
+        return HttpResponse(status=400)
+    if not _validGetRequest(request):
+        return HttpResponse(status=400)
+
+    if not isTeamValid(team_id):
+        return HttpResponse(status=400)
+
+    context = {
+        'team_id': team_id,
+        'team_fixtures': get_team_fixtures(team_id),
+    }
+    return render(request, 'contents/fixtures_team.html', context)
+
 
 @login_required
 def forecasts(request,week):

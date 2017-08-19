@@ -7,11 +7,12 @@ import datetime
 from django.db.models import Count
 import calendar
 from external.odds import get_odds
+from django.db.models import Q
 
 __all__ = ['fixtures','fixturesDays','fixuresDaysForMonth',
            'countFixuresPerDayForMonth','fixturesDaysAndWeeksForMonth',
            'fixturesOfTheDay','fixtureTeams','isFixtureValid','hasFixtureStarted', 'isFixtureFinished',
-           'getFixture', 'get_fixture_odds']
+           'getFixture', 'get_fixture_odds', 'get_team_fixtures']
 
 def fixtures(week):
     """
@@ -126,3 +127,12 @@ def get_fixture_odds(fixture_id):
         return all_odds.get((fixture.team_a.name, fixture.team_b.name))
     except Fixture.DoesNotExist:
         return None
+
+
+def get_team_fixtures(team_id):
+    """
+    returns all fixtures for a team
+    :param team_id:
+    :return:
+    """
+    return Fixture.objects.filter(Q(team_a=team_id) | Q(team_b=team_id)).order_by('week')

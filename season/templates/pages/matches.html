@@ -13,6 +13,7 @@
   <div class="mdl-tabs__tab-bar">
       <a href="#tab-fixtures-panel" class="mdl-tabs__tab is-active">Journée</a>
       <a href="#tab-calendar-panel" class="mdl-tabs__tab">Calendrier</a>
+      <a href="#tab-teams-panel" class="mdl-tabs__tab">équipes</a>
   </div>
 
   <div class="mdl-tabs__panel is-active" id="tab-fixtures-panel">
@@ -33,6 +34,15 @@
     </div>
   </div>
 
+  <div class="mdl-tabs__panel" id="tab-teams-panel">
+    <!-- Your content goes here -->
+    <div class="pronosfoot-wrapper">
+	  <h4 class="mdl-typography--font-light mdl-typography--display-color-contrast-light text-center">Matches & résultats par équipe</h4>
+    </div>
+      <div class="team-select-centered-wrapper">{%include 'global/teamselection.html'%}</div>
+      {%include 'contents/fixtures_team.html'%}
+  </div>
+
 </div>
 
 
@@ -43,7 +53,7 @@
 <script type="text/javascript">
 	$(document).ready(function() {
        $('#weekselection').pf_dropdown(Urls.ajax_fixtures_week,'#fixtures');
+       $('#teamselection').pf_dropdown(Urls.ajax_fixtures_team,'#fixtures_team');
 	});
 </script>
 {% endblock %}
-
