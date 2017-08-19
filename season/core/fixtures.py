@@ -10,7 +10,7 @@ from external.odds import get_odds
 
 __all__ = ['fixtures','fixturesDays','fixuresDaysForMonth',
            'countFixuresPerDayForMonth','fixturesDaysAndWeeksForMonth',
-           'fixturesOfTheDay','fixtureTeams','isFixtureValid','hasFixtureStarted',
+           'fixturesOfTheDay','fixtureTeams','isFixtureValid','hasFixtureStarted', 'isFixtureFinished',
            'getFixture', 'get_fixture_odds']
 
 def fixtures(week):
@@ -94,6 +94,16 @@ def hasFixtureStarted(fixture_id):
         return True
     else:
         return False
+
+
+def isFixtureFinished(fixture_id):
+    """
+    indicates whether a fixture is finished ie. when final score is filled in
+    :param fixture_id:
+    :return: boolean
+    """
+    fixture = Fixture.objects.get(id=fixture_id)
+    return fixture.score_a is not None and fixture.score_b is not None
 
 
 def getFixture(fixture_id):

@@ -36,6 +36,7 @@ from season.core.fixtures import fixturesDaysAndWeeksForMonth
 from season.core.fixtures import fixtureTeams
 from season.core.fixtures import isFixtureValid
 from season.core.fixtures import hasFixtureStarted
+from season.core.fixtures import isFixtureFinished
 from season.core.fixtures import getFixture
 from season.core.fixtures import get_fixture_odds
 #CALENDAR IMPORTS
@@ -710,6 +711,7 @@ def ajax_forecast_trend_fixture(request, fixture_id):
         return HttpResponse(status=400)
 
     fixture.is_started = hasFixtureStarted(fixture_id)
+    fixture.is_finished = isFixtureFinished(fixture_id)
     trend = fixture_forecasts_trend(fixture_id)
     # series = [{
     #     'name': 'Victoire  de {}'.format(fixture.team_b),

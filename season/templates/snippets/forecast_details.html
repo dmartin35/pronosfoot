@@ -45,7 +45,7 @@
 
 
 <h6>Pronostics des autres joueurs</h6>
-{%if fixture.is_started%}
+{%if fixture.is_finished%}
   {%if trend.nb_team_a_win or trend.nb_team_b_win or trend.nb_draw%}
     <select class="center">
       {%for forecast in forecasts%}
@@ -56,7 +56,7 @@
     <span class="info">Aucun pronostics enregistrés pour ce match.</span>
   {%endif%}
 {%else%}
-  <span class="info">Les pronostics des joueurs seront disponibles après le début du match.</span>
+  <span class="info">Les pronostics des joueurs seront disponibles après la fin du match.</span>
 {%endif%}
 
 
