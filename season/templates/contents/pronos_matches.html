@@ -164,7 +164,8 @@
 					'{{form.score_b.html_name}}': $('input[name={{form.score_b.html_name}}]').val(),
 				{% endfor %}
 				'form-TOTAL_FORMS': $('input[name=form-TOTAL_FORMS]').val(),
-				'form-INITIAL_FORMS': $('input[name=form-INITIAL_FORMS]').val()
+				'form-INITIAL_FORMS': $('input[name=form-INITIAL_FORMS]').val(),
+				'csrfmiddlewaretoken': '{{ csrf_token }}'
 	     	};
 	    	
 	    	 $.ajax({

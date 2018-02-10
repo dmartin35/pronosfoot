@@ -147,6 +147,7 @@
 				{% for field in fl_form.hidden_fields %}
 					'{{field.html_name}}': $('input[name={{field.html_name}}]').val(),
 				{% endfor %}
+				'csrfmiddlewaretoken': '{{ csrf_token }}',
 				null:null //hack - need null after last ,
 	     	};
 	    	 
