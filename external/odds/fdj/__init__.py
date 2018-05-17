@@ -1,7 +1,11 @@
 import os
 
-FDJ_TEAM_MAP = {}
+import warnings
+warnings.warn("the FDJ odds module is deprecated (broken API)", DeprecationWarning,
+              stacklevel=2)
 
+
+FDJ_TEAM_MAP = {}
 
 def init_team_map():
     dir = os.path.dirname(os.path.abspath(__file__))
