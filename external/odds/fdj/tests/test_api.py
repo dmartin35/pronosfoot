@@ -2,6 +2,7 @@ import unittest
 from external.odds.fdj.api import get_odds
 
 
+@unittest.skip('Skip broken FDJ odds API')
 class TestFDJOdds(unittest.TestCase):
     def test_get_odds(self):
         """
