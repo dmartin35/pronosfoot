@@ -2,12 +2,21 @@ import os
 import unittest
 from unittest import mock
 from external.odds.betclic.api import get_odds
+from memoize import delete_memoized
+
 
 
 BETCLIC_TESTS_FOLDER = os.path.dirname(os.path.abspath(__file__))
 
 
 class TestBetclicOdds(unittest.TestCase):
+    def setUp(self):
+        """
+        Clears odds memoize cache - to ensure not to get cached result from a previous unit test
+        """
+        delete_memoized(get_odds)
+
+    @unittest.skip('This test is disabled for production due to daily page changes which leads to no odds some days')
     def test_get_odds(self):
         """
         this test ensure the retrieval of betclic odds is not broken over time
@@ -28,8 +37,14 @@ class TestBetclicOdds(unittest.TestCase):
 class TestLocalBetclicOdds(unittest.TestCase):
 
     def setUp(self):
+        """
+        * Uses local html page for odds - downloaded once from the web site
+        * Clears odds memoize cache - to ensure not to get cached result from a previous unit test
+        """
         with open(os.path.join(BETCLIC_TESTS_FOLDER, 'betclic-ligue1.html'), 'r') as f:
             self.html = f.read()
+
+        delete_memoized(get_odds)
 
     def test_parse_odds(self):
         """
