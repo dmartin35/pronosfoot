@@ -1,5 +1,5 @@
 SHELL := /bin/bash
-VENV = /Users/dmartin/pyenv/pronosfoot-py36
+VENV = ~/.python/venv/pronosfoot
 APP_LIST ?= season
 
 
@@ -12,12 +12,15 @@ locale:
 	python manage.py makemessages -l fr --ignore "tools/*"
 
 collectstatic:
+	source $(VENV)/bin/activate; \
 	python manage.py collectstatic --noinput
 
 run:
+	source $(VENV)/bin/activate; \
 	python manage.py runserver 0.0.0.0:8000
 
 install:
+	source $(VENV)/bin/activate; \
 	pip install -r requirements.txt
 
 migrations-check:
@@ -30,6 +33,10 @@ migrations-check:
 #ci: test
 #	@coverage report
 
-#deploy: install collectstatic
-#	python manage.py compilemessages
+new-season:
+    source $(VENV)/bin/activate; \
+    python manage.py migrate; \
+    python manage.py prepare_season
+
+deploy: install collectstatic
 
