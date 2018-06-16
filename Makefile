@@ -34,9 +34,9 @@ migrations-check:
 #	@coverage report
 
 new-season:
-    source $(VENV)/bin/activate; \
-    python manage.py migrate; \
-    python manage.py prepare_season
+	source $(VENV)/bin/activate; \
+	python manage.py migrate; \
+	python manage.py prepare_season
 
 deploy: install collectstatic
 
