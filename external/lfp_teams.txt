@@ -18,3 +18,5 @@ Toulouse FC:Toulouse
 RC Strasbourg Alsace:Strasbourg
 Amiens SC:Amiens
 ESTAC Troyes:Troyes
+Nîmes Olympique:Nimes
+Stade de Reims:Reims

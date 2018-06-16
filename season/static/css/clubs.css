@@ -37,7 +37,7 @@
 
 /* Icons img-slice from LFP */
 
-#top #clubs_l1 a, #top #clubs_l2 a{background-image:url(../images/logos_30_l1_l2.png);}
+#top #clubs_l1 a, #top #clubs_l1 a{background-image:url(../images/logos_30_l1_l2.png);}
 
 /*Amiens SC*/
 #top #clubs_l1 a.logo_500240{background-position:0 0px;}
@@ -98,3 +98,65 @@
 
 /*ESTAC Troyes*/
 #top #clubs_l1 a.logo_500073{background-position:0 -855px;}
+
+
+
+/*AC ajaccio*/
+#top #clubs_l1 a.logo_500765{background-position:0 -900px;}
+
+/*GFC Ajaccio*/
+#top #clubs_l1 a.logo_546836{background-position:0 -945px;}
+
+/*AJ Auxerre*/
+#top #clubs_l1 a.logo_500220{background-position:0 -990px;}
+
+/*BOURG PERONNAS*/
+#top #clubs_l1 a.logo_504281{background-position:0 -1035px;}
+
+/*Brest*/
+#top #clubs_l1 a.logo_500024{background-position:0 -1080px;}
+
+/*chateauroux*/
+#top #clubs_l1 a.logo_500098{background-position:0 -1125px;}
+
+/*Clermont Foot*/
+#top #clubs_l1 a.logo_535789{background-position:0 -1170px;}
+
+/*Havre AC*/
+#top #clubs_l1 a.logo_500052{background-position:0 -1215px;}
+
+/*LENS*/
+#top #clubs_l1 a.logo_500369{background-position:0 -1260px;}
+
+/*FC Lorient*/
+#top #clubs_l1 a.logo_501913{background-position:0 -1305px;}
+
+/*NANCY*/
+#top #clubs_l1 a.logo_500302{background-position:0 -1350px;}
+
+/*Nimes Olympique*/
+#top #clubs_l1 a.logo_503313{background-position:0 -1395px;}
+
+/*Chamois Niortais*/
+#top #clubs_l1 a.logo_506978{background-position:0 -1440px;}
+
+/*ORLEANS*/
+#top #clubs_l1 a.logo_504891{background-position:0 -1485px;}
+
+/*Paris FC*/
+#top #clubs_l1 a.logo_500568{background-position:0 -1530px;}
+
+/*Stade de Reims*/
+#top #clubs_l1 a.logo_542397{background-position:0 -1617px;}
+
+/*quevilly rouen*/
+#top #clubs_l1 a.logo_531562{background-position:0 -1575px;}
+
+/*FC Sochaux-Montbeliard*/
+#top #clubs_l1 a.logo_500303{background-position:0 -1665px;}
+
+/*Tours FC*/
+#top #clubs_l1 a.logo_504917{background-position:0 -1710px;}
+
+/*Valenciennes FC*/
+#top #clubs_l1 a.logo_500250{background-position:0 -1755px;}
