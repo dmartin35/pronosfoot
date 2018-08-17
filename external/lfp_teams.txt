@@ -3,7 +3,6 @@ AS Monaco:Monaco
 AS Saint-Etienne:Saint-Etienne
 Dijon FCO:Dijon
 EA Guingamp:Guingamp
-FC Metz:Metz
 FC Nantes:Nantes
 Girondins de Bordeaux:Bordeaux
 LOSC:Lille
@@ -17,6 +16,5 @@ Stade Rennais FC:Rennes
 Toulouse FC:Toulouse
 RC Strasbourg Alsace:Strasbourg
 Amiens SC:Amiens
-ESTAC Troyes:Troyes
 Nîmes Olympique:Nimes
 Stade de Reims:Reims
