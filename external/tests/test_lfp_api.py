@@ -5,12 +5,12 @@ logging.basicConfig()
 
 from external import SCORE_URL
 from external.lfp_api import get_score, get_calendar
-
 from tools.web import get_url_content as _url_download
-
+from . import TEST_LFP_TEAM_MAP
 
 class TestLFPApi(unittest.TestCase):
 
+    @mock.patch.dict('external.lfp_results.LFP_TEAM_MAP', TEST_LFP_TEAM_MAP)
     @mock.patch('external.lfp_api.get_url_content')
     def test_get_scores(self, mock_url_content):
         """
