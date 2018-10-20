@@ -8,7 +8,7 @@ def get_url_content(url):
     return the content of a URL from the web
     """
     headers = {'User-agent': 'Mozilla/5.0'}
-    r = requests.get(url, headers=headers)
+    r = requests.get(url, headers=headers, verify=False)
     return r.text
 
 

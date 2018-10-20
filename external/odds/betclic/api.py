@@ -17,7 +17,7 @@ def _download_odds():
     Download html from
     :return:
     """
-    resp = requests.get(BETCLIC_L1_URL, headers={})
+    resp = requests.get(BETCLIC_L1_URL, headers={}, verify=False)
     resp.raise_for_status()
     return resp.content.decode('utf-8')
 

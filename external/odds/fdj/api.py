@@ -19,7 +19,7 @@ def _get_odds_raw():
     getches LFP html page then parse it to extract as many odds as possible
     :return: list of (teamA, teamB, odds win, odds draw, odds lose)
     """
-    resp = requests.get(PARIONS_SPORT_URL, headers={})
+    resp = requests.get(PARIONS_SPORT_URL, headers={}, verify=False)
     resp.raise_for_status()
     content = resp.content.decode('utf-8')
 
