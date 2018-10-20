@@ -6,6 +6,9 @@ from memoize import memoize
 
 from external.odds.fdj import FDJ_TEAM_MAP
 
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
+
 
 PARIONS_SPORT_URL = 'https://www.enligne.parionssport.fdj.fr/paris-football/france/ligue-1'
 ODD_REGEX = re.compile('.*?<li class="outcomes.*?<a.*?title="(?P<match>.*?)".*?<span class="formatted_price">(?P<win>.*?)</span>.*?<span class="formatted_price">(?P<draw>.*?)</span>.*?<span class="formatted_price">(?P<lose>.*?)</span>.*?', re.MULTILINE | re.DOTALL | re.IGNORECASE)

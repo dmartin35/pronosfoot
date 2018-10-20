@@ -5,6 +5,8 @@ from memoize import memoize
 import contextlib
 from external.odds.betclic import TEAM_MAP
 
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 BETCLIC_L1_URL = 'https://www.betclic.fr/football/ligue-1-conforama-e4'
 
