@@ -2,7 +2,7 @@ django>=1.10,<1.11
 pytz
 requests
 django-js-reverse>=0.7.2,<1.0
-arrow
+arrow<0.14
 mysqlclient
 beautifulsoup4
 django-memoize
