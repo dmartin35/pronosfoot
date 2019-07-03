@@ -1,20 +1,20 @@
+Amiens SC:Amiens
 Angers SCO:Angers
 AS Monaco:Monaco
 AS Saint-Etienne:Saint-Etienne
 Dijon FCO:Dijon
-EA Guingamp:Guingamp
+FC Metz:Metz
 FC Nantes:Nantes
 Girondins de Bordeaux:Bordeaux
 LOSC:Lille
 Montpellier Hérault SC:Montpellier
+Nîmes Olympique:Nimes
 OGC Nice:Nice
 Olympique de Marseille:Marseille
 Olympique Lyonnais:Lyon
 Paris Saint-Germain:Paris
-SM Caen:Caen
+RC Strasbourg Alsace:Strasbourg
+Stade Brestois 29:Brest
+Stade de Reims:Reims
 Stade Rennais FC:Rennes
 Toulouse FC:Toulouse
-RC Strasbourg Alsace:Strasbourg
-Amiens SC:Amiens
-Nîmes Olympique:Nimes
-Stade de Reims:Reims
