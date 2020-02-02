@@ -32,8 +32,11 @@ def check_calendar():
         if fixture:
             old_day = fixture.day
             old_time = fixture.hour
-        
-            if old_day != day or old_time != hour:
+
+            # change only for either day/date in the future or different scheduled time
+            # we don't want to update with a date in the past
+            # (when duplicated matches in wrong order in ICal for postponed matches)
+            if day > old_day or old_time != hour:
                 log_str = '%s (%s) %s-%s %s %s'% (fixture.id, fixture.week,
                     fixture.team_a, fixture.team_b, fixture.day, fixture.hour)
                 
