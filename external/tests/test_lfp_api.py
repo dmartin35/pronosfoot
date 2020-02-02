@@ -30,7 +30,8 @@ class TestLFPApi(unittest.TestCase):
         and the ICAL parsing is not broken over time
         """
         calendar = get_calendar()
-        self.assertEqual(len(calendar), 380)
+        self.assertTrue(len(calendar) >= 380)
+        # NB: greater for duplicated entries in ical for postponed/rescheduled matches
 
         for key in ['date', 'time', 'team_a', 'team_b', 'week']:
             self.assertTrue(key in calendar[0])
