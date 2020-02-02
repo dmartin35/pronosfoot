@@ -20,14 +20,13 @@ def check_calendar():
     lfp_cal = get_calendar()
     for fixt_dict in lfp_cal:
         #locally store fixture info
-        week = fixt_dict['week']
         team_a = Team.objects.get(name=fixt_dict['team_a'])
         team_b = Team.objects.get(name=fixt_dict['team_b'])
-        day = str_to_date(fixt_dict['date'],settings.DATE_FORMAT)
-        hour = str_to_time(fixt_dict['time'],settings.TIME_FORMAT)
+        day = str_to_date(fixt_dict['date'], settings.DATE_FORMAT)
+        hour = str_to_time(fixt_dict['time'], settings.TIME_FORMAT)
         
         #get fixture from DB - should get only one entry 
-        fixture = Fixture.objects.get(week=week,team_a=team_a,team_b=team_b)
+        fixture = Fixture.objects.get(team_a=team_a, team_b=team_b)
 
         #check date/time, modify if needed and log change
         if fixture:

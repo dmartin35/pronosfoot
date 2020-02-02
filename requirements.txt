@@ -6,3 +6,4 @@ arrow<0.14
 mysqlclient
 beautifulsoup4
 django-memoize
+ics<0.6

@@ -6,11 +6,11 @@ logging.basicConfig()
 from external import SCORE_URL
 from external.lfp_api import get_score, get_calendar
 from tools.web import get_url_content as _url_download
-from . import TEST_LFP_TEAM_MAP
+from . import TEST_LFP_TEAM_MAP_2017_2018
 
 class TestLFPApi(unittest.TestCase):
 
-    @mock.patch.dict('external.lfp_results.LFP_TEAM_MAP', TEST_LFP_TEAM_MAP)
+    @mock.patch.dict('external.lfp_results.LFP_TEAM_MAP', TEST_LFP_TEAM_MAP_2017_2018)
     @mock.patch('external.lfp_api.get_url_content')
     def test_get_scores(self, mock_url_content):
         """
@@ -18,7 +18,7 @@ class TestLFPApi(unittest.TestCase):
         by checking some known results
         """
 
-        mock_url_content.return_value = _url_download(SCORE_URL % (101, 1))
+        mock_url_content.return_value = _url_download(SCORE_URL % ('2017-2018', 1))
 
         self.assertEqual(get_score(1, 'Monaco', 'Toulouse'), (3, 2))
         self.assertEqual(get_score(1, 'Troyes', 'Rennes'), (1, 1))

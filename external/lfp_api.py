@@ -1,6 +1,8 @@
 """
 LFP API
 """
+import logging
+
 from . import LFP_TEAM_MAP
 from . import LFP_SEASON_ID
 from . import SCORE_URL
@@ -10,14 +12,17 @@ from tools.web import get_url_content
 from tools.escape import escape_accent
 from .lfp_calendar import ical_to_fixtures
 from .lfp_results import parse_results_page
+from .lfp_tools import escape_team_names
 
 __all__ = ['get_teams','get_score','get_calendar']
+
 
 def get_teams():
     """
     returns the list of teams
     """
     return list(LFP_TEAM_MAP.values())
+
 
 def get_calendar():
     """
@@ -28,12 +33,13 @@ def get_calendar():
     try:
         ical = get_url_content(CALENDAR_URL)
         # ical = ical.encode('utf-8')
+        ical = escape_team_names(ical)
         ical = escape_accent(ical)
         return ical_to_fixtures(ical)
     except Exception as e:
-        print('error getting LFP calendar:',e)
-        pass
+        logging.exception('Unable to fetch/parse LFP calender')
     return []
+
 
 def get_score(week, team_a, team_b):
     """
@@ -53,7 +59,7 @@ def get_score(week, team_a, team_b):
         for result in results:
             if result['team_a'] == team_a and result['team_b']:
                 return (result['score_a'],result['score_b'])
-    except Exception as err:
-        print('error getting match score:', err)
+    except Exception:
+        logging.exception('error getting match score:')
         pass
     return (None,None)

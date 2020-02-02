@@ -7,13 +7,14 @@ from tools.file import read_file_lines
 LFP_TEAM_MAP = {}
 LFP_TEAM_REVERSE_MAP = {}
 
-LFP_SEASON_ID = 103
+LFP_SEASON_ID = '2019-2020'
 
-CALENDAR_URL = 'http://lfp.fr/iCalendar/ligue1.ics'
+CALENDAR_URL = 'https://www.ligue1.fr/api/sitecore/MatchIcs/Download'
 #SCORE_URL = 'http://www.lfp.fr/ligue1/calendrier_resultat#sai=%d&jour=%s'
 #SCORE_URL = 'http://www.lfp.fr/ligue1/competitionPluginCalendrierResultat/changeCalendrierJournee?sai=%d&jour=%s'
 #SCORE_URL = 'http://www.lfp.fr/ligue1/calendrier_resultat#sai=%d&jour=%s'
-SCORE_URL = 'http://www.lfp.fr/ligue1/competitionPluginCalendrierResultat/changeCalendrierJournee?sai=%d&jour=%s'
+#SCORE_URL = 'http://www.lfp.fr/ligue1/competitionPluginCalendrierResultat/changeCalendrierJournee?sai=%d&jour=%s'
+SCORE_URL = 'https://www.ligue1.fr/calendrier-resultats?seasonId=%s&matchDay=%s'
 
 def init_team_map():
     try:

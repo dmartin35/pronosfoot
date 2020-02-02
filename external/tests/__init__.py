@@ -1,7 +1,7 @@
 
-# Teams for season 101
-TEST_LFP_TEAM_MAP = {'Angers SCO': 'Angers', 'AS Monaco': 'Monaco', 'AS Saint-Etienne': 'Saint-Etienne', 'Dijon FCO': 'Dijon',
- 'EA Guingamp': 'Guingamp', 'FC Metz': 'Metz', 'FC Nantes': 'Nantes', 'Girondins de Bordeaux': 'Bordeaux',
- 'LOSC': 'Lille', 'Montpellier Hérault SC': 'Montpellier', 'OGC Nice': 'Nice', 'Olympique de Marseille': 'Marseille',
- 'Olympique Lyonnais': 'Lyon', 'Paris Saint-Germain': 'Paris', 'SM Caen': 'Caen', 'Stade Rennais FC': 'Rennes',
- 'Toulouse FC': 'Toulouse', 'RC Strasbourg Alsace': 'Strasbourg', 'Amiens SC': 'Amiens', 'ESTAC Troyes': 'Troyes'}
+# Teams for season 2017-2018
+TEST_LFP_TEAM_MAP_2017_2018 = {'ANGERS SCO': 'Angers', 'AS MONACO': 'Monaco', 'AS SAINT-ETIENNE': 'Saint-Etienne', 'DIJON FCO': 'Dijon', 'EN AVANT GUINGAMP': 'Guingamp', 'FC METZ': 'Metz', 'FC NANTES': 'Nantes', 'FC GIRONDINS DE BORDEAUX': 'Bordeaux', 'LOSC LILLE': 'Lille', 'MONTPELLIER HÉRAULT SC': 'Montpellier', 'OGC NICE': 'Nice', 'OLYMPIQUE DE MARSEILLE': 'Marseille', 'OLYMPIQUE LYONNAIS': 'Lyon', 'PARIS SAINT-GERMAIN': 'Paris', 'STADE MALHERBE CAEN': 'Caen', 'STADE RENNAIS FC': 'Rennes', 'TOULOUSE FC': 'Toulouse', 'RC STRASBOURG ALSACE': 'Strasbourg', 'AMIENS SC': 'Amiens', 'ESTAC TROYES': 'Troyes'}
+
+# Teams for season 2019-2020 ( new lfp web site released )
+TEST_LFP_TEAM_MAP_2019_2020 = {'AMIENS SC': 'Amiens', 'ANGERS SCO': 'Angers', 'AS MONACO': 'Monaco', 'AS SAINT-ÉTIENNE': 'Saint-Etienne', 'DIJON FCO': 'Dijon', 'FC METZ': 'Metz', 'FC NANTES': 'Nantes', 'FC GIRONDINS DE BORDEAUX': 'Bordeaux', 'LOSC LILLE': 'Lille', 'MONTPELLIER HÉRAULT SC': 'Montpellier', 'NÎMES OLYMPIQUE': 'Nimes', 'OGC NICE': 'Nice', 'OLYMPIQUE DE MARSEILLE': 'Marseille', 'OLYMPIQUE LYONNAIS': 'Lyon', 'PARIS SAINT-GERMAIN': 'Paris', 'RC STRASBOURG ALSACE': 'Strasbourg', 'STADE BRESTOIS 29': 'Brest', 'STADE DE REIMS': 'Reims', 'STADE RENNAIS FC': 'Rennes', 'TOULOUSE FC': 'Toulouse'}
+TEST_LFP_TEAM_MAP = TEST_LFP_TEAM_MAP_2019_2020

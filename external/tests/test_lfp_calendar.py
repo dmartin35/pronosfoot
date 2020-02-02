@@ -1,5 +1,5 @@
 import unittest
-from external.lfp_calendar import extract_week
+from external.lfp_calendar import extract_week, extract_teams
 
 
 class TestExtractWeekFromICal(unittest.TestCase):
@@ -17,3 +17,25 @@ class TestExtractWeekFromICal(unittest.TestCase):
     def test_parse_ical_accented_chars(self):
         """ Test ical parsing with teams with accented characters (é/î/...)"""
         pass
+
+
+class TestExtractTeamsFromICal(unittest.TestCase):
+
+    def parse_default(self):
+
+        title = 'ANGERS SCO-FC GIRONDINS DE BORDEAUX'
+        team_a, team_b = extract_teams(title)
+        self.assertEqual(team_a, 'ANGERS SCO')
+        self.assertEqual(team_b, 'FC GIRONDINS DE BORDEAUX')
+
+    def test_parse_multiple_dashes(self):
+
+        title = 'DIJON FCO-AS SAINT-ÉTIENNE'
+        team_a, team_b = extract_teams(title)
+        self.assertEqual(team_a, 'DIJON FCO')
+        self.assertEqual(team_b, 'AS SAINT-ÉTIENNE')
+
+        title = 'AS SAINT-ÉTIENNE-PARIS SAINT-GERMAIN'
+        team_a, team_b = extract_teams(title)
+        self.assertEqual(team_a, 'AS SAINT-ÉTIENNE')
+        self.assertEqual(team_b, 'PARIS SAINT-GERMAIN')
