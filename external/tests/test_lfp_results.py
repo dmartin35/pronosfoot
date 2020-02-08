@@ -40,3 +40,27 @@ class TestLFPResults(unittest.TestCase):
         self.assertTrue({'team_a': 'Montpellier', 'team_b': 'Rennes', 'score_a': 0, 'score_b': 1} in results)
         # Saint-Etienne capital e-acute is replaced with capital e
         self.assertTrue({'team_a': 'Dijon', 'team_b': 'Saint-Etienne', 'score_a': 1, 'score_b': 2} in results)
+
+    @mock.patch.dict('external.lfp_results.LFP_TEAM_MAP', TEST_LFP_TEAM_MAP_2019_2020)
+    def test_parse_lfp_results_exclude_live_scores(self):
+
+        fpath = os.path.join(os.path.dirname(__file__), 'lfp_2019-2020_24_live.html')
+        html = open(fpath, 'r').read()
+        results = parse_results_page(html)
+
+        self.assertNotEqual(results, None)
+        self.assertEqual(len(results), 1)
+
+        self.assertTrue({'team_a': 'Angers', 'team_b': 'Lille', 'score_a': 0, 'score_b': 2} in results)
+
+    @mock.patch.dict('external.lfp_results.LFP_TEAM_MAP', TEST_LFP_TEAM_MAP_2019_2020)
+    def test_parse_lfp_results_exclude_upcoming_matches(self):
+
+        fpath = os.path.join(os.path.dirname(__file__), 'lfp_2019-2020_24.html')
+        html = open(fpath, 'r').read()
+        results = parse_results_page(html)
+
+        self.assertNotEqual(results, None)
+        self.assertEqual(len(results), 1)
+
+        self.assertTrue({'team_a': 'Angers', 'team_b': 'Lille', 'score_a': 0, 'score_b': 2} in results)
