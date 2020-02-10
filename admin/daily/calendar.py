@@ -24,8 +24,8 @@ def check_calendar():
         team_b = Team.objects.get(name=fixt_dict['team_b'])
         day = str_to_date(fixt_dict['date'], settings.DATE_FORMAT)
         hour = str_to_time(fixt_dict['time'], settings.TIME_FORMAT)
-        
-        #get fixture from DB - should get only one entry 
+
+        #get fixture from DB - should get only one entry
         fixture = Fixture.objects.get(team_a=team_a, team_b=team_b)
 
         #check date/time, modify if needed and log change
@@ -36,14 +36,19 @@ def check_calendar():
             # change only for either day/date in the future or different scheduled time for the same day
             # we don't want to update with a date in the past
             # (when duplicated matches in wrong order in ICal for postponed matches)
-            if day > old_day or (day == old_day and old_time != hour):
+            # case 1: always update for a more recent day ie postponed/re-scheduled matches
+            # case 2: same day but scheduled time has changed
+            # case 3: was not scheduled, but possibly day(s) before
+            if day > old_day \
+                    or (day == old_day and old_time != hour) \
+                    or (day != old_day and str(old_time)=='00:00:00'):
                 log_str = '%s (%s) %s-%s %s %s'% (fixture.id, fixture.week,
                     fixture.team_a, fixture.team_b, fixture.day, fixture.hour)
-                
+
                 #save date&time change in DB
                 fixture.day = day
                 fixture.hour = hour
                 fixture.save()
-                
+
                 #log change
                 _log('%s -> %s %s'%(log_str,day,hour))
