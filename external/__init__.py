@@ -1,10 +1,11 @@
 """
 automatically loads the LFP teams map from file 
 """
+from collections import OrderedDict
 import os
 from tools.file import read_file_lines
 
-LFP_TEAM_MAP = {}
+LFP_TEAM_MAP = OrderedDict()
 LFP_TEAM_REVERSE_MAP = {}
 
 LFP_SEASON_ID = '2019-2020'
@@ -22,7 +23,8 @@ def init_team_map():
         path = os.path.join(dir,'lfp_teams.txt')
         teams_list = read_file_lines(path)
         teams = [team.strip().split(':') for team in teams_list]
-        for (long_name,short_name) in teams:
+        teams = sorted(teams, key=lambda t: t[1])
+        for (long_name, short_name) in teams:
             LFP_TEAM_MAP[long_name] = short_name 
             LFP_TEAM_REVERSE_MAP[short_name] = long_name
     except:

@@ -1,3 +1,4 @@
+import os
 import unittest
 from unittest import mock
 import logging
@@ -35,3 +36,20 @@ class TestLFPApi(unittest.TestCase):
 
         for key in ['date', 'time', 'team_a', 'team_b', 'week']:
             self.assertTrue(key in calendar[0])
+
+    @mock.patch('external.lfp_api.get_url_content')
+    def test_ical_has_no_unescaped_question_mark(self, mock_url_content):
+        fpath = os.path.join(os.path.dirname(__file__), 'LFP-D1-2020-2021.ics')
+        with open(fpath, 'r') as ics:
+            mock_url_content.return_value = ics.read()
+
+        invalid = set()
+        calendar = get_calendar()
+        # ensure no unexpected '?' are left/forgotten in team names
+        for fixture in calendar:
+            for team in ['team_a', 'team_b']:
+                if '?' in fixture[team]:
+                    invalid.add(fixture[team])
+
+        # check that invalid set is empty
+        self.assertEqual(invalid, set())

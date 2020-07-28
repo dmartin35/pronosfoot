@@ -6,7 +6,7 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1']  #provide your host name
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'pronosfoot-2019-2020.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, 'pronosfoot-2020-2021.sqlite3'),
         #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }

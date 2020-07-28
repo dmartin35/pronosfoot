@@ -3,6 +3,7 @@ LFP calendar core
 """
 import arrow
 from ics import Calendar
+from ics.timeline import Timeline
 import logging
 import re
 from . import LFP_TEAM_MAP
@@ -42,6 +43,7 @@ def extract_teams(summary):
     """
     if summary.startswith((
         "AS SAINT-ÉTIENNE",
+        "AS SAINT-?TIENNE",
         "PARIS SAINT-GERMAIN"
     )):
         a1, a2, b = summary.split('-', 2)
@@ -66,7 +68,8 @@ def ical_to_fixtures(ical):
     fixtures = []
 
     cal = Calendar(ical)
-    for event in cal.events:
+    timeline = Timeline(cal)  # allow to have events sorted by begin date
+    for event in timeline:
         try:
             #date, time = extract_dt(change_dt_utc_to_local(event.begin))
             date, time = extract_dt(event.begin)
