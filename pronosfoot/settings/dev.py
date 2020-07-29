@@ -1,7 +1,11 @@
 from .base import *
 
 DEBUG = True
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']  #provide your host name
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '127.0.0.1:8000']  #provide your host name
+
+INSTALLED_APPS += [
+    'sslserver',
+]
 
 DATABASES = {
     'default': {
@@ -20,5 +24,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 CSRF_COOKIE_DOMAIN = ''
 CSRF_TRUSTED_ORIGINS = ALLOWED_HOSTS
+CSRF_COOKIE_SECURE = True
 
-SEASON_FORECAST_MAX_DATE = datetime.datetime(2016,10,31,23,59,59)
+SEASON_FORECAST_MAX_DATE = datetime.datetime(2020,10,31,23,59,59)
