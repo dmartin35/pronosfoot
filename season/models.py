@@ -18,8 +18,8 @@ class Player(models.Model):
 
 class Fixture(models.Model):
     week = models.IntegerField()
-    team_a = models.ForeignKey(Team, related_name="team_a")
-    team_b = models.ForeignKey(Team, related_name="team_b")
+    team_a = models.ForeignKey(Team, related_name="team_a", on_delete=models.CASCADE)
+    team_b = models.ForeignKey(Team, related_name="team_b", on_delete=models.CASCADE)
     score_a = models.IntegerField(blank=True, null=True)
     score_b = models.IntegerField(blank=True, null=True)
     day = models.DateField()
@@ -36,8 +36,8 @@ class Fixture(models.Model):
     
 
 class Forecast(models.Model):
-    fixture = models.ForeignKey(Fixture)
-    user = models.ForeignKey(Player)
+    fixture = models.ForeignKey(Fixture, on_delete=models.CASCADE)
+    user = models.ForeignKey(Player, on_delete=models.CASCADE)
     score_a = models.IntegerField(blank=True, null=True)
     score_b = models.IntegerField(blank=True, null=True)
     points = models.IntegerField(blank=True, null=True)
@@ -54,7 +54,7 @@ class Forecast(models.Model):
 
 
 class Mailing(models.Model):
-    user = models.OneToOneField(User, primary_key=True)
+    user = models.OneToOneField(User, primary_key=True, on_delete=models.CASCADE)
     newsletter = models.BooleanField(default=True)
     reminder = models.BooleanField(default=True)
     news_key = models.CharField(max_length=50, blank=True, null=True)
@@ -62,7 +62,7 @@ class Mailing(models.Model):
 
 
 class Table(models.Model):
-    team = models.ForeignKey(Team)
+    team = models.ForeignKey(Team, on_delete=models.CASCADE)
     week = models.IntegerField()
     points = models.IntegerField()
     win = models.IntegerField()
@@ -73,13 +73,13 @@ class Table(models.Model):
 
 
 class LeagueForecast(models.Model):
-    user = models.ForeignKey(Player)
-    winner_midseason = models.ForeignKey(Team, related_name="winner_midseason", blank=True, null=True)
-    winner = models.ForeignKey(Team, related_name="winner", blank=True, null=True)
-    second = models.ForeignKey(Team, related_name="second", blank=True, null=True)
-    third = models.ForeignKey(Team, related_name="third", blank=True, null=True)
-    fourth = models.ForeignKey(Team, related_name="fourth", blank=True, null=True)
-    looser1 = models.ForeignKey(Team, related_name="looser1", blank=True, null=True)
-    looser2 = models.ForeignKey(Team, related_name="looser2", blank=True, null=True)
-    looser3 = models.ForeignKey(Team, related_name="looser3", blank=True, null=True)
+    user = models.ForeignKey(Player, on_delete=models.CASCADE)
+    winner_midseason = models.ForeignKey(Team, related_name="winner_midseason", blank=True, null=True, on_delete=models.SET_NULL)
+    winner = models.ForeignKey(Team, related_name="winner", blank=True, null=True, on_delete=models.SET_NULL)
+    second = models.ForeignKey(Team, related_name="second", blank=True, null=True, on_delete=models.SET_NULL)
+    third = models.ForeignKey(Team, related_name="third", blank=True, null=True, on_delete=models.SET_NULL)
+    fourth = models.ForeignKey(Team, related_name="fourth", blank=True, null=True, on_delete=models.SET_NULL)
+    looser1 = models.ForeignKey(Team, related_name="looser1", blank=True, null=True, on_delete=models.SET_NULL)
+    looser2 = models.ForeignKey(Team, related_name="looser2", blank=True, null=True, on_delete=models.SET_NULL)
+    looser3 = models.ForeignKey(Team, related_name="looser3", blank=True, null=True, on_delete=models.SET_NULL)
     points = models.IntegerField(null=True)

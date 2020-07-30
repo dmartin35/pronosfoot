@@ -8,7 +8,7 @@ from django.template.response import TemplateResponse
 from django.utils.translation import ugettext as _
 import json
 
-from django.contrib.auth.views import login as djangologin
+#from django.contrib.auth.views import login as djangologin
 from django.contrib.auth import login as djangologin_user
 
 from django.conf import settings
@@ -248,7 +248,7 @@ def fixtures(request, week):
                }
 
     #get player forecasts count for calendar
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         context['forecasts_cal'] = countForecastsForMonth(firstday.year, firstday.month, request.user.id)
     
     return render(request, 'pages/matches.html',context)
