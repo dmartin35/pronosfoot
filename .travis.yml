@@ -3,7 +3,7 @@ env:
     - CC_TEST_REPORTER_ID=b75aa588efe2080cf10e1c10a37e554a8b06f65fb08535dba1613ed725f7e424
 language: python
 python:
-  - "3.4"
+  - "3.6"
 cache: pip
 before_install:
   - pip install "pytest>=2.9" pytest-cov
