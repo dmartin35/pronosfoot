@@ -8,3 +8,6 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 SERVER_EMAIL = EMAIL_HOST_USER
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+# removes SSL server - not required for running unit tests
+INSTALLED_APPS.remove('sslserver')
