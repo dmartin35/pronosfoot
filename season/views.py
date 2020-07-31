@@ -606,7 +606,7 @@ def ajax_calendar(request,year,month):
                }
     
     #get player forecasts count for calendar
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         context['forecasts_cal'] = countForecastsForMonth(year, month, request.user.id)
     
     return render(request, 'contents/calendar.html',context)
