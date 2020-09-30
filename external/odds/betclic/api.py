@@ -8,7 +8,7 @@ from external.odds.betclic import TEAM_MAP
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
-BETCLIC_L1_URL = 'https://www.betclic.fr/football/ligue-1-conforama-e4'
+BETCLIC_L1_URL = 'https://www.betclic.fr/football-s1/ligue-1-uber-eats-c4'
 
 
 Odds = namedtuple('Odds', ['win', 'draw','lose'])
@@ -33,15 +33,17 @@ def _parse_odds(html):
     soup = bs4.BeautifulSoup(html, 'html.parser')
 
     # odds = soup.select('div.match-entry')
-    odds = soup.find_all('div', class_='match-entry')
+    odds = soup.find_all('div', class_='cardMatch')
 
     raw = []
     for odd in odds:
         with contextlib.suppress(Exception):
-            teams = odd.select('.match-name > a')[0].string
-            teams = teams.strip().split(' - ')
+            teams = odd.select('.betBox_matchName')[0]
+            teams = teams.select('.betBox_contestantName')
+            teams = [t.string.strip() for t in teams]
 
-            match_odds = odd.select('.match-odds > .match-odd > span')
+            match_odds = odd.select('.betBox_wrapperOdds > app-default-market')[0]
+            match_odds = match_odds.select('.betBox_odds .oddValue')
             wdl = [tag.string for tag in match_odds]
 
             raw.append(tuple(teams + wdl))
