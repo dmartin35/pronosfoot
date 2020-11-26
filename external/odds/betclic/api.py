@@ -42,8 +42,8 @@ def _parse_odds(html):
             teams = teams.select('.betBox_contestantName')
             teams = [t.string.strip() for t in teams]
 
-            match_odds = odd.select('.betBox_wrapperOdds > app-default-market')[0]
-            match_odds = match_odds.select('.betBox_odds .oddValue')
+            match_odds = odd.select('.betBox_wrapperOdds .betBox_odds')[0]
+            match_odds = match_odds.select('.oddValue')
             wdl = [tag.string for tag in match_odds]
 
             raw.append(tuple(teams + wdl))
