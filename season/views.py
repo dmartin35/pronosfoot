@@ -7,6 +7,7 @@ from django.http import Http404, HttpResponse, JsonResponse
 from django.template.response import TemplateResponse
 from django.utils.translation import ugettext as _
 import json
+import logging
 
 #from django.contrib.auth.views import login as djangologin
 from django.contrib.auth import login as djangologin_user
@@ -751,6 +752,11 @@ def ajax_forecast_trend_fixture(request, fixture_id):
     #     'color': '#8bc34a',
     # }]
 
+    try:
+        odds = get_fixture_odds(fixture_id) if fixture.score_a is None and fixture.score_b is None else None
+    except Exception as exc:
+        logging.exception("Unexpected error when fetching odds for fixture %s", fixture_id)
+        odds = None
 
 
     context = {
@@ -759,7 +765,7 @@ def ajax_forecast_trend_fixture(request, fixture_id):
         'fixture': fixture,
         # 'trend_chart': series,
         # give odds only for fixture to come - not for match over
-        'odds': get_fixture_odds(fixture_id) if fixture.score_a is None and fixture.score_b is None else None,
+        'odds': odds,
     }
 
     return render(request, 'snippets/forecast_details.html', context)
