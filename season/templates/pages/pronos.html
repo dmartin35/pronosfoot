@@ -54,6 +54,8 @@
           $.get(url).done(function(data){
             next.data('loaded', 'loaded');
             next.html(data);
+          }).fail(function() {
+            next.html('<div class="text-center">Erreur lors du chargement des données</div>');
           });
         }
         parent.addClass('expanded');
