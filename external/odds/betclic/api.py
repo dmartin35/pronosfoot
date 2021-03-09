@@ -33,16 +33,16 @@ def _parse_odds(html):
     soup = bs4.BeautifulSoup(html, 'html.parser')
 
     # odds = soup.select('div.match-entry')
-    odds = soup.find_all('div', class_='cardMatch')
+    odds = soup.find_all('a', class_='cardEvent')
 
     raw = []
     for odd in odds:
         with contextlib.suppress(Exception):
-            teams = odd.select('.betBox_matchName')[0]
-            teams = teams.select('.betBox_contestantName')
+            teams = odd.select('.scoreboard_wrapper')[0]
+            teams = teams.select('.scoreboard_contestantLabel')
             teams = [t.string.strip() for t in teams]
 
-            match_odds = odd.select('.betBox_wrapperOdds .betBox_odds')[0]
+            match_odds = odd.select('.market_odds')[0]
             match_odds = match_odds.select('.oddValue')
             wdl = [tag.string for tag in match_odds]
 

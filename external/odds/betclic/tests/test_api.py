@@ -16,7 +16,7 @@ class TestBetclicOdds(unittest.TestCase):
         """
         delete_memoized(get_odds)
 
-    @unittest.skip('This test is disabled for production due to daily page changes which leads to no odds some days')
+    #@unittest.skip('This test is disabled for production due to daily page changes which leads to no odds some days')
     def test_get_odds(self):
         """
         this test ensure the retrieval of betclic odds is not broken over time
