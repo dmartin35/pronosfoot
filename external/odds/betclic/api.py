@@ -78,10 +78,13 @@ def get_odds():
     odds = {}
 
     for line in raw:
-        team_a, team_b, win, draw, lose = line
-        team_a = convert_team_name(team_a)
-        team_b = convert_team_name(team_b)
-        odds[(team_a, team_b)] = Odds(win, draw, lose)
+        try:
+            team_a, team_b, win, draw, lose = line
+            team_a = convert_team_name(team_a)
+            team_b = convert_team_name(team_b)
+            odds[(team_a, team_b)] = Odds(win, draw, lose)
+        except ValueError:
+            pass  # ignore in case of unpacking with value error for some lines
 
     return odds
 
