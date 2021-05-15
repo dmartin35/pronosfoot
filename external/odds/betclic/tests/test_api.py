@@ -1,7 +1,7 @@
 import os
 import unittest
 from unittest import mock
-from external.odds.betclic.api import get_odds
+from external.odds.betclic.api import get_odds, get_odds_from_html
 from memoize import delete_memoized
 
 
@@ -51,7 +51,7 @@ class TestLocalBetclicOdds(unittest.TestCase):
         Parse local betclic page to get odds
         """
         with mock.patch('external.odds.betclic.api._download_odds', return_value=self.html):
-            odds = get_odds()
+            odds = get_odds_from_html()
             self.assertNotEqual(odds, None)
             self.assertNotEqual(odds, {})
             self.assertTrue(len(odds.keys()) > 0)
@@ -62,7 +62,7 @@ class TestLocalBetclicOdds(unittest.TestCase):
         but using local html file
         """
         with mock.patch('external.odds.betclic.api._download_odds', return_value=self.html):
-            for match, odds in get_odds().items():
+            for match, odds in get_odds_from_html().items():
                 print(match, odds)
 
 
