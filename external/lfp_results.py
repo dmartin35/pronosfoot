@@ -22,16 +22,15 @@ def parse_results_page(content):
 
         try:
             # skip live matches
-            print(result.attrs.get('class', []) )
             if 'live' in result.attrs.get('class', []):
                 continue
 
-            team_a = result.select('div.club.home a span.calendarTeamNameDesktop')[0].string
-            team_b = result.select('div.club.away a span.calendarTeamNameDesktop')[0].string
+            team_a = result.select('div.club.home span.calendarTeamNameDesktop')[0].string
+            team_b = result.select('div.club.away span.calendarTeamNameDesktop')[0].string
             team_a = escape_accent(team_a)
             team_b = escape_accent(team_b)
 
-            scores = result.select('div.result a span')
+            scores = result.select('div.result span span')
             score_a = scores[0].string
             score_b = scores[-1].string
 
