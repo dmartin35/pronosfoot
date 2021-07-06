@@ -10,7 +10,7 @@ INSTALLED_APPS += [
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'pronosfoot-2020-2021.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, 'pronosfoot-2021-2022.sqlite3'),
         #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
