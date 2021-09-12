@@ -23,7 +23,13 @@
 
       <div class="pronosfoot-wrapper table">
 	  {%if league_table%}
-	  {%if currentweek%} {%with reversed=True%}{%include "global/weekselection.html"%}{%endwith%}{%endif%}
+      {% comment %}
+	    {%if currentweek%} {%with reversed=True%}{%include "global/weekselection.html"%}{%endwith%}{%endif%}
+      {% endcomment %}
+      <h6 class="text-center">
+        <span class=" mdl-typography--display-color-contrast-light ">Saison {{season}}</span>
+      </h6>
+
 	  {%include 'contents/classement_league.html'%}
 	  {%else%}
 		<p class="mdl-typography--font-light na text-center">
