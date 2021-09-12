@@ -5,6 +5,8 @@
 
   <span class=" mdl-typography--display-color-contrast-light ">Saison {{season}} | </span>
 
+  <i id="prevWeek" class="Icon Icon-chevron-left" style="display: inline;" aria-disabled="false"></i>
+
   <select id="weekselection">
       {% if reversed %}
           {% for week in weeks reversed%}
@@ -17,4 +19,68 @@
       {% endif %}
   </select>
 
+  <i id="nextWeek" class="Icon Icon-chevron-right" style="display: inline" aria-disabled="false"></i>
+
 </h6>
+
+
+<script type="text/javascript">
+// this is quite dirty but quick solution !
+$(document).ready(function() {
+  var weekSelector = $("#weekselection");
+  var prevSelector = $("#prevWeek");
+  var nextSelector = $("#nextWeek");
+
+  var currentWeek = parseInt(weekSelector.val());
+  var first = parseInt($('#weekselection option:first-child').val());
+  var last = parseInt($('#weekselection option:last-child').val());
+
+  prevSelector.on("click", function() {
+    currentWeek = parseInt(weekSelector.val());
+    if (currentWeek == first) {return};
+
+    prevWeek = currentWeek - 1;
+    weekSelector.val(prevWeek).trigger("change");
+  });
+
+  nextSelector.on("click", function() {
+    currentWeek = parseInt(weekSelector.val());
+    if (currentWeek == last) {return};
+
+    nextWeek = currentWeek + 1;
+    weekSelector.val(nextWeek).trigger("change");
+
+  });
+
+
+  // at html rendering - handle edges cases
+  if (currentWeek == first) {
+    prevSelector.addClass("disabled");
+  }
+
+  if (currentWeek == last) {
+    nextSelector.addClass("disabled");
+  }
+
+  // disable-enable prev/next depending on dropdown change
+  $(this).on("change", function(){
+    currentWeek = parseInt(weekSelector.val());
+      if (currentWeek == first) {
+      prevSelector.addClass("disabled");
+    } else {
+      prevSelector.removeClass("disabled");
+    }
+
+    if (currentWeek == last) {
+      nextSelector.addClass("disabled");
+    } else {
+      nextSelector.removeClass("disabled");
+    }
+
+  });
+
+
+});
+</script>
+
+
