@@ -5,7 +5,9 @@
 
   <span class=" mdl-typography--display-color-contrast-light ">Saison {{season}} | </span>
 
+  {% if not reversed %}
   <i id="prevWeek" class="Icon Icon-chevron-left" style="display: inline;" aria-disabled="false"></i>
+  {% endif %}
 
   <select id="weekselection">
       {% if reversed %}
@@ -19,7 +21,9 @@
       {% endif %}
   </select>
 
+  {% if not reversed %}
   <i id="nextWeek" class="Icon Icon-chevron-right" style="display: inline" aria-disabled="false"></i>
+  {% endif %}
 
 </h6>
 
