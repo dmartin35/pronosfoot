@@ -6,6 +6,7 @@ from ics import Calendar
 from ics.timeline import Timeline
 import logging
 import re
+import dateutil
 from . import LFP_TEAM_MAP
 
 from tools.regexp import extract_regexp_groups
@@ -15,20 +16,21 @@ from tools.timezone import convert_utctime_to_timezone
 __all__ = ['ical_to_fixtures']
 
 
-def change_dt_utc_to_local(dt):
+def change_dt_utc_to_local(dt: arrow.Arrow) -> arrow.Arrow:
     """
     change UTC date time to local time zone Europe/Paris
     """
-    return convert_utctime_to_timezone(dt,'%Y%m%dT%H%M%SZ','Europe/Paris','%Y%m%dT%H%M%S')
+    return dt.to('Europe/Paris')
+    #return convert_utctime_to_timezone(dt,'%Y%m%dT%H%M%SZ','Europe/Paris','%Y%m%dT%H%M%S%z')
 
 
-def extract_dt(dt):
+def extract_dt(dt: arrow.Arrow) -> arrow.Arrow:
     """
     convert date_time format YYYYMMDDTHHMMSSZ as a date YYYY-MM-DD and a time HH:MM:SS
     
     if not possible returns (None, None)
     """
-    dt = arrow.get(dt)
+    #dt = arrow.get(dt)
     date = dt.format('YYYY-MM-DD')
     time = dt.format('HH:mm:ss')
     return date, time
@@ -71,8 +73,7 @@ def ical_to_fixtures(ical):
     timeline = Timeline(cal)  # allow to have events sorted by begin date
     for event in timeline:
         try:
-            #date, time = extract_dt(change_dt_utc_to_local(event.begin))
-            date, time = extract_dt(event.begin)
+            date, time = extract_dt(change_dt_utc_to_local(event.begin))
             team_a, team_b = extract_teams(event.name)
             try:
                 week = extract_week(event.description)
