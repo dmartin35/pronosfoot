@@ -34,7 +34,7 @@ def get_calendar():
         ical = get_url_content(CALENDAR_URL)
         # ical = ical.encode('utf-8')
         ical = escape_team_names(ical)
-        ical = escape_accent(ical)
+        #ical = escape_accent(ical)
         return ical_to_fixtures(ical)
     except Exception as e:
         logging.exception('Unable to fetch/parse LFP calender')
