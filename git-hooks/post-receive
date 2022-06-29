@@ -1,0 +1,2 @@
+#!/bin/sh
+GIT_WORK_TREE=~/pronosfoot git checkout -f

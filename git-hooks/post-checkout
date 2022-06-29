@@ -1,0 +1,7 @@
+~/.python/venv/pronosfoot/bin/pip install -U -r ~/pronosfoot/requirements.txt --no-cache-dir
+rm ~/pronosfoot/pronosfoot/settings/dev.py
+rm ~/pronosfoot/pronosfoot/settings/test.py
+rm ~/pronosfoot/git-hooks/post-*
+rmdir ~/pronosfoot/git-hooks
+sed -i -e 's/#//' ~/pronosfoot/pronosfoot/settings/__init__.py
+~/.python/venv/pronosfoot/bin/python ~/pronosfoot/manage.py collectstatic --no-input
