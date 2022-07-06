@@ -7,7 +7,7 @@
 
 	<div class="team-logo-centered-wrapper ">
 		{% with team_name=team_name|lower %}
-			{% with 'images/clubs/xlarge/'|add:team_name|add:'.png' as image_static %}
+			{% with 'images/clubs/large/'|add:team_name|add:'.png' as image_static %}
 				<img class="pronosfoot-logo-xlarge center" src="{% static image_static %}" alt=""/>
 			{% endwith %}
 		{% endwith %}

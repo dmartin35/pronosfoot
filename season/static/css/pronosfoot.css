@@ -430,6 +430,10 @@ background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0
     margin-top: -18px;
     left: 70px;
 }
+.fixture .team-logo img{
+    width: 20px;
+    height: 20px;
+}
 
 .fixture .team:first-of-type .team-logo {
     right: 70px;

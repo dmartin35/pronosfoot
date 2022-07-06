@@ -326,6 +326,7 @@ def forecasts(request,week):
                'fl_vote_date':settings.SEASON_FORECAST_MAX_DATE,
                'fl_res':leagueForecastsResultsForPlayer(request.user.id),
                'fl_res_teams':leagueForecastsResults(),
+               'teams': getAllTeams(),
                }
             
     return render(request, 'pages/pronos.html',context)
@@ -407,6 +408,7 @@ def tables(request):
                'eos':eos,
                'players_table':full_players_table_until_auto() if not eos else full_players_table_with_bonus(),
                'final_players_table':eos,
+               'teams': getAllTeams(),
                }
     
     return render(request, 'pages/classements.html', context)
