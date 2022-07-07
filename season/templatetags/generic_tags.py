@@ -226,9 +226,11 @@ def teamTitle(title):
               'second':'dauphin',
               'third':'troisi&egrave;me',
               'fourth':'quatri&egrave;me',
+              'fifth': 'cinqui&egrave;me',
               'looser1':'rel&eacute;gu&eacute;s',
               'looser2':'rel&eacute;gu&eacute;s',
               'looser3':'rel&eacute;gu&eacute;s',
+              'looser4': 'rel&eacute;gu&eacute;s',
               }
     return titles[title]
 

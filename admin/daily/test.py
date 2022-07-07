@@ -16,7 +16,7 @@ def check_season_results():
     """
     if endOfSeason():
         #get the list of forecasts for the season
-        season_forecasts = LeagueForecast.objects.all()
+        season_forecasts =LeagueForecast.objects.all()
         
         #get the results for the season
         season_results = _get_season_results()
@@ -29,11 +29,11 @@ def check_season_results():
                 points = 0
                 
                 try:
-                    for attribute in ['winner','second','third','fourth','winner_midseason']:
+                    for attribute in ['winner','second','third','fourth','fifth','winner_midseason']:
                         value = getattr(season_forecast, attribute)
                         if value.id == season_results[attribute]:
                             points += 10
-                    for attribute in ['looser1','looser2','looser3']:
+                    for attribute in ['looser1','looser2','looser3','looser4']:
                         value = getattr(season_forecast, attribute)
                         if value.id in season_results['lasts']:
                             points += 10
@@ -57,6 +57,7 @@ def _get_season_results():
     season_results['second'] = None
     season_results['third'] = None
     season_results['fourth'] = None
+    season_results['fifth'] = None
     season_results['lasts'] = None
     
     #get the mid-season league table
@@ -69,9 +70,9 @@ def _get_season_results():
     #get the final league table
     try:
         league_table = full_league_table_teamid()
-        for (key,idx) in [('winner',0),('second',1),('third',2),('fourth',3)]:
+        for (key,idx) in [('winner',0),('second',1),('third',2),('fourth',3),('fifth',4)]:
             season_results[key] = league_table[idx][0]
-        season_results['lasts'] = [x[0] for x in league_table[-3:]]
+        season_results['lasts'] = [x[0] for x in league_table[-4:]]
     except:
         pass
     

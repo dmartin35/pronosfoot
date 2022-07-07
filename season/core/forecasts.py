@@ -150,9 +150,11 @@ def getLeagueForecastsForm(player):
                    'second':forecasts.second.id if forecasts.second else None,
                    'third':forecasts.third.id if forecasts.third else None,
                    'fourth':forecasts.fourth.id if forecasts.fourth else None,
+                   'fifth': forecasts.fifth.id if forecasts.fifth else None,
                    'looser1':forecasts.looser1.id if forecasts.looser1 else None,
                    'looser2':forecasts.looser2.id if forecasts.looser2 else None,
                    'looser3':forecasts.looser3.id if forecasts.looser3 else None,
+                   'looser4': forecasts.looser4.id if forecasts.looser4 else None,
                    }
 
     #create form with forecasts data    
@@ -263,9 +265,11 @@ def leagueForecastsResults():
         results['second'] = league_table[1][0]
         results['third'] = league_table[2][0]
         results['fourth'] = league_table[3][0]
+        results['fifth'] = league_table[4][0]
         results['looser1'] = league_table[-1][0]
         results['looser2'] = league_table[-2][0]
         results['looser3'] = league_table[-3][0]
+        results['looser4'] = league_table[-4][0]
     return results
         
 def leagueForecastsResultsForPlayer(player):
@@ -293,15 +297,18 @@ def leagueForecastsResultsForPlayer(player):
                 results['third']=(forecasts.third.name == league_res['third']) if forecasts.third else False
             if 'fourth' in league_res:
                 results['fourth']=(forecasts.fourth.name == league_res['fourth']) if forecasts.fourth else False
-            
+            if 'fifth' in league_res:
+                results['fifth']=(forecasts.fifth.name == league_res['fifth']) if forecasts.fifth else False
+
             loosers = []
-            for looser in ['looser1','looser2','looser3']:
+            for looser in ['looser1','looser2','looser3','looser4']:
                 if looser in league_res:
                     loosers.append(league_res[looser])
             if loosers != []:
                 results['looser1']=(forecasts.looser1.name in loosers) if forecasts.looser1 else False
                 results['looser2']=(forecasts.looser2.name in loosers) if forecasts.looser2 else False
                 results['looser3']=(forecasts.looser3.name in loosers) if forecasts.looser3 else False
+                results['looser4'] = (forecasts.looser4.name in loosers) if forecasts.looser4 else False
     except LeagueForecast.DoesNotExist:
         pass
     

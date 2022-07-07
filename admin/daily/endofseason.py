@@ -29,11 +29,11 @@ def check_season_results():
                 bonus = 20
                 
                 try:
-                    for attribute in ['winner_midseason','winner','second','third','fourth']:
+                    for attribute in ['winner_midseason','winner','second','third','fourth','fifth']:
                         value = str(getattr(season_forecast, attribute))
                         if value == season_results[attribute]:
                             points += bonus
-                    for attribute in ['looser1','looser2','looser3']:
+                    for attribute in ['looser1','looser2','looser3','looser4']:
                         value = str(getattr(season_forecast, attribute))
                         if value in season_results['lasts']:
                             points += bonus
@@ -57,6 +57,7 @@ def _get_season_results():
     season_results['second'] = None
     season_results['third'] = None
     season_results['fourth'] = None
+    season_results['fifth'] = None
     season_results['lasts'] = None
     
     #get the mid-season league table
@@ -69,9 +70,9 @@ def _get_season_results():
     #get the final league table
     try:
         league_table = full_league_table_teamid()
-        for (key,idx) in [('winner',0),('second',1),('third',2),('fourth',3)]:
+        for (key,idx) in [('winner',0),('second',1),('third',2),('fourth',3),('fifth',4)]:
             season_results[key] = str(league_table[idx][1])
-        season_results['lasts'] = [str(x[1]) for x in league_table[-3:]]
+        season_results['lasts'] = [str(x[1]) for x in league_table[-4:]]
     except:
         pass
     

@@ -78,28 +78,30 @@ class LeagueForecastForm(forms.ModelForm):
     second = forms.ModelChoiceField(queryset=teams_by_name,required=False)
     third = forms.ModelChoiceField(queryset=teams_by_name,required=False)
     fourth = forms.ModelChoiceField(queryset=teams_by_name,required=False)
+    fifth= forms.ModelChoiceField(queryset=teams_by_name, required=False)
     looser1 = forms.ModelChoiceField(queryset=teams_by_name,required=False)
     looser2 = forms.ModelChoiceField(queryset=teams_by_name,required=False)
     looser3 = forms.ModelChoiceField(queryset=teams_by_name,required=False)
+    looser4 = forms.ModelChoiceField(queryset=teams_by_name, required=False)
     
     class Meta:
         model = LeagueForecast
         fields = ['user_id', 'winner_midseason',
-                  'winner', 'second', 'third', 'fourth',
-                  'looser1','looser2','looser3']
+                  'winner', 'second', 'third', 'fourth','fifth',
+                  'looser1','looser2','looser3','looser4']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # disable edition mode, if vote limit date has expired
         readonly = datetime.now() > settings.SEASON_FORECAST_MAX_DATE
         if readonly:
-            for field in ['winner_midseason', 'winner', 'second', 'third', 'fourth',
-                          'looser1', 'looser2', 'looser3']:
+            for field in ['winner_midseason', 'winner', 'second', 'third', 'fourth', 'fifth',
+                          'looser1', 'looser2', 'looser3', 'looser4']:
                 self.fields[field].disabled = True
 
     def clean(self):
         #check loosers are all different
-        fields = ['looser1','looser2','looser3']
+        fields = ['looser1','looser2','looser3','looser4']
         cleaned_data = [self.cleaned_data[field] for field in fields if self.cleaned_data[field]]
         if cleaned_data != distinct(cleaned_data):
             #if some values are duplicated, 
@@ -114,9 +116,11 @@ class LeagueForecastForm(forms.ModelForm):
         second = self.cleaned_data['second']
         third = self.cleaned_data['third']
         fourth = self.cleaned_data['fourth']
+        fifth = self.cleaned_data['fifth']
         looser1 = self.cleaned_data['looser1']
         looser2 = self.cleaned_data['looser2']
         looser3 = self.cleaned_data['looser3']
+        looser4 = self.cleaned_data['looser4']
 
         #retrieve player for user id
         user = Player.objects.get(id=userid)
@@ -135,9 +139,11 @@ class LeagueForecastForm(forms.ModelForm):
                 leagueforecast.update(second = second)
                 leagueforecast.update(third = third)
                 leagueforecast.update(fourth = fourth)
+                leagueforecast.update(fifth = fifth)
                 leagueforecast.update(looser1 = looser1)
                 leagueforecast.update(looser2 = looser2)
                 leagueforecast.update(looser3 = looser3)
+                leagueforecast.update(looser4 = looser4)
                 
             else:
                 #creates a new forecast instance
@@ -147,9 +153,12 @@ class LeagueForecastForm(forms.ModelForm):
                                                 second = second,
                                                 third = third,
                                                 fourth = fourth,
+                                                fifth=fifth,
                                                 looser1 = looser1,
                                                 looser2 = looser2,
-                                                looser3 = looser3)
+                                                looser3 = looser3,
+                                                looser4=looser4,
+                                                )
                 leagueforecast.save()
                 
         return leagueforecast
