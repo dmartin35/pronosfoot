@@ -7,7 +7,7 @@ logging.basicConfig()
 from external import SCORE_URL
 from external.lfp_api import get_score, get_calendar
 from tools.web import get_url_content as _url_download
-from . import TEST_LFP_TEAM_MAP_2017_2018
+from . import TEST_LFP_TEAM_MAP_2017_2018, TEST_LFP_TEAM_MAP_2020_2021
 
 class TestLFPApi(unittest.TestCase):
 
@@ -37,6 +37,7 @@ class TestLFPApi(unittest.TestCase):
         for key in ['date', 'time', 'team_a', 'team_b', 'week']:
             self.assertTrue(key in calendar[0])
 
+    @mock.patch.dict('external.lfp_results.LFP_TEAM_MAP', TEST_LFP_TEAM_MAP_2020_2021)
     @mock.patch('external.lfp_api.get_url_content')
     def test_ical_has_no_unescaped_question_mark(self, mock_url_content):
         fpath = os.path.join(os.path.dirname(__file__), 'LFP-D1-2020-2021.ics')
