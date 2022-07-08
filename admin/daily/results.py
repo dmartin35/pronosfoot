@@ -141,3 +141,24 @@ def check_results():
     today = datetime.date.today()
     #check results for today's date
     _check_results_date(today)
+
+
+def _check_missed_results(d):
+    """
+    Check whether we have missed fixtures without score in the past
+    """
+    missed_fixtures = Fixture.objects.filter(day__lt=d, score_a=None, score_b=None)
+
+    for mf in missed_fixtures:
+        print(mf.day, mf.week, mf.team_a, mf.team_b)
+
+    return missed_fixtures.count()
+
+
+def check_missed_results():
+    """
+    check missed results before today (in the past)
+    """
+    today = datetime.date.today()
+    return _check_missed_results(today)
+
