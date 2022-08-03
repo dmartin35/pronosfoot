@@ -9,7 +9,7 @@ def fixtures_to_ical(fixtures) -> str:
 
     for f in fixtures:
         e = Event()
-        e.name = f"{f.team_a} - {f.team_b} (J{f.week})"
+        e.name = f"{f.team_a} - {f.team_b} (J{f.week}) [football]"
         e.uid = f"LFP_L1_{year_start}_{year_end}_{f.id}"
 
         dt = f"{f.day}T{f.hour}+02:00"
