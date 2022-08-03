@@ -62,6 +62,8 @@ urlpatterns = auth_urlpatterns + [
     url(r'^classements/$', views.tables, name='tables'),
     url(r'^stats/$', views.stats, name='stats'),
 
+    url(r'^calendrier/equipe/(\d+)/ics/$', views.export_team_ical, name='ical_equipe'),
+
     url(r'^$', views.index, name='index'),
 ]
 

@@ -102,6 +102,8 @@ from season.core.player import isPlayerValid
 from season.core.player import getAllPlayers
 from season.core.player import getPlayerName
 
+from tools.ical import fixtures_to_ical
+
 import datetime
 import uuid
 import re
@@ -913,3 +915,14 @@ def ajax_evo_player(request, player_id):
     return JsonResponse(context)
     #return render(request, 'lightboxes/evo.html', context)
 
+
+def export_team_ical(request, team_id):
+    """
+    This view allows to export into ical format all fixtures for a given team
+    rather than fetching ical from external lfp api every time, we uses our own
+    fixtures date&times to build the ical
+    ical is returned as plain html body
+    """
+    fixtures = get_team_fixtures(team_id)
+    ical = fixtures_to_ical(fixtures)
+    return HttpResponse(content=ical)
