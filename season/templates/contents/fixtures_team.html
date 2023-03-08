@@ -6,11 +6,17 @@
 {% spaceless %}
 <div id="fixtures_team" class="fixtures mdl-grid">
   <div class="mdl-cell center mdl-cell--6-col mdl-cell--6-col-tablet">
+
+    <span class="show-all">Afficher tous les matches</span>
+    <span class="show-upcoming">Afficher uniq. les matches à venir</span>
+
   {% for fixture in team_fixtures %}
-    <time datetime="{{fixture.day|date:"l j F Y"|capfirst}}" class="date">
+    {% with finished=fixture|is_finished %}
+
+    <time datetime="{{fixture.day|date:"l j F Y"|capfirst}}" class="date {% if finished %}finished{% else %}upcoming{% endif %}">
       <h5 class="mdl-typography--font-light">{{fixture.week|french_ordinal:'f'}} journée - {{fixture.day|date:"l j F Y"|capfirst}}</h5>
     </time>
-    <ul class="match-list mdl-list">
+    <ul class="match-list mdl-list {% if finished %}finished{% else %}upcoming{% endif %}">
       <li class="mdl-list__item ">
         <div class="fixture">
 
@@ -53,7 +59,34 @@
         </div>
       </li>
     </ul>
+    {% endwith %}
   {%endfor%}
   </div>
 </div>
 {% endspaceless %}
+
+<script type="text/javascript">
+  $(document).ready(function(){
+
+    $('#fixtures_team .show-upcoming').click(function(){
+      // toggle link
+      $(this).hide();
+      $('#fixtures_team .show-all').show();
+
+      // hide finished matches
+      $('#fixtures_team time.date.finished').hide();
+      $('#fixtures_team ul.match-list.finished').hide();
+    });
+
+    $('#fixtures_team .show-all').click(function(){
+      // toggle link
+      $(this).hide();
+      $('#fixtures_team .show-upcoming').show();
+
+      // show finished matches
+      $('#fixtures_team time.date.finished').show();
+      $('#fixtures_team ul.match-list.finished').show();
+    });
+
+  });
+</script>

@@ -260,3 +260,7 @@ def wdl(value):
 @register.filter('slice_str')
 def slice_string(value, count):
     return str(value)[:int(count)]
+
+@register.filter('is_finished')
+def fixture_is_finished(fixture):
+    return fixture.score_a is not None and fixture.score_b is not None
