@@ -34,6 +34,7 @@ def init_calendar():
     """
     initialize the entire season fixtures in DB from calendar
     """
+    teams = Team.objects.count()
     lfp_cal = get_calendar()
     for idx, fixt_dict in enumerate(lfp_cal):
 
@@ -41,7 +42,7 @@ def init_calendar():
         # !! since ical does not contains any information
         # about the week of a game, we consider at first cal init
         # that all games per week are listed in right order !!
-        week = idx // 10 + 1
+        week = idx // int(teams/2) + 1
         Fixture(week=week,
                 team_a=Team.objects.get(name=fixt_dict['team_a']),
                 team_b=Team.objects.get(name=fixt_dict['team_b']),

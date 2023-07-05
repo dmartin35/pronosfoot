@@ -170,5 +170,5 @@ LOG_FILE = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'pronosfoot.
 DATE_FORMAT = '%Y-%m-%d'
 TIME_FORMAT = '%H:%M:%S'
 
-SEASON = '2022/2023'
-SEASON_FORECAST_MAX_DATE = datetime.datetime(2022,10,31,23,59,59)
+SEASON = '2023/2024'
+SEASON_FORECAST_MAX_DATE = datetime.datetime(2023,10,31,23,59,59)

@@ -48,7 +48,7 @@
         </li>
         <li class="mdl-list__item">
           <span class="mdl-list__item-secondary-content">
-            Qualifiés en Ligue des Champions
+            Qualifiés en Ligue des Champions (phase de groupes)
           </span>
         </li>
         <li class="pf-list__item-sep"></li>
@@ -64,7 +64,7 @@
         </li>
         <li class="mdl-list__item">
           <span class="mdl-list__item-secondary-content">
-            Qualifié en Ligue Europa
+            Qualifiés en Ligue des Champions (tour de qualification)
           </span>
         </li>
         <li class="pf-list__item-sep"></li>
@@ -81,51 +81,68 @@
         </li>
         <li class="mdl-list__item">
           <span class="mdl-list__item-secondary-content">
-            Qualifié en Ligue Europa Conférence
+            Qualifié en Ligue Europa (phase de groupes)
           </span>
         </li>
         <li class="pf-list__item-sep"></li>
 
         <li class="mdl-list__item">
           <span class="mdl-list__item-primary-content">
+            Sixième
+          </span>
+          {{fl_form.sixth}}
+          {%if fl_res|has_key:'sixth'%}
+            <i id="res_league_sixth" class="fa {%if fl_res.sixth%}fa-check pf-success{%else%}fa-times pf-error{%endif%}" aria-hidden="true"></i>
+            <div class="mdl-tooltip" for="res_league_sixth">Sixième: <br>{{fl_res_teams.sixth}}</div>
+          {%endif%}
+        </li>
+        <li class="mdl-list__item">
+          <span class="mdl-list__item-secondary-content">
+            Qualifié en Ligue Europa Conférence
+          </span>
+        </li>
+        <li class="pf-list__item-sep"></li>
+
+
+
+        <li class="mdl-list__item">
+          <span class="mdl-list__item-primary-content">
+            Barragiste
+          </span>
+          {{fl_form.relegation_playoff1}}
+          {%if fl_res|has_key:'relegation_playoff1'%}
+            <i id="res_league_relegation_playoff1" class="fa {%if fl_res.relegation_playoff1%}fa-check pf-success{%else%}fa-times pf-error{%endif%}" aria-hidden="true"></i>
+            <div class="mdl-tooltip" for="res_league_relegation_playoff1">Barragiste: <br>{{fl_res_teams.relegation_playoff1}} </div>
+          {%endif%}
+        </li>
+
+        <li class="mdl-list__item">
+          <span class="mdl-list__item-secondary-content">
+            Barragiste pour le maintien
+          </span>
+        </li>
+        <li class="pf-list__item-sep"></li>
+
+
+        <li class="mdl-list__item">
+          <span class="mdl-list__item-primary-content">
             Relégués
           </span>
-          {{fl_form.looser1}}
-          {%if fl_res|has_key:'looser1'%}
-            <i id="res_league_looser1" class="fa {%if fl_res.looser1%}fa-check pf-success{%else%}fa-times pf-error{%endif%}" aria-hidden="true"></i>
-            <div class="mdl-tooltip" for="res_league_looser1">Relégués: <br>{{fl_res_teams.looser1}}, {{fl_res_teams.looser2}}, {{fl_res_teams.looser3}}, {{fl_res_teams.looser4}} </div>
+          {{fl_form.relegated1}}
+          {%if fl_res|has_key:'relegated1'%}
+            <i id="res_league_relegated1" class="fa {%if fl_res.relegated1%}fa-check pf-success{%else%}fa-times pf-error{%endif%}" aria-hidden="true"></i>
+            <div class="mdl-tooltip" for="res_league_relegated1">Relégués: <br>{{fl_res_teams.relegated1}}, {{fl_res_teams.relegated2}}</div>
           {%endif%}
         </li>
         <li class="mdl-list__item">
           <span class="mdl-list__item-primary-content">
           </span>
-          {{fl_form.looser2}}
-          {%if fl_res|has_key:'looser2'%}
-            <i id="res_league_looser2" class="fa {%if fl_res.looser2%}fa-check pf-success{%else%}fa-times pf-error{%endif%}" aria-hidden="true"></i>
-            <div class="mdl-tooltip" for="res_league_looser2">Relégués: <br>{{fl_res_teams.looser1}}, {{fl_res_teams.looser2}}, {{fl_res_teams.looser3}}, {{fl_res_teams.looser4}} </div>
+          {{fl_form.relegated2}}
+          {%if fl_res|has_key:'relegated2'%}
+            <i id="res_league_relegated2" class="fa {%if fl_res.relegated2%}fa-check pf-success{%else%}fa-times pf-error{%endif%}" aria-hidden="true"></i>
+            <div class="mdl-tooltip" for="res_league_relegated2">Relégués: <br>{{fl_res_teams.relegated1}}, {{fl_res_teams.relegated2}}</div>
           {%endif%}
         </li>
-        <li class="mdl-list__item">
-          <span class="mdl-list__item-primary-content">
-          </span>
-          {{fl_form.looser3}}
-          {%if fl_res|has_key:'looser3'%}
-            <i id="res_league_looser3" class="fa {%if fl_res.looser3%}fa-check pf-success{%else%}fa-times pf-error{%endif%}" aria-hidden="true"></i>
-            <div class="mdl-tooltip" for="res_league_looser3">Relégués: <br>{{fl_res_teams.looser1}}, {{fl_res_teams.looser2}}, {{fl_res_teams.looser3}}, {{fl_res_teams.looser4}} </div>
-          {%endif%}
-        </li>
-
-
-        <li class="mdl-list__item">
-          <span class="mdl-list__item-primary-content">
-          </span>
-          {{fl_form.looser4}}
-          {%if fl_res|has_key:'looser4'%}
-            <i id="res_league_looser4" class="fa {%if fl_res.looser4%}fa-check pf-success{%else%}fa-times pf-error{%endif%}" aria-hidden="true"></i>
-            <div class="mdl-tooltip" for="res_league_looser4">Relégués: <br>{{fl_res_teams.looser1}}, {{fl_res_teams.looser2}}, {{fl_res_teams.looser3}}, {{fl_res_teams.looser4}} </div>
-          {%endif%}
-        </li>
-
         <li class="mdl-list__item">
           <span class="mdl-list__item-secondary-content">
             Relégués en Ligue 2

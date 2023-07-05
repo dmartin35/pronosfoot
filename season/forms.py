@@ -79,33 +79,34 @@ class LeagueForecastForm(forms.ModelForm):
     third = forms.ModelChoiceField(queryset=teams_by_name,required=False)
     fourth = forms.ModelChoiceField(queryset=teams_by_name,required=False)
     fifth= forms.ModelChoiceField(queryset=teams_by_name, required=False)
-    looser1 = forms.ModelChoiceField(queryset=teams_by_name,required=False)
-    looser2 = forms.ModelChoiceField(queryset=teams_by_name,required=False)
-    looser3 = forms.ModelChoiceField(queryset=teams_by_name,required=False)
-    looser4 = forms.ModelChoiceField(queryset=teams_by_name, required=False)
+    sixth = forms.ModelChoiceField(queryset=teams_by_name, required=False)
+    relegated1 = forms.ModelChoiceField(queryset=teams_by_name,required=False)
+    relegated2 = forms.ModelChoiceField(queryset=teams_by_name,required=False)
+    relegation_playoff1 = forms.ModelChoiceField(queryset=teams_by_name,required=False)
+
     
     class Meta:
         model = LeagueForecast
         fields = ['user_id', 'winner_midseason',
-                  'winner', 'second', 'third', 'fourth','fifth',
-                  'looser1','looser2','looser3','looser4']
+                  'winner', 'second', 'third', 'fourth', 'fifth', 'sixth',
+                  'relegated1', 'relegated2', 'relegation_playoff1']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # disable edition mode, if vote limit date has expired
         readonly = datetime.now() > settings.SEASON_FORECAST_MAX_DATE
         if readonly:
-            for field in ['winner_midseason', 'winner', 'second', 'third', 'fourth', 'fifth',
-                          'looser1', 'looser2', 'looser3', 'looser4']:
+            for field in ['winner_midseason', 'winner', 'second', 'third', 'fourth', 'fifth', 'sixth',
+                          'relegated1', 'relegated2', 'relegation_playoff1']:
                 self.fields[field].disabled = True
 
     def clean(self):
         #check loosers are all different
-        fields = ['looser1','looser2','looser3','looser4']
+        fields = ['relegated1', 'relegated2']
         cleaned_data = [self.cleaned_data[field] for field in fields if self.cleaned_data[field]]
         if cleaned_data != distinct(cleaned_data):
             #if some values are duplicated, 
-            raise forms.ValidationError(_("Loosers must all be different."))
+            raise forms.ValidationError(_("Relegated must all be different."))
         
         return self.cleaned_data
 
@@ -117,10 +118,10 @@ class LeagueForecastForm(forms.ModelForm):
         third = self.cleaned_data['third']
         fourth = self.cleaned_data['fourth']
         fifth = self.cleaned_data['fifth']
-        looser1 = self.cleaned_data['looser1']
-        looser2 = self.cleaned_data['looser2']
-        looser3 = self.cleaned_data['looser3']
-        looser4 = self.cleaned_data['looser4']
+        sixth = self.cleaned_data['sixth']
+        relegated1 = self.cleaned_data['relegated1']
+        relegated2 = self.cleaned_data['relegated2']
+        relegation_playoff1 = self.cleaned_data['relegation_playoff1']
 
         #retrieve player for user id
         user = Player.objects.get(id=userid)
@@ -140,11 +141,11 @@ class LeagueForecastForm(forms.ModelForm):
                 leagueforecast.update(third = third)
                 leagueforecast.update(fourth = fourth)
                 leagueforecast.update(fifth = fifth)
-                leagueforecast.update(looser1 = looser1)
-                leagueforecast.update(looser2 = looser2)
-                leagueforecast.update(looser3 = looser3)
-                leagueforecast.update(looser4 = looser4)
-                
+                leagueforecast.update(sixth=sixth)
+                leagueforecast.update(relegated1 = relegated1)
+                leagueforecast.update(relegated2 = relegated2)
+                leagueforecast.update(relegation_playoff1 = relegation_playoff1)
+
             else:
                 #creates a new forecast instance
                 leagueforecast = LeagueForecast(user=user,
@@ -154,10 +155,10 @@ class LeagueForecastForm(forms.ModelForm):
                                                 third = third,
                                                 fourth = fourth,
                                                 fifth=fifth,
-                                                looser1 = looser1,
-                                                looser2 = looser2,
-                                                looser3 = looser3,
-                                                looser4=looser4,
+                                                sixth=sixth,
+                                                relegated1 = relegated1,
+                                                relegated2 = relegated2,
+                                                relegation_playoff1 = relegation_playoff1,
                                                 )
                 leagueforecast.save()
                 

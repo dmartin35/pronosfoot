@@ -29,13 +29,14 @@ def check_season_results():
                 bonus = 20
                 
                 try:
-                    for attribute in ['winner_midseason','winner','second','third','fourth','fifth']:
+                    for attribute in ['winner_midseason', 'winner', 'second', 'third',
+                                      'fourth', 'fifth', 'sixth', 'relegation_playoff1']:
                         value = str(getattr(season_forecast, attribute))
                         if value == season_results[attribute]:
                             points += bonus
-                    for attribute in ['looser1','looser2','looser3','looser4']:
+                    for attribute in ['relegated1', 'relegated2']:
                         value = str(getattr(season_forecast, attribute))
-                        if value in season_results['lasts']:
+                        if value in season_results['relegated']:
                             points += bonus
                 except:
                     pass
@@ -58,7 +59,9 @@ def _get_season_results():
     season_results['third'] = None
     season_results['fourth'] = None
     season_results['fifth'] = None
-    season_results['lasts'] = None
+    season_results['sixth'] = None
+    season_results['relegation_playoff1'] = None
+    season_results['relegated'] = None
     
     #get the mid-season league table
     try:
@@ -70,9 +73,10 @@ def _get_season_results():
     #get the final league table
     try:
         league_table = full_league_table_teamid()
-        for (key,idx) in [('winner',0),('second',1),('third',2),('fourth',3),('fifth',4)]:
-            season_results[key] = str(league_table[idx][1])
-        season_results['lasts'] = [str(x[1]) for x in league_table[-4:]]
+        for (key, pos) in [('winner', 1), ('second', 2), ('third', 3), ('fourth', 4), ('fifth', 5), ('sixth', 6),
+                           ('relegation_playoff1', 16)]:
+            season_results[key] = str(league_table[pos - 1][1])
+        season_results['relegated'] = [str(x[1]) for x in league_table[-2:]]
     except:
         pass
     

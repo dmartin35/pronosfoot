@@ -151,10 +151,10 @@ def getLeagueForecastsForm(player):
                    'third':forecasts.third.id if forecasts.third else None,
                    'fourth':forecasts.fourth.id if forecasts.fourth else None,
                    'fifth': forecasts.fifth.id if forecasts.fifth else None,
-                   'looser1':forecasts.looser1.id if forecasts.looser1 else None,
-                   'looser2':forecasts.looser2.id if forecasts.looser2 else None,
-                   'looser3':forecasts.looser3.id if forecasts.looser3 else None,
-                   'looser4': forecasts.looser4.id if forecasts.looser4 else None,
+                   'sixth': forecasts.sixth.id if forecasts.sixth else None,
+                   'relegated1':forecasts.relegated1.id if forecasts.relegated1 else None,
+                   'relegated2':forecasts.relegated2.id if forecasts.relegated2 else None,
+                   'relegation_playoff1': forecasts.relegation_playoff1.id if forecasts.relegation_playoff1 else None,
                    }
 
     #create form with forecasts data    
@@ -266,10 +266,10 @@ def leagueForecastsResults():
         results['third'] = league_table[2][0]
         results['fourth'] = league_table[3][0]
         results['fifth'] = league_table[4][0]
-        results['looser1'] = league_table[-1][0]
-        results['looser2'] = league_table[-2][0]
-        results['looser3'] = league_table[-3][0]
-        results['looser4'] = league_table[-4][0]
+        results['sixth'] = league_table[5][0]
+        results['relegated1'] = league_table[-1][0]
+        results['relegated2'] = league_table[-2][0]
+        results['relegation_playoff1'] = league_table[-3][0]
     return results
         
 def leagueForecastsResultsForPlayer(player):
@@ -299,16 +299,18 @@ def leagueForecastsResultsForPlayer(player):
                 results['fourth']=(forecasts.fourth.name == league_res['fourth']) if forecasts.fourth else False
             if 'fifth' in league_res:
                 results['fifth']=(forecasts.fifth.name == league_res['fifth']) if forecasts.fifth else False
+            if 'sixth' in league_res:
+                results['sixth']=(forecasts.fifth.name == league_res['sixth']) if forecasts.fifth else False
+            if 'relegation_playoff1' in league_res:
+                results['relegation_playoff1']=(forecasts.relegation_playoff1.name == league_res['relegation_playoff1']) if forecasts.relegation_playoff1 else False
 
             loosers = []
-            for looser in ['looser1','looser2','looser3','looser4']:
+            for looser in ['relegated1','relegated2']:
                 if looser in league_res:
                     loosers.append(league_res[looser])
             if loosers != []:
-                results['looser1']=(forecasts.looser1.name in loosers) if forecasts.looser1 else False
-                results['looser2']=(forecasts.looser2.name in loosers) if forecasts.looser2 else False
-                results['looser3']=(forecasts.looser3.name in loosers) if forecasts.looser3 else False
-                results['looser4'] = (forecasts.looser4.name in loosers) if forecasts.looser4 else False
+                results['relegated1']=(forecasts.relegated1.name in loosers) if forecasts.relegated1 else False
+                results['relegated2']=(forecasts.relegated2.name in loosers) if forecasts.relegated2 else False
     except LeagueForecast.DoesNotExist:
         pass
     
