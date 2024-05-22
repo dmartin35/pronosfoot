@@ -446,7 +446,7 @@ def user_table_with_bonus():
            c.scores, 
            c.issues, 
            c.matches,
-           c.points + IF (ISNULL(c.bonus),0,c.bonus) as total,
+           c.points + COALESCE(c.bonus,0) as total,
            c.bonus
     FROM(
         SELECT * from
@@ -471,7 +471,7 @@ def user_table_with_bonus():
         )b
         ON a.id = b.user_id
     )c
-    ORDER BY ISNULL(total)ASC, total DESC, points DESC, scores DESC, 
+    ORDER BY COALESCE(total,0) DESC, points DESC, scores DESC,
              issues DESC, matches, name, id
     """
     #ISNULL(total) ASC, total -->MySql
