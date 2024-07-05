@@ -1,0 +1,643 @@
+{
+   "matches":[
+      {
+         "matchId":"l1_championship_match_72415",
+         "championshipId":1,
+         "gameWeekNumber":1,
+         "date":"2024-08-17T22:00:00.000Z",
+         "dateTimeUnknown":true,
+         "period":"preMatch",
+         "isLive":false,
+         "broadcasters":{
+            "international":[
+
+            ],
+            "local":[
+
+            ]
+         },
+         "home":{
+            "clubId":"l1_championship_club_2024_37",
+            "clubIdentity":{
+               "id":"l1_championship_club_2024_37",
+               "name":"Angers SCO",
+               "officialName":"Angers",
+               "shortName":"Angers SCO",
+               "displayName":"Angers Sco",
+               "businessName":"Angers SCO",
+               "trigram":"ANR",
+               "primaryColor":"#000000",
+               "secondaryColor":"#FFFFFF",
+               "assets":{
+                  "logo":{
+                     "small":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/logo/2023_4_37_128x128_22f933b61100266bf7f510aad9b5ad28.png",
+                     "medium":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/logo/2023_4_37_512x512_b5149d8c4312c158b2975298205510eb.png",
+                     "large":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/logo/2023_4_37_768x768_c4cece6a5c19ddae0e091591551e341c.png"
+                  },
+                  "whiteLogo":{
+                     "small":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/whiteLogo/2023_4_37_128x128_9178b4aa49e5729540795ac2c162660f.png",
+                     "medium":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/whiteLogo/2023_4_37_512x512_0d3daec93935c39faa6c0c29527d7f7e.png",
+                     "large":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/whiteLogo/2023_4_37_768x768_43b866677a58c8988e66459bdd00690e.png"
+                  }
+               },
+               "preferMonochromeLogo":false
+            }
+         },
+         "away":{
+            "clubId":"l1_championship_club_2024_6",
+            "clubIdentity":{
+               "id":"l1_championship_club_2024_6",
+               "name":"RC Lens",
+               "officialName":"Lens",
+               "shortName":"RC Lens",
+               "displayName":"Rc Lens",
+               "businessName":"RC Lens",
+               "trigram":"LEN",
+               "primaryColor":"#C51315",
+               "secondaryColor":"#FFD500",
+               "assets":{
+                  "logo":{
+                     "small":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/logo/2023_1_6_128x128_887afe054fb407c46a1e2cc878d56d01.png",
+                     "medium":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/logo/2023_1_6_512x512_955600e1ae7ee06f96f79ed424a0874a.png",
+                     "large":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/logo/2023_1_6_768x768_84fcf6622476df8bb7b037fec9cc6d01.png"
+                  },
+                  "whiteLogo":{
+                     "small":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/whiteLogo/2023_1_6_128x128_34bc17277556178aea69e3b6b7149088.png",
+                     "medium":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/whiteLogo/2023_1_6_512x512_36fb6619cb1603fc5b86babad9e37afe.png",
+                     "large":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/whiteLogo/2023_1_6_768x768_0ee371ecdd50605f5aa626eebbc0c1b2.png"
+                  }
+               },
+               "preferMonochromeLogo":false
+            }
+         }
+      },
+      {
+         "matchId":"l1_championship_match_72416",
+         "championshipId":1,
+         "gameWeekNumber":1,
+         "date":"2024-08-17T22:00:00.000Z",
+         "dateTimeUnknown":true,
+         "period":"preMatch",
+         "isLive":false,
+         "broadcasters":{
+            "local":[
+
+            ],
+            "international":[
+
+            ]
+         },
+         "home":{
+            "clubId":"l1_championship_club_2024_2",
+            "clubIdentity":{
+               "id":"l1_championship_club_2024_2",
+               "name":"AJ Auxerre",
+               "officialName":"Auxerre",
+               "shortName":"AJ Auxerre",
+               "displayName":"Aj Auxerre",
+               "businessName":"AJ Auxerre",
+               "trigram":"AUX",
+               "primaryColor":"#164194",
+               "secondaryColor":"#FFFFFF",
+               "assets":{
+                  "logo":{
+                     "small":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/logo/2023_4_2_128x128_f25b3b461b1ed57875618ac6f3ea96e8.png",
+                     "medium":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/logo/2023_4_2_512x512_4bed22ddd777a8b0977284bee7f416a7.png",
+                     "large":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/logo/2023_4_2_768x768_ed1502c12ee3e4ea6128a09326aaa2c2.png"
+                  },
+                  "whiteLogo":{
+                     "small":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/whiteLogo/2023_4_2_128x128_7fad5191d1f4bc9016b1c17b651a51b4.png",
+                     "medium":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/whiteLogo/2023_4_2_512x512_a8a6eea2fc4f046ed9dc53186631624e.png",
+                     "large":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/whiteLogo/2023_4_2_768x768_196eade76aa6e152557be7cd9df25d43.png"
+                  }
+               },
+               "preferMonochromeLogo":false
+            }
+         },
+         "away":{
+            "clubId":"l1_championship_club_2024_30",
+            "clubIdentity":{
+               "id":"l1_championship_club_2024_30",
+               "name":"OGC Nice",
+               "officialName":"Nice",
+               "shortName":"OGC Nice",
+               "displayName":"Ogc Nice",
+               "businessName":"OGC Nice",
+               "trigram":"NIC",
+               "primaryColor":"#DA2128",
+               "secondaryColor":"#2C2A29",
+               "assets":{
+                  "logo":{
+                     "small":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/logo/2023_1_30_128x128_eb33f30ec2a8dfbebe1f8d5b49149451.png",
+                     "medium":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/logo/2023_1_30_512x512_2ccb89a2f1fbad23e693d1c5d101a25d.png",
+                     "large":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/logo/2023_1_30_768x768_a5d6f891e9eee7d73adb04f17ca97289.png"
+                  },
+                  "whiteLogo":{
+                     "small":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/whiteLogo/2023_1_30_128x128_946acfb794cbbefb055ed57558ba5147.png",
+                     "medium":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/whiteLogo/2023_1_30_512x512_7709b0c8fba1638f20be7d625dbb4aaf.png",
+                     "large":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/whiteLogo/2023_1_30_768x768_335b184e4bdac0508feed8dd2faffc28.png"
+                  }
+               },
+               "preferMonochromeLogo":false
+            }
+         }
+      },
+      {
+         "matchId":"l1_championship_match_72417",
+         "championshipId":1,
+         "gameWeekNumber":1,
+         "date":"2024-08-17T22:00:00.000Z",
+         "dateTimeUnknown":true,
+         "period":"preMatch",
+         "isLive":false,
+         "broadcasters":{
+            "local":[
+
+            ],
+            "international":[
+
+            ]
+         },
+         "home":{
+            "clubId":"l1_championship_club_2024_44",
+            "clubIdentity":{
+               "id":"l1_championship_club_2024_44",
+               "name":"Stade Brestois 29",
+               "officialName":"Brest",
+               "shortName":"Brest",
+               "displayName":"Stade Brestois 29",
+               "businessName":"Brest",
+               "trigram":"BRS",
+               "primaryColor":"#D10A11",
+               "secondaryColor":"#FFFFFF",
+               "assets":{
+                  "logo":{
+                     "small":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/logo/2023_1_44_128x128_6e80f6db6cec2117be34cd65ab9edbd1.png",
+                     "medium":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/logo/2023_1_44_512x512_b8930455bc938de7b9f4e128e1036989.png",
+                     "large":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/logo/2023_1_44_768x768_5b902ce45f1645c17e1710c4be3f0b1e.png"
+                  },
+                  "whiteLogo":{
+                     "small":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/whiteLogo/2023_1_44_128x128_fc43007739733d43a64fbdd972956334.png",
+                     "medium":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/whiteLogo/2023_1_44_512x512_98925d294e919f027383c3eef30ca052.png",
+                     "large":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/whiteLogo/2023_1_44_768x768_3e2378ed34d3a81bbf095b15e64c467f.png"
+                  }
+               },
+               "preferMonochromeLogo":false
+            }
+         },
+         "away":{
+            "clubId":"l1_championship_club_2024_1",
+            "clubIdentity":{
+               "id":"l1_championship_club_2024_1",
+               "name":"Olympique de Marseille",
+               "officialName":"Marseille",
+               "shortName":"OM",
+               "displayName":"Olympique De Marseille",
+               "businessName":"OMGGGG",
+               "trigram":"MAR",
+               "primaryColor":"#0E96D2",
+               "secondaryColor":"#FFFFFF",
+               "assets":{
+                  "logo":{
+                     "small":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/logo/2023_1_1_128x128_b5e66d77018d1ffd71d40119a10769d9.png",
+                     "medium":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/logo/2023_1_1_512x512_d3163cea28f9a3820a3036ea51f1261a.png",
+                     "large":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/logo/2023_1_1_768x768_82c6667eb43efe601d6ce5357487d116.png"
+                  },
+                  "whiteLogo":{
+                     "small":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/whiteLogo/2023_1_1_128x128_da72f448f2d974ee9ecf6881f68b201a.png",
+                     "medium":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/whiteLogo/2023_1_1_512x512_36a1971bface37227c180f17fa61d926.png",
+                     "large":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/whiteLogo/2023_1_1_768x768_ea78aa2acc8277665159e377227d39c3.png"
+                  }
+               },
+               "preferMonochromeLogo":true
+            }
+         }
+      },
+      {
+         "matchId":"l1_championship_match_72418",
+         "championshipId":1,
+         "gameWeekNumber":1,
+         "date":"2024-08-17T22:00:00.000Z",
+         "dateTimeUnknown":true,
+         "period":"preMatch",
+         "isLive":false,
+         "broadcasters":{
+            "local":[
+
+            ],
+            "international":[
+
+            ]
+         },
+         "home":{
+            "clubId":"l1_championship_club_2024_5",
+            "clubIdentity":{
+               "id":"l1_championship_club_2024_5",
+               "name":"Havre Athletic Club",
+               "officialName":"Le Havre",
+               "shortName":"Havre AC",
+               "displayName":"Havre Athletic Club",
+               "businessName":"Havre AC",
+               "trigram":"LHV",
+               "primaryColor":"#79BDE8",
+               "secondaryColor":"#183360",
+               "assets":{
+                  "logo":{
+                     "small":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/logo/2023_1_5_128x128_08ea6f21e63bbc926a6b2e99a54d66b9.png",
+                     "medium":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/logo/2023_1_5_512x512_e9bf970697e022dcbd3d51e245f3682d.png",
+                     "large":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/logo/2023_1_5_768x768_9ff4a4595ab434bdc1d5adf548b1d5d8.png"
+                  },
+                  "whiteLogo":{
+                     "small":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/whiteLogo/2023_1_5_128x128_b02a397d09e5bd1c45ee4a71d4a3b409.png",
+                     "medium":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/whiteLogo/2023_1_5_512x512_4e25ab901531b75b04b7cc82564595d8.png",
+                     "large":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/whiteLogo/2023_1_5_768x768_bf92306bb60edd511b056cb2a41c96b6.png"
+                  }
+               },
+               "preferMonochromeLogo":false
+            }
+         },
+         "away":{
+            "clubId":"l1_championship_club_2024_13",
+            "clubIdentity":{
+               "id":"l1_championship_club_2024_13",
+               "name":"Paris Saint-Germain",
+               "officialName":"Paris Saint-Germain",
+               "shortName":"PSG",
+               "displayName":"Paris Saint-Germain",
+               "businessName":"PSG",
+               "trigram":"PSG",
+               "primaryColor":"#004070",
+               "secondaryColor":"#E30613",
+               "assets":{
+                  "logo":{
+                     "small":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/logo/2023_1_13_128x128_71452974055596a4cdae24a2112ead57.png",
+                     "medium":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/logo/2023_1_13_512x512_4a9438034a011c1368c52d097a93b98f.png",
+                     "large":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/logo/2023_1_13_768x768_c678b2679b5f96c5255c3fb5e912df5a.png"
+                  },
+                  "whiteLogo":{
+                     "small":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/whiteLogo/2023_1_13_128x128_c4139f63a5add876fa55b583f9acefdd.png",
+                     "medium":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/whiteLogo/2023_1_13_512x512_ffc362a296583161378d27df1ad7e109.png",
+                     "large":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/whiteLogo/2023_1_13_768x768_e288557b43100c5212a3b6b748871e9c.png"
+                  }
+               },
+               "preferMonochromeLogo":false
+            }
+         }
+      },
+      {
+         "matchId":"l1_championship_match_72419",
+         "championshipId":1,
+         "gameWeekNumber":1,
+         "date":"2024-08-17T22:00:00.000Z",
+         "dateTimeUnknown":true,
+         "period":"preMatch",
+         "isLive":false,
+         "broadcasters":{
+            "local":[
+
+            ],
+            "international":[
+
+            ]
+         },
+         "home":{
+            "clubId":"l1_championship_club_2024_9",
+            "clubIdentity":{
+               "id":"l1_championship_club_2024_9",
+               "name":"AS Monaco",
+               "officialName":"Monaco",
+               "shortName":"AS Monaco",
+               "displayName":"As Monaco",
+               "businessName":"AS Monaco",
+               "trigram":"MCO",
+               "primaryColor":"#D70032",
+               "secondaryColor":"#FFFFFF",
+               "assets":{
+                  "logo":{
+                     "small":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/logo/2023_1_9_128x128_486e4b383509816f94f5ab9269a14449.png",
+                     "medium":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/logo/2023_1_9_512x512_ad7dd146950eee8eb68ea9588a674fe8.png",
+                     "large":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/logo/2023_1_9_768x768_0f59d1cadcd741881109da1a49bb7a0d.png"
+                  },
+                  "whiteLogo":{
+                     "small":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/whiteLogo/2023_1_9_128x128_e9478a4c3eb59d1e8eba6a26b38b614f.png",
+                     "medium":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/whiteLogo/2023_1_9_512x512_5dbc554fe872033a94563f73705e4995.png",
+                     "large":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/whiteLogo/2023_1_9_768x768_04de42489490b5198687fb9920420661.png"
+                  }
+               },
+               "preferMonochromeLogo":false
+            }
+         },
+         "away":{
+            "clubId":"l1_championship_club_2024_31",
+            "clubIdentity":{
+               "id":"l1_championship_club_2024_31",
+               "name":"AS Saint-Étienne",
+               "officialName":"St Etienne",
+               "shortName":"ASSE",
+               "displayName":"AS Saint-Étienne",
+               "businessName":"ASSE",
+               "trigram":"STE",
+               "primaryColor":"#1D995B",
+               "secondaryColor":"#FFFFFF",
+               "assets":{
+                  "logo":{
+                     "small":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/logo/2023_4_31_128x128_87708774378511643d25d87deec9c4e0.png",
+                     "medium":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/logo/2023_4_31_512x512_5b548ce238a23e1b8e0191a74cc3df30.png",
+                     "large":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/logo/2023_4_31_768x768_32b1d28beb452840d52adb50773adb52.png"
+                  },
+                  "whiteLogo":{
+                     "small":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/whiteLogo/2023_4_31_128x128_40279734334d92ab4dace83cff4dd615.png",
+                     "medium":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/whiteLogo/2023_4_31_512x512_1521ccdcfbbe65d2a9e9bc842b132131.png",
+                     "large":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/whiteLogo/2023_4_31_768x768_f0412fa36ad19674329e46c8f570d5bf.png"
+                  }
+               },
+               "preferMonochromeLogo":false
+            }
+         }
+      },
+      {
+         "matchId":"l1_championship_match_72420",
+         "championshipId":1,
+         "gameWeekNumber":1,
+         "date":"2024-08-17T22:00:00.000Z",
+         "dateTimeUnknown":true,
+         "period":"preMatch",
+         "isLive":false,
+         "broadcasters":{
+            "local":[
+
+            ],
+            "international":[
+
+            ]
+         },
+         "home":{
+            "clubId":"l1_championship_club_2024_10",
+            "clubIdentity":{
+               "id":"l1_championship_club_2024_10",
+               "name":"Montpellier Hérault SC",
+               "officialName":"Montpellier",
+               "shortName":"Montpellier",
+               "displayName":"Montpellier Hérault Sc",
+               "businessName":"Montpellier",
+               "trigram":"ACRO",
+               "primaryColor":"#023A78",
+               "secondaryColor":"#EC6707",
+               "assets":{
+                  "logo":{
+                     "small":"https://s3.eu-west-1.amazonaws.com/image.mpg/2024_4_40_A_128x128.png",
+                     "medium":"https://s3.eu-west-1.amazonaws.com/image.mpg/2024_4_40_A_512x512.png",
+                     "large":"https://s3.eu-west-1.amazonaws.com/image.mpg/2024_4_40_A_768x768.png"
+                  },
+                  "whiteLogo":{
+                     "small":"https://s3.eu-west-1.amazonaws.com/image.mpg/2024_4_40_WHITE_128x128.png",
+                     "medium":"https://s3.eu-west-1.amazonaws.com/image.mpg/2024_4_40_WHITE_512x512.png",
+                     "large":"https://s3.eu-west-1.amazonaws.com/image.mpg/2024_4_40_WHITE_768x768.png"
+                  }
+               },
+               "preferMonochromeLogo":false
+            }
+         },
+         "away":{
+            "clubId":"l1_championship_club_2024_15",
+            "clubIdentity":{
+               "id":"l1_championship_club_2024_15",
+               "name":"RC Strasbourg Alsace",
+               "officialName":"Strasbourg",
+               "shortName":"Strasbourg",
+               "displayName":"Rc Strasbourg Alsace",
+               "businessName":"Strasbourg",
+               "trigram":"SBG",
+               "primaryColor":"#009EE2",
+               "secondaryColor":"#DB2F34",
+               "assets":{
+                  "logo":{
+                     "small":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/logo/2023_1_15_128x128_b0690caabe8c7f44215d7664eed973b4.png",
+                     "medium":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/logo/2023_1_15_512x512_e9553990e86d8098a3cf94febe8b4b96.png",
+                     "large":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/logo/2023_1_15_768x768_4350d32e5f679b44fbc16b8f5352e85e.png"
+                  },
+                  "whiteLogo":{
+                     "small":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/whiteLogo/2023_1_15_128x128_e1a882abc582b8b9f86c35e934fb3278.png",
+                     "medium":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/whiteLogo/2023_1_15_512x512_a534ea0a2780e8278dfda235189ca5eb.png",
+                     "large":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/whiteLogo/2023_1_15_768x768_5bb5654139490857654262d8b2686f0f.png"
+                  }
+               },
+               "preferMonochromeLogo":false
+            }
+         }
+      },
+      {
+         "matchId":"l1_championship_match_72421",
+         "championshipId":1,
+         "gameWeekNumber":1,
+         "date":"2024-08-17T22:00:00.000Z",
+         "dateTimeUnknown":true,
+         "period":"preMatch",
+         "isLive":false,
+         "broadcasters":{
+            "local":[
+
+            ],
+            "international":[
+
+            ]
+         },
+         "home":{
+            "clubId":"l1_championship_club_2024_41",
+            "clubIdentity":{
+               "id":"l1_championship_club_2024_41",
+               "name":"Stade DE Reims",
+               "officialName":"Reims",
+               "shortName":"Reims",
+               "displayName":"Stade De Reims",
+               "businessName":"Reims",
+               "trigram":"REI",
+               "primaryColor":"#EC3432",
+               "secondaryColor":"#FFFFFF",
+               "assets":{
+                  "logo":{
+                     "small":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/logo/2023_1_41_128x128_53697d559d116f1ab1af017ac832a25c.png",
+                     "medium":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/logo/2023_1_41_512x512_f32c01fb9955ff258883198ae4ec88b5.png",
+                     "large":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/logo/2023_1_41_768x768_a71d33087649b4019254ff8060850247.png"
+                  },
+                  "whiteLogo":{
+                     "small":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/whiteLogo/2023_1_41_128x128_f923733f1e3645f0306554b9b1262b0a.png",
+                     "medium":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/whiteLogo/2023_1_41_512x512_567d5fae13f121cbd1875de9c5ccffc6.png",
+                     "large":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/whiteLogo/2023_1_41_768x768_91b9089eceb464153ba843f7da61dd68.png"
+                  }
+               },
+               "preferMonochromeLogo":true
+            }
+         },
+         "away":{
+            "clubId":"l1_championship_club_2024_158",
+            "clubIdentity":{
+               "id":"l1_championship_club_2024_158",
+               "name":"LOSC Lille",
+               "officialName":"Lille",
+               "shortName":"LOSC",
+               "displayName":"LOSC Lille",
+               "businessName":"LOSC",
+               "trigram":"LIL",
+               "primaryColor":"#E41B13",
+               "secondaryColor":"#211E5F",
+               "assets":{
+                  "logo":{
+                     "small":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/logo/2023_1_158_128x128_7bf9576cddda33d2c1ebd966f44779d3.png",
+                     "medium":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/logo/2023_1_158_512x512_39a605746d9cf4eb12d9cd4f63adb27c.png",
+                     "large":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/logo/2023_1_158_768x768_94fd86e26028c4bb869925a35e8d901a.png"
+                  },
+                  "whiteLogo":{
+                     "small":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/whiteLogo/2023_1_158_128x128_102d4146c2293181a53afac9ea79cd90.png",
+                     "medium":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/whiteLogo/2023_1_158_512x512_73cd15f2ed622b7add8c45d36ff70663.png",
+                     "large":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/whiteLogo/2023_1_158_768x768_f3a30e0b1e98dad02e576283da10d8df.png"
+                  }
+               },
+               "preferMonochromeLogo":false
+            }
+         }
+      },
+      {
+         "matchId":"l1_championship_match_72422",
+         "championshipId":1,
+         "gameWeekNumber":1,
+         "date":"2024-08-17T22:00:00.000Z",
+         "dateTimeUnknown":true,
+         "period":"preMatch",
+         "isLive":false,
+         "broadcasters":{
+            "local":[
+
+            ],
+            "international":[
+
+            ]
+         },
+         "home":{
+            "clubId":"l1_championship_club_2024_14",
+            "clubIdentity":{
+               "id":"l1_championship_club_2024_14",
+               "name":"Stade Rennais FC",
+               "officialName":"Rennes",
+               "shortName":"Rennes",
+               "displayName":"Stade Rennais Fc",
+               "businessName":"Rennes",
+               "trigram":"REN",
+               "primaryColor":"#DA261B",
+               "secondaryColor":"#0D181C",
+               "assets":{
+                  "logo":{
+                     "small":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/logo/2023_1_14_128x128_e7371f8a913a19713876abf7cb92e131.png",
+                     "medium":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/logo/2023_1_14_512x512_28c7492293ca34c6e26d6cb71e858a57.png",
+                     "large":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/logo/2023_1_14_768x768_e703d9e4e25cdfc639c91df88b3d0793.png"
+                  },
+                  "whiteLogo":{
+                     "small":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/whiteLogo/2023_1_14_128x128_d8f0636fac557db80927cfffcd6a9169.png",
+                     "medium":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/whiteLogo/2023_1_14_512x512_6fe14edeef7960a8290247306a3aa6e4.png",
+                     "large":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/whiteLogo/2023_1_14_768x768_23db67217eb240ffc79d7f0a2e2ebe16.png"
+                  }
+               },
+               "preferMonochromeLogo":false
+            }
+         },
+         "away":{
+            "clubId":"l1_championship_club_2024_159",
+            "clubIdentity":{
+               "id":"l1_championship_club_2024_159",
+               "name":"Olympique Lyonnais",
+               "officialName":"Lyon",
+               "shortName":"OL",
+               "displayName":"Olympique Lyonnais",
+               "businessName":"OL",
+               "trigram":"LYN",
+               "primaryColor":"#0F23AA",
+               "secondaryColor":"#E5202E",
+               "assets":{
+                  "logo":{
+                     "small":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/logo/2023_1_159_128x128_019eb4a1eab9b4c9b89829cbcbbeb1de.png",
+                     "medium":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/logo/2023_1_159_512x512_1a9c2cd8f58fba433bb5cd568b3de7d0.png",
+                     "large":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/logo/2023_1_159_768x768_b150a2edf914d9beed162e1c40d00db4.png"
+                  },
+                  "whiteLogo":{
+                     "small":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/whiteLogo/2023_1_159_128x128_7882d2a5ef4500c28d900929d2bbacd2.png",
+                     "medium":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/whiteLogo/2023_1_159_512x512_a1c764bf2f259fec9203b37c51c34a49.png",
+                     "large":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/whiteLogo/2023_1_159_768x768_336109f324a909be13010cf201ba37e1.png"
+                  }
+               },
+               "preferMonochromeLogo":false
+            }
+         }
+      },
+      {
+         "matchId":"l1_championship_match_72423",
+         "championshipId":1,
+         "gameWeekNumber":1,
+         "date":"2024-08-17T22:00:00.000Z",
+         "dateTimeUnknown":true,
+         "period":"preMatch",
+         "isLive":false,
+         "broadcasters":{
+            "local":[
+
+            ],
+            "international":[
+
+            ]
+         },
+         "home":{
+            "clubId":"l1_championship_club_2024_16",
+            "clubIdentity":{
+               "id":"l1_championship_club_2024_16",
+               "name":"Toulouse FC",
+               "officialName":"Toulouse",
+               "shortName":"Toulouse FC",
+               "displayName":"Toulouse Fc",
+               "businessName":"Toulouse FC",
+               "trigram":"TOU",
+               "primaryColor":"#3E2B57",
+               "secondaryColor":"#FFFFFF",
+               "assets":{
+                  "logo":{
+                     "small":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/logo/2023_1_16_128x128_a5add8c2d780e5d231b1b2732e313eeb.png",
+                     "medium":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/logo/2023_1_16_512x512_a7be4e575396227614acc0ed47083503.png",
+                     "large":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/logo/2023_1_16_768x768_a4cff640ab69e9471d89ba21b39a3e03.png"
+                  },
+                  "whiteLogo":{
+                     "small":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/whiteLogo/2023_1_16_128x128_5f537fde304461624897801ca1823a9a.png",
+                     "medium":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/whiteLogo/2023_1_16_512x512_25195c2f3a53f0b636512dc39af30a63.png",
+                     "large":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/whiteLogo/2023_1_16_768x768_20fdcf38f1431fa117ef41b2e0a7d137.png"
+                  }
+               },
+               "preferMonochromeLogo":false
+            }
+         },
+         "away":{
+            "clubId":"l1_championship_club_2024_12",
+            "clubIdentity":{
+               "id":"l1_championship_club_2024_12",
+               "name":"FC Nantes",
+               "officialName":"Nantes",
+               "shortName":"FC Nantes",
+               "displayName":"Fc Nantes",
+               "businessName":"FC Nantes",
+               "trigram":"NAN",
+               "primaryColor":"#FFDC00",
+               "secondaryColor":"#00A558",
+               "assets":{
+                  "logo":{
+                     "small":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/logo/2023_1_12_128x128_9f2e1e92597ac09a0b744b74f4c07ed1.png",
+                     "medium":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/logo/2023_1_12_512x512_8aeaa2c15c8654db7cfd1451351939da.png",
+                     "large":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/logo/2023_1_12_768x768_e76ef187da6520b9e3b0a1782c55f588.png"
+                  },
+                  "whiteLogo":{
+                     "small":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/whiteLogo/2023_1_12_128x128_7b25c618c751cc8ff62088a3ae036636.png",
+                     "medium":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/whiteLogo/2023_1_12_512x512_1af63e9b01e5474371418fb3e38482b2.png",
+                     "large":"https://s3.eu-west-1.amazonaws.com/image.mpg/assets/clubs/whiteLogo/2023_1_12_768x768_3b4285ade92a8938c1c7662afcc8551f.png"
+                  }
+               },
+               "preferMonochromeLogo":false
+            }
+         }
+      }
+   ]
+}

@@ -1,7 +1,8 @@
 import unittest
-from external.lfp_calendar import extract_week, extract_teams
+from external.ligue1_website_old.lfp_calendar import extract_week, extract_teams
 
 
+@unittest.skip('Skip test for parsing old LFP website')
 class TestExtractWeekFromICal(unittest.TestCase):
 
     def test_week_from_desc(self):
@@ -19,6 +20,7 @@ class TestExtractWeekFromICal(unittest.TestCase):
         pass
 
 
+@unittest.skip('Skip test for parsing old LFP website')
 class TestExtractTeamsFromICal(unittest.TestCase):
 
     def parse_default(self):

@@ -1,10 +1,11 @@
 import unittest
 
-from external import CALENDAR_URL
-from external.lfp_tools import escape_team_names
+from external.ligue1_website_old import CALENDAR_URL
+from external.ligue1_website_old.lfp_tools import escape_team_names
 from tools.web import get_url_content
 
 
+@unittest.skip('Skip test for parsing old LFP website')
 class TestEscapeTeamNames(unittest.TestCase):
 
     def test_escape_question_mark_ical(self):

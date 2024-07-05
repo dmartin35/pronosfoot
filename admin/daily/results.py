@@ -7,7 +7,7 @@
 """
 import datetime
 
-from external.lfp_api import get_score
+from external.ligue1.api import get_score
 from season.models import Fixture
 from season.models import Table
 from season.models import Forecast

@@ -6,7 +6,7 @@
 from django.conf import settings
 
 from tools.log import _log
-from external.lfp_api import get_calendar
+from external.ligue1.api import get_calendar
 from season.models import Team
 from season.models import Fixture
 from tools.dtconvert import str_to_date

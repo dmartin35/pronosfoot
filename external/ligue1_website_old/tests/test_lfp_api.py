@@ -4,11 +4,13 @@ from unittest import mock
 import logging
 logging.basicConfig()
 
-from external import SCORE_URL
-from external.lfp_api import get_score, get_calendar
+from external.ligue1_website_old import SCORE_URL
+from external.ligue1_website_old.lfp_api import get_score, get_calendar
 from tools.web import get_url_content as _url_download
 from . import TEST_LFP_TEAM_MAP_2017_2018, TEST_LFP_TEAM_MAP_2020_2021
 
+
+@unittest.skip('Skip test for parsing old LFP website')
 class TestLFPApi(unittest.TestCase):
 
     @mock.patch.dict('external.lfp_results.LFP_TEAM_MAP', TEST_LFP_TEAM_MAP_2017_2018)
