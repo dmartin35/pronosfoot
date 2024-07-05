@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 
-from external.lfp_api import get_teams
-from external.lfp_api import get_calendar
+from external.ligue1.api import get_teams
+from external.ligue1.api import get_calendar
 
 from season.models import Team
 from season.models import Table
