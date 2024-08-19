@@ -80,7 +80,6 @@ def _get_matches(week: int) -> Any:
     :param week:
     :return:
     """
-    print(">> get matches ", week)
     r = requests.get(L1_CHAMPIONSHIP_MATCHES % (L1_CHAMPIONSHIP_ID, week, L1_CHAMPIONSHIP_SEASON))
     r.raise_for_status()
 
@@ -98,17 +97,15 @@ def get_score(week: int, team_a: str, team_b: str) -> (int | None, int | None):
     @return the score of the match
     @return tuple (score_a, score_b) if found, (None,None) otherwise
     """
-    print(">> get score", week, team_a, team_b)
     matches = _get_matches(week)
-
 
     for match in matches:
         team_home = match["home"]["clubIdentity"]["officialName"]
         team_away = match["away"]["clubIdentity"]["officialName"]
-        # period = match['period']
+        period = match['period']
         is_live = match['isLive']
 
-        if team_home == team_a and team_away == team_b and not is_live:  # @todo check period is enf of game
+        if team_home == team_a and team_away == team_b and not is_live and period == "fullTime":
             score_home = match["home"].get("score")
             score_away = match["away"].get("score")
 
@@ -117,6 +114,6 @@ def get_score(week: int, team_a: str, team_b: str) -> (int | None, int | None):
     return None, None
 
 
-#print(get_teams())
-#print(get_calendar())
-print(get_score(1, "Angers", "Lens"))
+# print(get_teams())
+# print(get_calendar())
+# print(get_score(1, "Angers", "Lens"))
