@@ -9,7 +9,7 @@ from external.odds.betclic import TEAM_MAP
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
-BETCLIC_L1_URL = 'https://www.betclic.fr/football-s1/ligue-1-uber-eats-c4'
+BETCLIC_L1_URL = 'https://www.betclic.fr/football-sfootball/ligue-1-mcdonald-s-c4'
 
 BETCLIC_API_URL = 'https://offer.cdn.betclic.fr/api/pub/v2/competitions/4?application=2&countrycode=fr&fetchMultipleDefaultMarkets=true&language=fr&sitecode=frfr'
 
@@ -47,8 +47,8 @@ def _parse_odds(html):
             teams = [t.string.strip() for t in teams]
 
             match_odds = odd.select('.market_odds')[0]
-            match_odds = match_odds.select('.oddValue')
-            wdl = [tag.string for tag in match_odds]
+            match_odds = match_odds.select('.btn.is-odd')
+            wdl = [btn_odd.select(".btn_label")[1].string for btn_odd in match_odds]
 
             raw.append(tuple(teams + wdl))
 
@@ -140,4 +140,4 @@ def get_odds_from_api():
 
 @memoize(timeout=300)
 def get_odds():
-    return get_odds_from_api()
+    return get_odds_from_html()

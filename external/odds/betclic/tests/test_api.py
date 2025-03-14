@@ -1,7 +1,7 @@
 import os
 import unittest
 from unittest import mock
-from external.odds.betclic.api import get_odds, get_odds_from_html
+from external.odds.betclic.api import get_odds, get_odds_from_html, _download_odds
 from memoize import delete_memoized
 
 
@@ -32,6 +32,10 @@ class TestBetclicOdds(unittest.TestCase):
         """
         for match, odds in get_odds().items():
             print(match, odds)
+
+    def test_download_odds(self):
+        with open(os.path.join(BETCLIC_TESTS_FOLDER, "download.html"), "w") as f:
+            f.write(_download_odds())
 
 
 class TestLocalBetclicOdds(unittest.TestCase):
