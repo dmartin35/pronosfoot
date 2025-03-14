@@ -9,6 +9,7 @@ from memoize import delete_memoized
 BETCLIC_TESTS_FOLDER = os.path.dirname(os.path.abspath(__file__))
 
 
+@unittest.skip("disable - fail when running on github, due to 403 response from betclic")
 class TestBetclicOdds(unittest.TestCase):
     def setUp(self):
         """
