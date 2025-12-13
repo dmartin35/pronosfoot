@@ -7,3 +7,4 @@ mysqlclient
 beautifulsoup4
 django-memoize
 ics
+urllib3>=2.6.0 # not directly required, pinned by Snyk to avoid a vulnerability
