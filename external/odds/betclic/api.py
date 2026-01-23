@@ -48,7 +48,7 @@ def _parse_odds(html):
 
             match_odds = odd.select('.market_odds')[0]
             match_odds = match_odds.select('.btn.is-odd')
-            wdl = [btn_odd.select(".btn_label")[1].string for btn_odd in match_odds]
+            wdl = [btn_odd.select(".btn_label")[1].text.strip() for btn_odd in match_odds]
 
             raw.append(tuple(teams + wdl))
 
