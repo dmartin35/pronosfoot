@@ -10,7 +10,7 @@ INSTALLED_APPS += [
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'pronosfoot-2025-2026.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, 'pronosfoot-2026-2027.sqlite3'),
         #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
@@ -26,4 +26,4 @@ CSRF_COOKIE_DOMAIN = ''
 CSRF_TRUSTED_ORIGINS = ALLOWED_HOSTS
 CSRF_COOKIE_SECURE = True
 
-SEASON_FORECAST_MAX_DATE = datetime.datetime(2025,10,31,23,59,59)
+SEASON_FORECAST_MAX_DATE = datetime.datetime(2026,10,31,23,59,59)
