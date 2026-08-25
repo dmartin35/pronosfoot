@@ -1,4 +1,4 @@
-django~=3.2.14
+django~=4.2.27
 pytz
 requests
 django-js-reverse>=0.9,<1.0
@@ -7,3 +7,4 @@ mysqlclient
 beautifulsoup4
 django-memoize
 ics
+sqlparse>=0.5.4 # not directly required, pinned by Snyk to avoid a vulnerability
