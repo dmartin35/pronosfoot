@@ -1,4 +1,4 @@
-django~=3.2.14
+django~=4.2.15
 pytz
 requests
 django-js-reverse>=0.9,<1.0
